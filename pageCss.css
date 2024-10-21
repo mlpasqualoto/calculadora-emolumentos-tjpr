@@ -7,18 +7,18 @@ body {
     border-radius: 16px;
     border-style: solid;
     padding: 10px;
-    margin: 25px;
+    margin: 20px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif
 }
-  
+
 .cont_corpo {
     background-color: #fcfeff96;
     border-radius: 16px;
     border-style: solid;
     padding: 10px;
-    margin: 25px;
-    height: 730px;
+    margin: 50px;
+    height: 760px;
     width: 40%;
     transform: translate(-50%, -50%);
     position: absolute;
@@ -88,3 +88,4 @@ table {
     width: 180px;
     height: 40px;
 }
+
