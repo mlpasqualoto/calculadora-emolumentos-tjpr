@@ -49,7 +49,6 @@ table {
 
 #topItem {
     background-color: #3fa3dda6;
-    width: 79%;
     border: 2px solid black;
     padding: 3px;
 }
@@ -72,7 +71,7 @@ table {
     text-align: justify;
     font-size: small;
     padding: 3px;
-    width: 79%;
+    width: 73%;
 }
 
 #contBens {
@@ -88,4 +87,3 @@ table {
     width: 180px;
     height: 40px;
 }
-
