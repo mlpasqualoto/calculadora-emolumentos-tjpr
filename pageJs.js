@@ -161,7 +161,7 @@ function calculoFunrejus() {
 //calculo soma da escritura rodape
 function somaEscrituraRodape() {
   sumEscrituraRodape = sumEscrituraTotal + funrejus; //sumEscrituraRodape declarada aqui!
-  document.getElementById("sumEscrituraRodape").textContent = sumEscrituraRodape;
+  document.getElementById("sumEscrituraRodape").textContent = sumEscrituraRodape.toFixed(2);
 };
 
 //certidoes
