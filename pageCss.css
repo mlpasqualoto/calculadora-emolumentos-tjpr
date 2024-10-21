@@ -1,0 +1,90 @@
+body {
+    background-color: #3fa3dda6;
+}
+
+.cont_cabecalho {
+    background-color: #fcfeff96;
+    border-radius: 16px;
+    border-style: solid;
+    padding: 10px;
+    margin: 25px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif
+}
+  
+.cont_corpo {
+    background-color: #fcfeff96;
+    border-radius: 16px;
+    border-style: solid;
+    padding: 10px;
+    margin: 25px;
+    height: 730px;
+    width: 40%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 56%;
+    left: 50%;
+}
+  
+.cont_tabela {
+    text-align: center;
+    border-style: solid;
+    border-radius: 16px;
+    border-width: 2px;
+    padding: 10px;
+    height: 97%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#topVal {
+    background-color: #3fa3dda6;
+    border: 2px solid black;
+    padding: 3px;
+}
+
+#topItem {
+    background-color: #3fa3dda6;
+    width: 79%;
+    border: 2px solid black;
+    padding: 3px;
+}
+
+#addbens {
+    margin: 10px;
+}
+
+.val {
+    background-color: #abdcf048;
+    border: 1px solid black;
+    text-align: justify;
+    font-size: small;
+    padding: 3px;
+}
+
+.item {
+    background-color: #abdcf048;
+    border: 1px solid black;
+    text-align: justify;
+    font-size: small;
+    padding: 3px;
+    width: 79%;
+}
+
+#contBens {
+    display: inline;
+}
+
+.itbiitcmd {
+    float: right;
+}
+
+#calcular {
+    margin: 10px;
+    width: 180px;
+    height: 40px;
+}
