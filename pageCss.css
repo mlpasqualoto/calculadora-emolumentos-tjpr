@@ -19,11 +19,9 @@ body {
     padding: 10px;
     margin: 50px;
     height: 760px;
-    width: 40%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 56%;
-    left: 50%;
+    width: 850px;
+    margin-right: auto;
+    margin-left: auto;
 }
   
 .cont_tabela {
