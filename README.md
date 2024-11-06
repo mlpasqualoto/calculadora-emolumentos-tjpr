@@ -7,6 +7,7 @@ A Calculadora de Emolumentos é um projeto desenvolvido em JavaScript para autom
 1. **Cálculo de Escritura**: 
    - Com base no valor do bem, a função `valorEscritura()` calcula o valor da escritura, aplicando descontos para bens adicionais.
    - Limita o número de bens a 10 por cálculo.
+   - Agora é possível calcular o valor da escritura para imóveis de garagem em conjunto com os demais imóveis.
 
 2. **Cálculo de Taxas**:
    - **Fundep**: Calcula o valor do Fundo de Desenvolvimento da Justiça com base em 5% do valor total das escrituras.
