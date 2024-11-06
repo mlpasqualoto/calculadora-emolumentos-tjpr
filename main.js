@@ -7,7 +7,7 @@ function valorEscritura(valBem, tabela) {
     return 0;
   };
 
-    const garagem = document.getElementByClass("add-garagem");
+    const garagem = document.getElementById("input-garagem");
     let valEsc = 0;
     if (valBem >= 62602.0) {
       if (cont === 2) {
