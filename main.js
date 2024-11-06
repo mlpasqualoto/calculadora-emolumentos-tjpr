@@ -6,24 +6,32 @@ function valorEscritura(valBem, tabela) {
     alert('Limite de 10 bens atingidos!');
     return 0;
   };
-  for (const key in tabela) {
+
+    const garagem = document.getElementByClass("add-garagem");
     let valEsc = 0;
     if (valBem >= 62602.0) {
       if (cont === 2) {
         valEsc = 1377.24;
+      } else if (garagem.checked) {
+        valEsc = 1377.24 * (50 / 100);
       } else {
         valEsc = 1377.24 * (80 / 100);
-      }
+      } 
       return valEsc.toFixed(2);
-    } else if (valBem <= key) {
-      if (cont === 2) {
-        valEsc = tabela[key];
-      } else {
-        valEsc = tabela[key] * (80 / 100);
-      }
-      return valEsc.toFixed(2);
+    } else {
+      for (const key in tabela) {
+        if (valBem <= key) {
+          if (cont === 2) {
+            valEsc = tabela[key];
+          } else if (garagem.checked) {
+            valEsc = tabela[key] * (50 / 100);
+          } else {
+            valEsc = tabela[key] * (80 / 100);
+          }
+          return valEsc.toFixed(2);
+        }
+      }  
     }
-  }
 };
 
 //calcular valor fundep
