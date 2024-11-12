@@ -156,7 +156,7 @@ let distribuidor = parseFloat(12.40);
 //soma valor total da escritura
 function somaValorEscriturasTotal() {
   sumEscrituraTotal = sumEscrituras + fundep + issqn + selos + distribuidor; //sumEscrituraTotal declarada aqui!
-  document.getElementById("sumEscrituraTotal").textContent = sumEscrituraTotal;
+  document.getElementById("sumEscrituraTotal").textContent = sumEscrituraTotal.toFixed(2);
 };
 
 //calculo funrejus
