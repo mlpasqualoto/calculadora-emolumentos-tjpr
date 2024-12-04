@@ -2,6 +2,10 @@ body {
     background-color: #3fa3dda6;
 }
 
+input {
+    text-align: right;
+}
+
 /* Para navegadores modernos */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
