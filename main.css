@@ -2,33 +2,57 @@ body {
     background-color: #3fa3dda6;
 }
 
+#totalScreen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cont_cabecalho {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    background-color: #fcfeff96;
+    border-radius: 16PX;
+    width: auto;
+    height: auto;
+}
+
+.cont_cabecalho h1 {
     background-color: #fcfeff96;
     border-radius: 16px;
-    border-style: solid;
-    padding: 10px;
-    margin: 20px;
-    text-align: center;
+    border: 1px solid black;
+    padding: 50px;
+    margin: 10px;
     font-family: Arial, Helvetica, sans-serif
 }
 
 .cont_corpo {
+    height: 100%;
+    width: 50%;
     background-color: #fcfeff96;
     border-radius: 16px;
-    border-style: solid;
     padding: 10px;
-    margin: 50px;
-    height: 760px;
-    width: 850px;
+    height: auto;
+    width: 35%;
     margin-right: auto;
     margin-left: auto;
 }
-  
+
 .cont_tabela {
     text-align: center;
-    border-style: solid;
     border-radius: 16px;
-    border-width: 2px;
+    border: 1px solid black;
     padding: 10px;
     height: 97%;
 }
@@ -41,13 +65,13 @@ table {
 
 #topVal {
     background-color: #3fa3dda6;
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 3px;
 }
 
 #topItem {
     background-color: #3fa3dda6;
-    border: 2px solid black;
+    border: 1px solid black;
     padding: 3px;
 }
 
@@ -55,7 +79,14 @@ table {
     float: right;
     display: flex;
     align-items: center;
-    justify-content: flex-end;	
+    justify-content: flex-end;
+}
+
+#alert {
+    font-size: small;
+    font-weight: bold;
+    color: red;
+    font-style: italic;
 }
 
 #addbens {
@@ -80,7 +111,7 @@ table {
 }
 
 input {
-    width: 95%;        
+    width: 95%;
 }
 
 #contBens {

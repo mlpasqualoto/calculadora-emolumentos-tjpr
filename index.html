@@ -11,111 +11,115 @@
         
     </head>
     <body>
-        <div class="cont_cabecalho">
-                <h1>Calculadora de Emolumentos TJ/PR</h1>
-        </div>
-        <hr>
-        <div class="cont_corpo">
-            <div class="cont_tabela">
-                <table>
-                    <tr id="topo">
-                        <td id="topItem">Item</td>
-                        <td id="topVal">Valor R$</td>
-                    </tr>
-                    <tr>
-                        <td class="item">Bem nº <p id="contBens"></p>
-                            <label class="add-garagem">
-			    		        <input id="input-garagem" type="checkbox"></button>Garagem
-				            </label>
-                        </td>
-                        <td class="val"><input type="number" id="valBem" placeholder="Valor do bem" required></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><button id="addbens" onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar Bem</button></td>
-                    </tr>
-                </table>
-                <table>
-                    <tr>
-                        <td class="item">Soma dos bens</td>
-                        <td id="sumBens" class="val"></td>
-                    </tr>
-                    <tr>
-                        <td class="item">Soma das escrituras (somente valor das escrituras)</td>
-                        <td id="sumEscrituras" class="val"></td>
-                    </tr>
-                </table>
-                <br><hr><br>
-                <table>
-                    <tr>
-                        <td class="item">Fundep (5% sobre a soma das escrituras)</td>
-                        <td id="fundep" class="val"></td>
-                    </tr>
-                    <tr>
-                        <td class="item">ISSQN (2% sobre a soma das escrituras)</td>
-                        <td id="issqn" class="val"></td>
-                    </tr>
-                    <tr>
-                        <td class="item">Selos (2 selos)</td>
-                        <td class="val">16,00</td>
-                    </tr>
-                    <tr>
-                        <td class="item">Distribuidor</td>
-                        <td class="val">12,40</td>
-                    </tr>
-                </table>
-                <br>
-                <table>
-                    <tr>
-                        <td class="item"><strong>Soma do valor total das escrituras (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor)</strong></td>
-                        <td class="val"><strong id="sumEscrituraTotal"></strong></td>
-                    </tr>
-                </table>
-                <br>
-                <table>
-                    <tr>
-                        <td class="item">Funrejus (0,2% sobre a soma dos bens)</td>
-                        <td id="funrejus" class="val"></td>
-                    </tr>
-                </table>
-                <br>
-                <table>
-                    <tr>
-                        <td class="item"><strong>Soma do valor total das escrituras + Funrejus (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor + Funrejus)</strong></td>
-                        <td class="val"><strong id="sumEscrituraRodape"></strong></td>
-                    </tr>
-                </table>
-                <br><hr><br>
-                <table>
-                    <tr>
-                        <td class="item">Certidões</td>
-                        <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões" required></td>
-                    </tr>
-                    <tr>
-                        <td class="item">Registro de imóveis</td>
-                        <td class="val"><input type="number" id="registro" placeholder="Valor do registro" required></td>
-                    </tr>
-                    <tr>
-                        <td class="item">ITBI (2% sobre a soma dos bens)<button class="itbiitcmd" onclick="calculoItbi()">Adicionar</button></td>
-                        <td id="itbi" class="val"></td>
-                    </tr>
-                    <tr>
-                        <td class="item">ITCMD (4% sobre a soma dos bens)<button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button></td>
-                        <td id="itcmd" class="val"></td>
-                    </tr>
-                </table>
-                <br><hr><br>
-                <table>
-                    <tr>
-                        <td class="item"><strong>Orçamento</strong></td>
-                        <td class="val"><strong id="orcamento"></strong></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><button id="calcular" onclick="calculoFundep(); calculoIssqn(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button></td>
-                    </tr>
-                </table>
-                
+        <div id="totalScreen">
+            <div class="cont_cabecalho">
+                <div class="title">                   
+                    <h1>Calculadora de Emolumentos TJ/PR</h1>
+                </div>
+            </div>
+            <div class="cont_corpo">
+                <div class="cont_tabela">
+                    <table>
+                        <tr id="topo">
+                            <td id="topItem">Item</td>
+                            <td id="topVal">Valor R$</td>
+                        </tr>
+                        <tr>
+                            <td class="item">Bem nº 
+                                <p id="contBens"></p>
+                                <label class="add-garagem">
+                                    <input id="input-garagem" type="checkbox"></button>Garagem
+                                </label>
+                            </td>
+                            <td class="val"><input type="number" id="valBem" placeholder="Valor do bem" required></td>
+                        </tr>
+                        <tr>
+                            <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
+                            <td><button id="addbens" onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar Bem</button></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="item">Soma dos bens</td>
+                            <td id="sumBens" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Soma das escrituras (somente valor das escrituras)</td>
+                            <td id="sumEscrituras" class="val"></td>
+                        </tr>
+                    </table>
+                    <br><hr><br>
+                    <table>
+                        <tr>
+                            <td class="item">Fundep (5% sobre a soma das escrituras)</td>
+                            <td id="fundep" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">ISSQN (2% sobre a soma das escrituras)</td>
+                            <td id="issqn" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Selos (2 selos)</td>
+                            <td class="val">16,00</td>
+                        </tr>
+                        <tr>
+                            <td class="item">Distribuidor</td>
+                            <td class="val">12,40</td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <td class="item"><strong>Soma do valor total das escrituras (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor)</strong></td>
+                            <td class="val"><strong id="sumEscrituraTotal"></strong></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <td class="item">Funrejus (0,2% sobre a soma dos bens)</td>
+                            <td id="funrejus" class="val"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table>
+                        <tr>
+                            <td class="item"><strong>Soma do valor total das escrituras + Funrejus (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor + Funrejus)</strong></td>
+                            <td class="val"><strong id="sumEscrituraRodape"></strong></td>
+                        </tr>
+                    </table>
+                    <br><hr><br>
+                    <table>
+                        <tr>
+                            <td class="item">Certidões</td>
+                            <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões" required></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Registro de imóveis</td>
+                            <td class="val"><input type="number" id="registro" placeholder="Valor do registro" required></td>
+                        </tr>
+                        <tr>
+                            <td class="item">ITBI (2% sobre a soma dos bens)<button class="itbiitcmd" onclick="calculoItbi()">Adicionar</button></td>
+                            <td id="itbi" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">ITCMD (4% sobre a soma dos bens)<button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button></td>
+                            <td id="itcmd" class="val"></td>
+                        </tr>
+                    </table>
+                    <br><hr><br>
+                    <table>
+                        <tr>
+                            <td class="item"><strong>Orçamento</strong></td>
+                            <td class="val"><strong id="orcamento"></strong></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><button id="calcular" onclick="calculoFundep(); calculoIssqn(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button></td>
+                        </tr>
+                    </table>
+                    
+                </div>
             </div>
         </div>
 
