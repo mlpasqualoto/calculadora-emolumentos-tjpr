@@ -2,6 +2,18 @@ body {
     background-color: #3fa3dda6;
 }
 
+/* Para navegadores modernos */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para o Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 #totalScreen {
     width: 100vw;
     height: 100vh;
