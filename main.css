@@ -6,6 +6,10 @@ input, .val {
     text-align: right;
 }
 
+button {
+    cursor: pointer;
+}
+
 /* Para navegadores modernos */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -143,7 +147,7 @@ input {
     float: right;
 }
 
-#calcular {
+#calcular, #printPage {
     margin: 10px;
     width: 180px;
     height: 40px;
