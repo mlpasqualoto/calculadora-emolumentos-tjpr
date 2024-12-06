@@ -214,3 +214,8 @@ function calculoOrcamento() {
   orcamento = formatarVal(orcamento);
   document.getElementById("orcamento").textContent = orcamento;
 };
+
+//imprime a página
+function printPage() {
+  window.print();
+};
