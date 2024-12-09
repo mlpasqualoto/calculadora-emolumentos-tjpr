@@ -154,11 +154,50 @@ input {
 }
 
 @media print {
-    #printPage {
-        display: none;
+    .cont_cabecalho {
+	    display: none;
     }
 
-    .cont_cabecalho {
-        display: none;
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    #totalScreen {
+        width: 90%; /* Reduz a largura total para caber melhor na página */
+        margin: 0 auto; /* Centraliza o conteúdo */
+        padding: 10px;
+    }
+
+    .cont_cabecalho, .cont_calc, .cont_corpo {
+        width: 100%; /* Mantém a largura dos contêineres proporcional */
+        margin: 0;
+        padding: 0;
+    }
+
+    .cont_tabela {
+	width: 100%; /* Mantém a largura dos contêineres proporcional */
+        margin: 0;
+        padding: 10px;
+    }
+
+    table {
+        width: 100%; /* Faz a tabela ocupar a largura disponível */
+        border-collapse: collapse;
+        font-size: small;
+    }
+
+    th, td {
+        word-wrap: break-word; /* Permite quebra de linha automática dentro das células */
+    }
+
+    button {
+	display: none;
+    }
+
+    @page {
+        size: A4; /* Garante que o tamanho da página seja padrão A4 */
+        margin: 10mm; /* Define margens consistentes para a impressão */
     }
 }
