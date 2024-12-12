@@ -219,3 +219,12 @@ function calculoOrcamento() {
 function printPage() {
   window.print();
 };
+
+//função botão enter
+document.addEventListener("DOMContentLoaded", () => {
+  valBem.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      addbens.click();
+    };           
+  });
+})
