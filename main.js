@@ -34,6 +34,25 @@ function valorEscritura(valBem, tabela) {
     }
 };
 
+//adiciona descrição de cada bem
+function addBemRow(nBem, valBem, valEscritura) {
+  const table = document.getElementById("bensTable");
+  const row = document.createElement("tr");
+  row.classList.add("bens");
+
+  const columnItem = document.createElement("td");
+  columnItem.classList.add("item");
+  columnItem.textContent = "Bem " + (nBem - 1) + " R$ " + valBem;
+  row.appendChild(columnItem);
+
+  const columnVal = document.createElement("td");
+  columnVal.classList.add("val");
+  columnVal.textContent = valEscritura;
+  row.appendChild(columnVal);
+
+  table.appendChild(row);
+};
+
 //calcular valor fundep
 function valorFundep(sumEsc) {
   let fundep = sumEsc * (5 / 100);
@@ -111,6 +130,8 @@ function calculoValorEscrituras() {
   let valEscrituraAtual = valorEscritura(valBem, tabela);
   valEscrituraAtual = parseFloat(valEscrituraAtual);
   valEscrituras.push(valEscrituraAtual);
+
+  addBemRow(cont, valBem, valEscrituraAtual);
 };
 
 //soma do valor dos bens
