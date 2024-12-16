@@ -34,6 +34,16 @@ function valorEscritura(valBem, tabela) {
     }
 };
 
+//formata valor em reais
+function valFormatReais(val) {
+  const valReais = new Intl.NumberFormat('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(val);
+
+  return valReais;
+};
+
 //adiciona descrição de cada bem
 function addBemRow(nBem, valBem, valEscritura) {
   const table = document.getElementById("bensTable");
@@ -42,12 +52,12 @@ function addBemRow(nBem, valBem, valEscritura) {
 
   const columnItem = document.createElement("td");
   columnItem.classList.add("item");
-  columnItem.textContent = "Bem " + (nBem - 1) + " R$ " + valBem;
+  columnItem.textContent = "Bem " + (nBem - 1) + " R$ " + valFormatReais(valBem);
   row.appendChild(columnItem);
 
   const columnVal = document.createElement("td");
   columnVal.classList.add("val");
-  columnVal.textContent = valEscritura;
+  columnVal.textContent = valFormatReais(valEscritura);
   row.appendChild(columnVal);
 
   table.appendChild(row);
@@ -80,7 +90,7 @@ function valorItbi(sumB) {
 function valorItcmd(sumB) {
   let itcmd = sumB * (4 / 100);
   return itcmd.toFixed(2);
-}
+};
 
 //formatar valor
 function formatarVal(val) {
@@ -141,7 +151,7 @@ function somaValorBens() {
     sumBens = sumBens + valBens[i];
   };
   sumBens = formatarVal(sumBens);
-  document.getElementById("sumBens").textContent = sumBens;
+  document.getElementById("sumBens").textContent = valFormatReais(sumBens);
 };
 
 //soma do valor das escrituras
@@ -151,21 +161,21 @@ function somaValorEscrituras() {
     sumEscrituras = sumEscrituras + valEscrituras[i];
   };
   sumEscrituras = formatarVal(sumEscrituras);
-  document.getElementById("sumEscrituras").textContent = sumEscrituras;
+  document.getElementById("sumEscrituras").textContent = valFormatReais(sumEscrituras);
 };
 
 //calculo do fundep
 function calculoFundep() {
   fundep = valorFundep(sumEscrituras); //fundep declarado aqui!
   fundep = parseFloat(fundep);
-  document.getElementById("fundep").textContent = fundep;
+  document.getElementById("fundep").textContent = valFormatReais(fundep);
 };
 
 //calculo issqn
 function calculoIssqn() {
   issqn = valorIssqn(sumEscrituras); //issqn declarado aqui!
   issqn = parseFloat(issqn);
-  document.getElementById("issqn").textContent = issqn;
+  document.getElementById("issqn").textContent = valFormatReais(issqn);
 };
 
 //selos
@@ -177,20 +187,20 @@ let distribuidor = parseFloat(12.40);
 //soma valor total da escritura
 function somaValorEscriturasTotal() {
   sumEscrituraTotal = sumEscrituras + fundep + issqn + selos + distribuidor; //sumEscrituraTotal declarada aqui!
-  document.getElementById("sumEscrituraTotal").textContent = sumEscrituraTotal.toFixed(2);
+  document.getElementById("sumEscrituraTotal").textContent = valFormatReais(sumEscrituraTotal);
 };
 
 //calculo funrejus
 function calculoFunrejus() {
   funrejus = valorFunrejus(sumBens); //funrejus declarado aqui!
   funrejus = parseFloat(funrejus);
-  document.getElementById("funrejus").textContent = funrejus;
+  document.getElementById("funrejus").textContent = valFormatReais(funrejus);
 };
 
 //calculo soma da escritura rodape
 function somaEscrituraRodape() {
   sumEscrituraRodape = sumEscrituraTotal + funrejus; //sumEscrituraRodape declarada aqui!
-  document.getElementById("sumEscrituraRodape").textContent = sumEscrituraRodape.toFixed(2);
+  document.getElementById("sumEscrituraRodape").textContent = valFormatReais(sumEscrituraRodape);
 };
 
 //certidoes
@@ -218,7 +228,7 @@ itbi = 0; //itbi declarado aqui!
 function calculoItbi() {
   itbi = valorItbi(sumBens);
   itbi = parseFloat(itbi);
-  document.getElementById("itbi").textContent = itbi;
+  document.getElementById("itbi").textContent = valFormatReais(itbi);
 };
 
 //calculo itcmd
@@ -226,14 +236,14 @@ itcmd = 0; //itcmd declarado aqui!
 function calculoItcmd() {
   itcmd = valorItcmd(sumBens);
   itcmd = parseFloat(itcmd);
-  document.getElementById("itcmd").textContent = itcmd;
+  document.getElementById("itcmd").textContent = valFormatReais(itcmd);
 };
 
 //calculo orcamento total
 function calculoOrcamento() {
   orcamento = sumEscrituraRodape + certidoes + registro + itbi + itcmd; //orcamento declarado aqui!
   orcamento = formatarVal(orcamento);
-  document.getElementById("orcamento").textContent = orcamento;
+  document.getElementById("orcamento").textContent = valFormatReais(orcamento);
 };
 
 //imprime a página
