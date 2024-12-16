@@ -52,7 +52,7 @@ function addBemRow(nBem, valBem, valEscritura) {
 
   const columnItem = document.createElement("td");
   columnItem.classList.add("item");
-  columnItem.textContent = "Bem " + (nBem - 1) + " R$ " + valFormatReais(valBem);
+  columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem);
   row.appendChild(columnItem);
 
   const columnVal = document.createElement("td");
