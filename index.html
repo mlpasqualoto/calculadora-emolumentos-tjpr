@@ -6,9 +6,7 @@
         <meta name="description" content="página para calcular valor de escrituras">
         <meta autor="author" content="Matheus Leite Pasqualoto">
         <meta name="keywords" content="html, css, javascript">
-        <link rel="stylesheet" href="main.css">
-        <script src="main.js"></script>
-        
+        <link rel="stylesheet" href="styles.css">        
     </head>
     <body>
         <div id="totalScreen">
@@ -25,7 +23,7 @@
                                 <td id="topItem">Item</td>
                                 <td id="topVal">Valor R$</td>
                             </tr>
-                            <tr>
+                            <tr id="transparent">
                                 <td class="item">Bem nº 
                                     <p id="contBens"></p>
                                     <label class="add-garagem">
@@ -36,13 +34,13 @@
                             </tr>
                         </table>
                         <table id="bensTable"></table>
-                        <table>
+                        <table class="corpo">
                             <tr>
                                 <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
                                 <td><button id="addbens" onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar Bem</button></td>
                             </tr>
                         </table>
-                        <table>
+                        <table class="corpo">
                             <tr>
                                 <td class="item">Soma dos bens</td>
                                 <td id="sumBens" class="val"></td>
@@ -52,8 +50,8 @@
                                 <td id="sumEscrituras" class="val"></td>
                             </tr>
                         </table>
-                        <br><hr><br>
-                        <table>
+                        <br class="corpo"><hr class="corpo"><br class="corpo">
+                        <table class="corpo">
                             <tr>
                                 <td class="item">Fundep (5% sobre a soma das escrituras)</td>
                                 <td id="fundep" class="val"></td>
@@ -71,28 +69,28 @@
                                 <td class="val">12,40</td>
                             </tr>
                         </table>
-                        <br>
+                        <br class="corpo">
                         <table>
                             <tr>
                                 <td class="item"><strong>Soma do valor total das escrituras (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor)</strong></td>
                                 <td class="val"><strong id="sumEscrituraTotal"></strong></td>
                             </tr>
                         </table>
-                        <br>
+                        <br class="corpo">
                         <table>
                             <tr>
                                 <td class="item">Funrejus (0,2% sobre a soma dos bens)</td>
                                 <td id="funrejus" class="val"></td>
                             </tr>
                         </table>
-                        <br>
-                        <table>
+                        <br class="corpo">
+                        <table class="corpo">
                             <tr>
                                 <td class="item"><strong>Soma do valor total das escrituras + Funrejus (valor das escrituas + Fudenp + ISSQN + Selos + Distribuidor + Funrejus)</strong></td>
                                 <td class="val"><strong id="sumEscrituraRodape"></strong></td>
                             </tr>
                         </table>
-                        <br><hr><br>
+                        <br class="corpo"><hr class="corpo"><br class="corpo">
                         <table>
                             <tr>
                                 <td class="item">Certidões</td>
@@ -118,7 +116,10 @@
                                 <td class="val"><strong id="orcamento"></strong></td>
                             </tr>
                             <tr>
-                                <td><button id="printPage" onclick="printPage()">IMPRIMIR</button></td>
+                                <td id="print">
+                                    <button id="printCompletoBtn" onclick="printPage()">IMPRIMIR COMPLETO</button>
+                                    <button id="printResumoBtn">IMPRIMIR RESUMO</button>
+                                </td>
                                 <td><button id="calcular" onclick="calculoFundep(); calculoIssqn(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button></td>
                             </tr>
                         </table>
@@ -128,5 +129,6 @@
             </div>
         </div>
 
+        <script src="main.js"></script>
     </body>
 </html>

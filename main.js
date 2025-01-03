@@ -48,7 +48,7 @@ function valFormatReais(val) {
 function addBemRow(nBem, valBem, valEscritura) {
   const table = document.getElementById("bensTable");
   const row = document.createElement("tr");
-  row.classList.add("bens");
+  row.classList.add("bens", "corpo");
 
   const columnItem = document.createElement("td");
   columnItem.classList.add("item");
@@ -246,10 +246,20 @@ function calculoOrcamento() {
   document.getElementById("orcamento").textContent = valFormatReais(orcamento);
 };
 
-//imprime a página
-function printPage() {
-  window.print();
-};
+// Função para adicionar classe ao body e acionar a impressão
+function printSection(section) {
+  document.body.classList.add(section); // Adiciona a classe correspondente
+  window.print(); // Dispara a impressão
+  document.body.classList.remove(section); // Remove a classe após a impressão
+}
+
+// Seleciona os botões
+const printResumoBtn = document.getElementById('printResumoBtn');
+const printCompletoBtn = document.getElementById('printCompletoBtn');
+
+// Define eventos de clique para os botões
+printResumoBtn.addEventListener('click', () => printSection('printResumo'));
+printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
 
 //função botão enter
 document.addEventListener("DOMContentLoaded", () => {
