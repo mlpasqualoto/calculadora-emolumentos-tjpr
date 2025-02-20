@@ -24,11 +24,21 @@
                                 <td id="topVal">Valor R$</td>
                             </tr>
                             <tr id="transparent">
-                                <td class="item">Bem nº 
-                                    <p id="contBens"></p>
-                                    <label class="add-garagem">
-                                        <input id="input-garagem" type="checkbox"></button>Garagem
-                                    </label>
+                                <td class="item">
+                                    <div id="td-top">
+                                        <div id="bem-container">
+                                            Bem nº 
+                                            <p id="contBens"></p>
+                                        </div>
+                                        <div id="checkbox-container">
+                                            <label class="add-checkbox" for="input-garagem">
+                                                <input id="input-garagem" type="checkbox"> Garagem
+                                            </label>
+                                            <label class="add-checkbox" for="input-Doacao">
+                                                <input type="checkbox" id="input-Doacao"> Doação c/ usufruto
+                                            </label>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td class="val"><input type="number" id="valBem" placeholder="Valor do bem" autocomplete="off" required></td>
                             </tr>
@@ -79,10 +89,15 @@
                         <br class="corpo">
                         <table>
                             <tr>
-                                <td class="item">Funrejus (0,2% sobre a soma dos bens)</td>
+                                <td class="item">
+                                    <div id="funrejus-container">
+                                        Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE FUNREJUS NESTE CASO</p>
+                                    </div>
+                                </td>
                                 <td id="funrejus" class="val"></td>
                             </tr>
                         </table>
+                        <table id="guiasTable"></table>
                         <br class="corpo">
                         <table class="corpo">
                             <tr>
@@ -105,7 +120,19 @@
                                 <td id="itbi" class="val"></td>
                             </tr>
                             <tr>
-                                <td class="item">ITCMD (4% sobre a soma dos bens)<button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button></td>
+                                <td class="item">
+                                    <div id="itcmd-container">
+                                        <div id="itcmd-text-container">
+                                            <div id="itcmd-text2">  
+                                                ITCMD (4% sobre a soma dos bens) 
+                                            </div> 
+                                            <p id="doacao-aviso-itcmd">ITCMD DE 2% NESTE CASO</p>
+                                        </div>
+                                        <div>
+                                            <button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td id="itcmd" class="val"></td>
                             </tr>
                         </table>

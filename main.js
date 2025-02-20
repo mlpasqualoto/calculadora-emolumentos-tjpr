@@ -1,3 +1,18 @@
+
+//mostra e esconde aviso de doação com usufruto
+const doacaoUsufruto = document.getElementById("input-Doacao");
+const doacaoAvisoFunrejus = document.getElementById("doacao-aviso-funrejus");
+const doacaoAvisoItcmd = document.getElementById("doacao-aviso-itcmd");
+doacaoUsufruto.addEventListener("change", () => {
+  if (doacaoUsufruto.checked) {
+    doacaoAvisoFunrejus.style.display = "flex";
+    doacaoAvisoItcmd.style.display = "flex";
+  } else {
+    doacaoAvisoFunrejus.style.display = "none";
+    doacaoAvisoItcmd.style.display = "none";
+  }
+});
+
 //calcular valor da escritura
 let cont = 1;
 function valorEscritura(valBem, tabela) {
@@ -7,31 +22,31 @@ function valorEscritura(valBem, tabela) {
     return 0;
   };
 
-    const garagem = document.getElementById("input-garagem");
-    let valEsc = 0;
-    if (valBem >= 62602.0) {
-      if (cont === 2) {
-        valEsc = 1377.24;
-      } else if (garagem.checked) {
-        valEsc = 1377.24 * (50 / 100);
-      } else {
-        valEsc = 1377.24 * (80 / 100);
-      } 
-      return valEsc.toFixed(2);
+  const garagem = document.getElementById("input-garagem");
+  let valEsc = 0;
+  if (valBem >= 62602.0) {
+    if (cont === 2) {
+      valEsc = 1377.24;
+    } else if (garagem.checked) {
+      valEsc = 1377.24 * (50 / 100);
     } else {
-      for (const key in tabela) {
-        if (valBem <= key) {
-          if (cont === 2) {
-            valEsc = tabela[key];
-          } else if (garagem.checked) {
-            valEsc = tabela[key] * (50 / 100);
-          } else {
-            valEsc = tabela[key] * (80 / 100);
-          }
-          return valEsc.toFixed(2);
-        }
-      }  
+      valEsc = 1377.24 * (80 / 100);
     }
+    return valEsc.toFixed(2);
+  } else {
+    for (const key in tabela) {
+      if (valBem <= key) {
+        if (cont === 2) {
+          valEsc = tabela[key];
+        } else if (garagem.checked) {
+          valEsc = tabela[key] * (50 / 100);
+        } else {
+          valEsc = tabela[key] * (80 / 100);
+        }
+        return valEsc.toFixed(2);
+      }
+    }
+  }
 };
 
 //formata valor em reais
@@ -43,6 +58,35 @@ function valFormatReais(val) {
 
   return valReais;
 };
+
+function addGuias(valFunrejus) {
+  const guiasTable = document.getElementById("guiasTable");
+
+  const row1 = document.createElement("tr");
+  row1.classList.add("corpo");
+  const column1 = document.createElement("td");
+  const column2 = document.createElement("td");
+  column1.classList.add("item");
+  column2.classList.add("val");
+  column1.textContent = "Guia 1 - FUNREJUS";
+  column2.textContent = valFormatReais(valFunrejus / 2);
+  row1.appendChild(column1);
+  row1.appendChild(column2);
+
+  const row2 = document.createElement("tr");
+  row2.classList.add("corpo");
+  const column3 = document.createElement("td");
+  const column4 = document.createElement("td");
+  column3.classList.add("item");
+  column4.classList.add("val");
+  column3.textContent = "Guia 2 - FUNREJUS";
+  column4.textContent = valFormatReais(valFunrejus / 2);
+  row2.appendChild(column3);
+  row2.appendChild(column4);
+
+  guiasTable.appendChild(row1);
+  guiasTable.appendChild(row2);
+}
 
 //adiciona descrição de cada bem
 function addBemRow(nBem, valBem, valEscritura) {
@@ -68,7 +112,7 @@ function valorFundep(sumEsc) {
   let fundep = sumEsc * (5 / 100);
   return fundep.toFixed(2);
 };
- //calcular valor issqn
+//calcular valor issqn
 function valorIssqn(sumEsc) {
   let issqn = sumEsc * (2 / 100);
   return issqn.toFixed(2);
@@ -76,8 +120,15 @@ function valorIssqn(sumEsc) {
 
 //calcular valor funrejus
 function valorFunrejus(sumB) {
+  const doacaoUsufruto = document.getElementById("input-Doacao");
   let funrejus = sumB * (0.2 / 100);
+
+  if (doacaoUsufruto.checked) {
+    funrejus = 2 * funrejus;
+  };
+
   return funrejus.toFixed(2);
+
 };
 
 //calcular valor itbi
@@ -88,7 +139,13 @@ function valorItbi(sumB) {
 
 //calcular valor itcmd
 function valorItcmd(sumB) {
+  const doacaoUsufruto = document.getElementById("input-Doacao");
   let itcmd = sumB * (4 / 100);
+
+  if (doacaoUsufruto.checked) {
+    itcmd = sumB * (2 / 100);
+  };
+
   return itcmd.toFixed(2);
 };
 
@@ -192,8 +249,13 @@ function somaValorEscriturasTotal() {
 
 //calculo funrejus
 function calculoFunrejus() {
+  const doacaoUsufruto = document.getElementById("input-Doacao");
+
   funrejus = valorFunrejus(sumBens); //funrejus declarado aqui!
   funrejus = parseFloat(funrejus);
+  if (doacaoUsufruto.checked) {
+    addGuias(funrejus);
+  };
   document.getElementById("funrejus").textContent = valFormatReais(funrejus);
 };
 
@@ -262,10 +324,9 @@ printResumoBtn.addEventListener('click', () => printSection('printResumo'));
 printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
 
 //função botão enter
-document.addEventListener("DOMContentLoaded", () => {
-  valBem.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      addbens.click();
-    };           
-  });
-})
+valBem.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    addbens.click();
+  };
+});
+

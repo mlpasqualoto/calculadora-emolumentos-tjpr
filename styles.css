@@ -7,6 +7,11 @@ input,
     text-align: right;
 }
 
+p {
+    margin: 0;
+    white-space: nowrap;
+}
+
 button {
     cursor: pointer;
 }
@@ -103,11 +108,22 @@ table {
     padding: 3px;
 }
 
-.add-garagem {
-    float: right;
+#td-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#checkbox-container {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+}
+
+.add-checkbox {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    white-space: nowrap;
 }
 
 #alert {
@@ -141,12 +157,41 @@ input {
     width: 95%;
 }
 
+#funrejus-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#doacao-aviso-funrejus, #doacao-aviso-itcmd {
+    display: none;
+    color: #ff0000;
+}
+
 #contBens {
     display: inline;
 }
 
 .itbiitcmd {
     float: right;
+    margin: 0 0 0 5px;
+}
+
+#itcmd-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#itcmd-text-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 105px;
+}
+
+#itcmd-text2 {
+    white-space: nowrap;
 }
 
 #print {
