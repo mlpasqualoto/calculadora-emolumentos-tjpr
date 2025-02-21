@@ -202,7 +202,8 @@ input {
 
 #calcular,
 #printCompletoBtn,
-#printResumoBtn {
+#printResumoBtn,
+#limparBtn {
     margin: 10px;
     width: 180px;
     height: 40px;

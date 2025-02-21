@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 
 //mostra e esconde aviso de doação com usufruto
 const doacaoUsufruto = document.getElementById("input-Doacao");
@@ -315,18 +316,21 @@ function printSection(section) {
   document.body.classList.remove(section); // Remove a classe após a impressão
 }
 
-// Seleciona os botões
+// Define botões de impressão
 const printResumoBtn = document.getElementById('printResumoBtn');
 const printCompletoBtn = document.getElementById('printCompletoBtn');
-
-// Define eventos de clique para os botões
 printResumoBtn.addEventListener('click', () => printSection('printResumo'));
-printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
+printCompletoBtn.addEventListener('click', () => ipcRenderer.send('print-window'));
 
-//função botão enter
+// Função botão enter
 valBem.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     addbens.click();
   };
 });
 
+// Define botão de recarregar a página
+const limparBtn = document.getElementById("limparBtn");
+limparBtn.addEventListener("click", () => {
+  location.reload();
+});
