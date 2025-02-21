@@ -64,7 +64,6 @@ function addGuias(valFunrejus) {
   const guiasTable = document.getElementById("guiasTable");
 
   const row1 = document.createElement("tr");
-  row1.classList.add("corpo");
   const column1 = document.createElement("td");
   const column2 = document.createElement("td");
   column1.classList.add("item");
@@ -75,7 +74,6 @@ function addGuias(valFunrejus) {
   row1.appendChild(column2);
 
   const row2 = document.createElement("tr");
-  row2.classList.add("corpo");
   const column3 = document.createElement("td");
   const column4 = document.createElement("td");
   column3.classList.add("item");

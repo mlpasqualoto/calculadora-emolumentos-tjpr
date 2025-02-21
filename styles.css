@@ -209,6 +209,12 @@ input {
     height: 40px;
 }
 
+#btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media print {
     body.printResumo .corpo {
         display: none;
@@ -218,10 +224,6 @@ input {
     body.printResumo #transparent {
         visibility: hidden;
         /* Imprime o resumo */
-    }
-
-    .cont_cabecalho {
-        display: none;
     }
 
     body {
@@ -234,8 +236,6 @@ input {
         width: 90%;
         /* Reduz a largura total para caber melhor na página */
         margin: 0 auto;
-        /* Centraliza o conteúdo */
-        padding: 10px;
     }
 
     .cont_cabecalho,
@@ -248,10 +248,8 @@ input {
     }
 
     .cont_tabela {
-        width: 100%;
+        width: 96%;
         /* Mantém a largura dos contêineres proporcional */
-        margin: 0;
-        padding: 10px;
     }
 
     table {
@@ -269,12 +267,5 @@ input {
 
     button {
         display: none;
-    }
-
-    @page {
-        size: A4;
-        /* Garante que o tamanho da página seja padrão A4 */
-        margin: 10mm;
-        /* Define margens consistentes para a impressão */
     }
 }
