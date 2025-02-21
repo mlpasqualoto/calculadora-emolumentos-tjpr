@@ -1,5 +1,6 @@
 body {
     background-color: #3fa3dda6;
+    overflow-x: hidden;
 }
 
 input,
@@ -40,7 +41,7 @@ input[type=number] {
 .cont_cabecalho {
     height: 100%;
     width: 40%;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-end;
 }
@@ -66,10 +67,10 @@ input[type=number] {
 
 .cont_calc {
     height: 100%;
-    width: 60%;
+    width: 90%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .cont_corpo {
@@ -78,8 +79,7 @@ input[type=number] {
     background-color: #fcfeff96;
     border-radius: 16px;
     padding: 10px;
-    margin-right: auto;
-    margin-left: auto;
+    overflow: hidden;
 }
 
 .cont_tabela {
@@ -163,7 +163,8 @@ input {
     align-items: center;
 }
 
-#doacao-aviso-funrejus, #doacao-aviso-itcmd {
+#doacao-aviso-funrejus,
+#doacao-aviso-itcmd {
     display: none;
     color: #ff0000;
 }
@@ -209,11 +210,13 @@ input {
 
 @media print {
     body.printResumo .corpo {
-        display: none; /* Imprime o resumo */
+        display: none;
+        /* Imprime o resumo */
     }
 
     body.printResumo #transparent {
-        visibility: hidden; /* Imprime o resumo */
+        visibility: hidden;
+        /* Imprime o resumo */
     }
 
     .cont_cabecalho {
