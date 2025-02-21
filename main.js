@@ -320,7 +320,7 @@ function printSection(section) {
 const printResumoBtn = document.getElementById('printResumoBtn');
 const printCompletoBtn = document.getElementById('printCompletoBtn');
 printResumoBtn.addEventListener('click', () => printSection('printResumo'));
-printCompletoBtn.addEventListener('click', () => ipcRenderer.send('print-window'));
+printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
 
 // Função botão enter
 valBem.addEventListener("keypress", (e) => {

@@ -6,7 +6,7 @@
   "dependencies": {
     "node": "^18.20.7"
   },
-  "name": "Calculadora-de-Emolumentos",
+  "name": "calculadora-de-emolumentos",
   "version": "1.0.0",
   "description": "Calculadora de Emolumentos TJ/PR",
   "main": "app.js",
