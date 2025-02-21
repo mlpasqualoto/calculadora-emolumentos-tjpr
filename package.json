@@ -12,11 +12,12 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "build": {
     "appId": "com.seuapp.id",
-    "productName": "MeuAppElectron",
+    "productName": "Calculadora Emolumentos",
     "files": [
       "main.js",
       "index.html",
@@ -24,7 +25,19 @@
       "app.js"
     ],
     "directories": {
-      "buildResources": "assets"
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "./assets/favicon.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
     }
   }
 }
