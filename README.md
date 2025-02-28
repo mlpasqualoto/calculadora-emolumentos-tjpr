@@ -1,30 +1,87 @@
 # Calculadora de Emolumentos
 
-A Calculadora de Emolumentos é um projeto desenvolvido em JavaScript para automatizar o cálculo de emolumentos notariais e outros valores relacionados à compra e venda de bens imóveis. Ela permite a inserção de valores de diferentes bens, calcula as taxas aplicáveis e exibe o resultado diretamente na interface da página.
+Este é um projeto desenvolvido somente para desktop para calcular os emolumentos de serviços notariais e de registro, considerando diferentes variáveis, como valor da escritura e presença de imóveis de garagem. A aplicação utiliza HTML, CSS e JavaScript para a interface e a lógica de cálculo.
 
-## Funcionalidades:
+---
 
-1. **Cálculo de Escritura**: 
-   - Com base no valor do bem, a função `valorEscritura()` calcula o valor da escritura, aplicando descontos para bens adicionais.
-   - Limita o número de bens a 10 por cálculo.
-   - Agora é possível calcular o valor da escritura para imóveis de garagem em conjunto com os demais imóveis.
+## 📸 Capturas de Tela  
+### Desktop  
+![calc](https://github.com/user-attachments/assets/237e8958-5d78-4062-94ac-ed63c2e762a5)
+  
+---
 
-2. **Cálculo de Taxas**:
-   - **Fundep**: Calcula o valor do Fundo de Desenvolvimento da Justiça com base em 5% do valor total das escrituras.
-   - **ISSQN**: Calcula o Imposto Sobre Serviços de Qualquer Natureza (ISSQN), equivalente a 2% do valor das escrituras.
-   - **Funrejus**: Calcula o valor do Fundo de Reequipamento do Judiciário (FUNREJUS), que é 0,2% do valor total dos bens.
-   - **ITBI**: Calcula o Imposto sobre a Transmissão de Bens Imóveis (ITBI), equivalente a 2% do valor dos bens.
-   - **ITCMD**: Calcula o Imposto sobre Transmissão Causa Mortis e Doação (ITCMD), equivalente a 4% do valor dos bens.
+## ✨ Funcionalidades  
+- **Cálculo Automático:** O usuário pode inserir valores e selecionar opções, como a presença de garagem, para calcular o valor dos emolumentos.  
+- **Interface Responsiva:** O layout é adaptável para dispositivos desktop e móveis, garantindo uma experiência consistente e acessível.  
+- **Campos Interativos:** O usuário pode facilmente inserir dados como o valor da escritura e marcar a opção de garagem.  
+- **Resultado Imediato:** O valor do emolumento é calculado automaticamente conforme as entradas.  
 
-3. **Soma dos Valores**:
-   - A calculadora soma os valores das escrituras, certidões, registro de imóveis, selos, e distribuidor, gerando o valor total das escrituras e o orçamento final.
-   - O valor total é exibido para o usuário após todos os cálculos.
+---
 
-4. **Interação com o Usuário**:
-   - O usuário pode adicionar até 10 bens para o cálculo.
-   - Alertas de erro são exibidos caso o valor inserido não seja um número válido ou se houver algum erro de entrada.
+## 🛠 Tecnologias Utilizadas  
+### Frontend:  
+- **HTML5:** Estrutura básica da interface.  
+- **CSS3:** Estilização responsiva e moderna, garantindo um design limpo e organizado.  
+- **JavaScript:** Lógica de cálculo e manipulação das interações do usuário.  
 
-5. **Formatação Automática**:
-   - Valores numéricos são formatados com duas casas decimais para maior precisão.
-   - Funções como `formatarVal()` garantem que os valores sejam tratados corretamente antes de serem usados nos cálculos.
+---
 
+## 📂 Estrutura do Código  
+### **HTML**  
+Estrutura da interface, incluindo:  
+- Cabeçalho com o título da calculadora de emolumentos.  
+- Campos de entrada para os dados necessários (valor da escritura, opção de garagem, etc).  
+- Exibição do resultado do cálculo.
+
+### **CSS**  
+Estilos responsivos e modernos, como:  
+- Layout flexível para diferentes tamanhos de tela.  
+- Estilização clara e intuitiva para facilitar a navegação do usuário.
+
+### **JavaScript (Frontend)**  
+- **main.js:**  
+  - `calcularEmolumento()`: Função que realiza o cálculo com base nos valores inseridos.  
+  - Manipulação de eventos para atualizar o valor conforme as opções selecionadas.
+
+---
+
+## ⚙️ Configuração do Projeto  
+1. **Clone o repositório:**  
+   ```bash  
+   git clone <url-do-repositorio>  
+   cd calculadora-emolumentos  
+2. **Abra o arquivo HTML:**  
+   Abra o arquivo `index.html` no seu navegador para utilizar a calculadora.
+
+   ou
+
+- Você também pode instalar as dependências do Electron e instalar o app na sua máquina, através dos comandos abaixos:
+```bash
+npm install electron electron-builder --save-dev
+```
+
+---
+
+## 🔍 Exemplo de Uso  
+1. **Insira o valor da escritura e selecione se há alguma exceção como a de bem de garagem ou escritura de Doação com Usufruto.**
+2. **O cálculo do emolumento será exibido automaticamente na tela.**
+3. **Você pode alterar os valores a qualquer momento para ver o cálculo atualizado.**
+
+   ou
+
+- Você também pode gerar um instalador através do Electron e usar o app diretamente no seu desktop. Neste caso, use o comando abaixo:
+```bash
+npm run dist
+```
+
+---
+
+## 🤝 Contribuições
+
+Contribuições são bem-vindas! Caso encontre algum problema ou tenha sugestões, fique à vontade para abrir uma issue ou enviar um pull request.
+
+---
+
+## 📜 Licença
+
+Este projeto está licenciado sob a licença MIT.
