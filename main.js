@@ -1,9 +1,22 @@
 const { ipcRenderer } = require('electron');
 
+// mostra e esconde aviso de meação
+const meacao = document.getElementById("input-meacao");
+const meacaoAvisoItmcd = document.getElementById("meacao-aviso-itcmd");
+
+meacao.addEventListener("change", () => {
+  if (meacao.checked) {
+    meacaoAvisoItmcd.style.display = "flex";
+  } else {
+    meacaoAvisoItmcd.style.display = "none";
+  }
+});
+
 //mostra e esconde aviso de doação com usufruto
 const doacaoUsufruto = document.getElementById("input-Doacao");
 const doacaoAvisoFunrejus = document.getElementById("doacao-aviso-funrejus");
 const doacaoAvisoItcmd = document.getElementById("doacao-aviso-itcmd");
+
 doacaoUsufruto.addEventListener("change", () => {
   if (doacaoUsufruto.checked) {
     doacaoAvisoFunrejus.style.display = "flex";
@@ -16,14 +29,20 @@ doacaoUsufruto.addEventListener("change", () => {
 
 //calcular valor da escritura
 let cont = 1;
+let contBem = 0;
 function valorEscritura(valBem, tabela) {
   cont = cont + 1;
+
   if (cont >= 11) {
     alert('Limite de 10 bens atingidos!');
     return 0;
   };
 
   const garagem = document.getElementById("input-garagem");
+  if (!garagem.checked) {
+    contBem = contBem + 1;
+  }
+
   let valEsc = 0;
   if (valBem >= 62602.0) {
     if (cont === 2) {
@@ -60,6 +79,7 @@ function valFormatReais(val) {
   return valReais;
 };
 
+//adiciona guias funrejus
 function addGuias(valFunrejus) {
   const guiasTable = document.getElementById("guiasTable");
 
@@ -91,11 +111,17 @@ function addGuias(valFunrejus) {
 function addBemRow(nBem, valBem, valEscritura) {
   const table = document.getElementById("bensTable");
   const row = document.createElement("tr");
-  row.classList.add("bens", "corpo");
-
+  const garagem = document.getElementById("input-garagem");
   const columnItem = document.createElement("td");
+
   columnItem.classList.add("item");
-  columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem);
+
+  if (garagem.checked) {
+    columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem) + " (Imóvel de Garagem)";
+  } else {
+    columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem);
+  }
+
   row.appendChild(columnItem);
 
   const columnVal = document.createElement("td");
@@ -116,6 +142,19 @@ function valorIssqn(sumEsc) {
   let issqn = sumEsc * (2 / 100);
   return issqn.toFixed(2);
 };
+
+//calcular valor selos
+let valSelos = 16;
+function valorSelos() {
+  if (contBem > 1) {
+    for (let i = 1; i < contBem; i++) {
+      valSelos = valSelos + 8;
+    }
+  }
+
+  console.log(valSelos);
+  return valSelos.toFixed(2);
+}
 
 //calcular valor funrejus
 function valorFunrejus(sumB) {
@@ -139,9 +178,10 @@ function valorItbi(sumB) {
 //calcular valor itcmd
 function valorItcmd(sumB) {
   const doacaoUsufruto = document.getElementById("input-Doacao");
+  const meacao = document.getElementById("input-meacao");
   let itcmd = sumB * (4 / 100);
 
-  if (doacaoUsufruto.checked) {
+  if (doacaoUsufruto.checked || meacao.checked) {
     itcmd = sumB * (2 / 100);
   };
 
@@ -235,7 +275,12 @@ function calculoIssqn() {
 };
 
 //selos
-let selos = parseFloat(16);
+function calculoSelos() {
+  selos = valorSelos(); // selos declarado aqui!
+  selos = parseFloat(selos);
+  console.log(selos);
+  document.getElementById("selos").textContent = valFormatReais(selos);
+}
 
 //distribuidor
 let distribuidor = parseFloat(12.40);

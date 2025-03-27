@@ -33,8 +33,11 @@
                                         <p id="contBens"></p>
                                     </div>
                                     <div id="checkbox-container">
+                                        <label class="add-checkbox" for="input-meacao">
+                                            <input id="input-meacao" type="checkbox"> Descontar Meação
+                                        </label>
                                         <label class="add-checkbox" for="input-garagem">
-                                            <input id="input-garagem" type="checkbox"> Garagem
+                                            <input id="input-garagem" type="checkbox"> Garagem (compra e venda)
                                         </label>
                                         <label class="add-checkbox" for="input-Doacao">
                                             <input type="checkbox" id="input-Doacao"> Doação c/ usufruto
@@ -50,9 +53,9 @@
                     <table class="corpo">
                         <tr>
                             <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
-                            <td><button id="addbens"
-                                    onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar
-                                    Bem</button></td>
+                            <td>
+                                <button id="addbens" onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar Bem</button>
+                            </td>
                         </tr>
                     </table>
                     <table class="corpo">
@@ -77,8 +80,8 @@
                             <td id="issqn" class="val"></td>
                         </tr>
                         <tr>
-                            <td class="item">Selos (2 selos)</td>
-                            <td class="val">16,00</td>
+                            <td class="item">Selos (R$ 8,00 cada)</td>
+                            <td id="selos" class="val"></td>
                         </tr>
                         <tr>
                             <td class="item">Distribuidor</td>
@@ -140,6 +143,7 @@
                                             ITCMD (4% sobre a soma dos bens)
                                         </div>
                                         <p id="doacao-aviso-itcmd">ITCMD DE 2% NESTE CASO</p>
+                                        <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
                                     </div>
                                     <div>
                                         <button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button>
@@ -164,7 +168,7 @@
                         <button id="printResumoBtn">IMPRIMIR RESUMO</button>
                         <button id="limparBtn">LIMPAR</button>
 
-                        <button id="calcular" onclick="calculoFundep(); calculoIssqn(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button>
+                        <button id="calcular" onclick="calculoFundep(); calculoIssqn(); calculoSelos(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button>
                     </div>
                 </div>
             </div>
