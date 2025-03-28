@@ -354,6 +354,43 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("orcamento").textContent = valFormatReais(orcamento);
   };
 
+  /* EVENTOS DE AÇÃO DO SISTEMA */
+
+  // Define botão de adicionar bens
+  const addbensBtn = document.getElementById("addbens");
+  addbensBtn.addEventListener("click", () => {
+    calculoValorEscrituras(); 
+    somaValorBens(); 
+    somaValorEscrituras(); 
+    limparValor();
+  });
+
+  // Define botão de calcular ITBI
+  const itbiBtn = document.getElementById("itbiBtn");
+  itbiBtn.addEventListener("click", () => {
+    calculoItbi();
+  });
+
+  // Define botão de calcular ITCMD
+  const itcmdBtn = document.getElementById("itcmdBtn");
+  itcmdBtn.addEventListener("click", () => {
+    calculoItcmd();
+  });
+
+  // Define botão de calcular valores
+  const calcularBtn = document.getElementById("calcularBtn");
+  calcularBtn.addEventListener("click", () => {
+    calculoFundep(); 
+    calculoIssqn(); 
+    calculoSelos(); 
+    somaValorEscriturasTotal(); 
+    calculoFunrejus(); 
+    somaEscrituraRodape(); 
+    calculoCertidoes(); 
+    calculoRegistro(); 
+    calculoOrcamento();
+  });
+
   // Função para adicionar classe ao body e acionar a impressão
   function printSection(section) {
     document.body.classList.add(section); // Adiciona a classe correspondente

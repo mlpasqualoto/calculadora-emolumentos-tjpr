@@ -6,7 +6,6 @@
     <title>Orçamento Escrituras</title>
     <meta name="description" content="página para calcular valor de escrituras">
     <meta autor="author" content="Matheus Leite Pasqualoto">
-    <meta name="keywords" content="html, css, javascript">
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -34,13 +33,13 @@
                                     </div>
                                     <div id="checkbox-container">
                                         <label class="add-checkbox" for="input-meacao">
-                                            <input id="input-meacao" type="checkbox"> Descontar Meação
+                                            <input id="input-meacao" type="checkbox"> Desc. Meação
                                         </label>
                                         <label class="add-checkbox" for="input-garagem">
-                                            <input id="input-garagem" type="checkbox"> Garagem (compra e venda)
+                                            <input id="input-garagem" type="checkbox"> Garagem (compra/venda)
                                         </label>
                                         <label class="add-checkbox" for="input-Doacao">
-                                            <input type="checkbox" id="input-Doacao"> Doação c/ usufruto
+                                            <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
                                         </label>
                                     </div>
                                 </div>
@@ -54,7 +53,7 @@
                         <tr>
                             <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
                             <td>
-                                <button id="addbens" onclick="calculoValorEscrituras(); somaValorBens(); somaValorEscrituras(); limparValor();">Adicionar Bem</button>
+                                <button id="addbens">Adicionar Bem</button>
                             </td>
                         </tr>
                     </table>
@@ -102,7 +101,7 @@
                             <td class="item">
                                 <div id="funrejus-container">
                                     Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
-                                        FUNREJUS NESTE CASO</p>
+                                        FUNREJUS</p>
                                 </div>
                             </td>
                             <td id="funrejus" class="val"></td>
@@ -131,8 +130,7 @@
                                     autocomplete="off" required></td>
                         </tr>
                         <tr>
-                            <td class="item">ITBI (2% sobre a soma dos bens)<button class="itbiitcmd"
-                                    onclick="calculoItbi()">Adicionar</button></td>
+                            <td class="item">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
                             <td id="itbi" class="val"></td>
                         </tr>
                         <tr>
@@ -142,11 +140,11 @@
                                         <div id="itcmd-text2">
                                             ITCMD (4% sobre a soma dos bens)
                                         </div>
-                                        <p id="doacao-aviso-itcmd">ITCMD DE 2% NESTE CASO</p>
+                                        <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
                                         <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
                                     </div>
                                     <div>
-                                        <button class="itbiitcmd" onclick="calculoItcmd()">Adicionar</button>
+                                        <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
                                     </div>
                                 </div>
                             </td>
@@ -164,11 +162,11 @@
                     <br>
                     <hr><br>
                     <div id="btn-container">
-                        <button id="printCompletoBtn" onclick="printPage()">IMPRIMIR COMPLETO</button>
+                        <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
                         <button id="printResumoBtn">IMPRIMIR RESUMO</button>
                         <button id="limparBtn">LIMPAR</button>
 
-                        <button id="calcular" onclick="calculoFundep(); calculoIssqn(); calculoSelos(); somaValorEscriturasTotal(); calculoFunrejus(); somaEscrituraRodape(); calculoCertidoes(); calculoRegistro(); calculoOrcamento();">CALCULAR</button>
+                        <button id="calcularBtn">CALCULAR</button>
                     </div>
                 </div>
             </div>

@@ -201,7 +201,7 @@ input {
     justify-content: space-around;
 }
 
-#calcular,
+#calcularBtn,
 #printCompletoBtn,
 #printResumoBtn,
 #limparBtn {
@@ -267,6 +267,10 @@ input {
     }
 
     button {
+        display: none;
+    }
+
+    #bem-container {
         display: none;
     }
 }
