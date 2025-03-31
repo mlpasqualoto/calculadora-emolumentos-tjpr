@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "electron": "^34.2.0",
+    "electron": "^34.4.1",
     "electron-builder": "^25.1.8"
   },
   "dependencies": {

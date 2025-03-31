@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const column2 = document.createElement("td");
     column1.classList.add("item");
     column2.classList.add("val");
-    column1.textContent = "Guia 1 - FUNREJUS";
+    column1.textContent = "Guia 1 - FUNREJUS - Nua Propriedade";
     column2.textContent = valFormatReais(valFunrejus / 2);
     row1.appendChild(column1);
     row1.appendChild(column2);
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const column4 = document.createElement("td");
     column3.classList.add("item");
     column4.classList.add("val");
-    column3.textContent = "Guia 2 - FUNREJUS";
+    column3.textContent = "Guia 2 - FUNREJUS - Usufruto";
     column4.textContent = valFormatReais(valFunrejus / 2);
     row2.appendChild(column3);
     row2.appendChild(column4);
