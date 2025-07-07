@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function valorEscritura(valBem, tabela) {
     cont = cont + 1;
 
-    if (cont >= 11) {
+    if (cont > 11) {
       alert('Limite de 10 bens atingidos!');
       return 0;
     };
