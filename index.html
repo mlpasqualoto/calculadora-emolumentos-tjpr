@@ -36,7 +36,7 @@
                                             <input id="input-meacao" type="checkbox"> Desc. Meação
                                         </label>
                                         <label class="add-checkbox" for="input-garagem">
-                                            <input id="input-garagem" type="checkbox"> Garagem (compra/venda)
+                                            <input id="input-garagem" type="checkbox"> Garagem (compra venda)
                                         </label>
                                         <label class="add-checkbox" for="input-Doacao">
                                             <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
@@ -59,11 +59,11 @@
                     </table>
                     <table class="corpo">
                         <tr>
-                            <td class="item">Soma dos bens</td>
+                            <td class="item">Soma dos valores dos bens</td>
                             <td id="sumBens" class="val"></td>
                         </tr>
                         <tr>
-                            <td class="item">Soma das escrituras (somente valor das escrituras)</td>
+                            <td class="item">Soma dos emolumentos</td>
                             <td id="sumEscrituras" class="val"></td>
                         </tr>
                     </table>
@@ -71,11 +71,11 @@
                     <hr class="corpo"><br class="corpo">
                     <table class="corpo">
                         <tr>
-                            <td class="item">Fundep (5% sobre a soma das escrituras)</td>
+                            <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
                             <td id="fundep" class="val"></td>
                         </tr>
                         <tr>
-                            <td class="item">ISSQN (2% sobre a soma das escrituras)</td>
+                            <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
                             <td id="issqn" class="val"></td>
                         </tr>
                         <tr>
@@ -90,7 +90,7 @@
                     <br class="corpo">
                     <table>
                         <tr>
-                            <td class="item"><strong>Soma do valor total das escrituras (valor das escrituas + Fudenp +
+                            <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
                                     ISSQN + Selos + Distribuidor)</strong></td>
                             <td class="val"><strong id="sumEscrituraTotal"></strong></td>
                         </tr>
@@ -111,7 +111,7 @@
                     <br class="corpo">
                     <table class="corpo">
                         <tr>
-                            <td class="item"><strong>Soma do valor total das escrituras + Funrejus (valor das escrituas
+                            <td class="item"><strong>Total da escritura + Funrejus (Emolumentos
                                     + Fudenp + ISSQN + Selos + Distribuidor + Funrejus)</strong></td>
                             <td class="val"><strong id="sumEscrituraRodape"></strong></td>
                         </tr>
@@ -122,10 +122,10 @@
                         <tr>
                             <td class="item">Certidões</td>
                             <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
-                                    autocomplete="off" required></td>
+                                    autocomplete="off" required value="250"></td>
                         </tr>
                         <tr>
-                            <td class="item">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
+                            <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
                             <td id="itbi" class="val"></td>
                         </tr>
                         <tr>
@@ -148,7 +148,7 @@
                         <tr>
                             <td class="item">Registro de imóveis</td>
                             <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
-                                    autocomplete="off" required></td>
+                                    autocomplete="off" required value="1700"></td>
                         </tr>
                     </table>
                     <br>

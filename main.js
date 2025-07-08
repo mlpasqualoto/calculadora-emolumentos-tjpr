@@ -35,17 +35,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function valorEscritura(valBem, tabela) {
     cont = cont + 1;
 
-    if (cont > 11) {
-      alert('Limite de 10 bens atingidos!');
-      return 0;
-    };
-
     const garagem = document.getElementById("input-garagem");
     if (!garagem.checked) {
       contBem = contBem + 1;
     }
 
     let valEsc = 0;
+
+    // Se passou do limite de 10 bens, valor da escritura é 0
+    if (cont > 11) {
+      if (cont === 12) {
+        alert('Limite de 10 bens atingido! Próximos bens terão valor de escritura R$ 0,00!');
+      }
+      return valEsc.toFixed(2);
+    }
+
     if (valBem >= 62602.0) {
       if (cont === 2) {
         valEsc = 1377.24;
@@ -129,8 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const columnVal = document.createElement("td");
     columnVal.classList.add("val");
     columnVal.textContent = valFormatReais(valEscritura);
+    
     row.appendChild(columnVal);
-
     table.appendChild(row);
   };
 
@@ -404,10 +408,18 @@ document.addEventListener("DOMContentLoaded", () => {
   printResumoBtn.addEventListener('click', () => printSection('printResumo'));
   printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
 
-  // Função botão enter
+  // Evento do botão enter p/ adicionar bens
   valBem.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       addbens.click();
+    };
+  });
+
+  //Evento do botão enter p/ calcular valores
+  const registroInput = document.getElementById("registro");
+  registroInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      calcularBtn.click();
     };
   });
 
