@@ -221,6 +221,17 @@ table td:last-child {
     width: 100%;
 }
 
+#avisoOrcamento {
+    margin-bottom: 0;
+    text-align: justify;
+    display: none; /* Oculto por padrão */
+}
+
+#avisoOrcamento b {
+    color: #dc2626;
+    font-weight: 600;
+}
+
 /* === Container do ITBI com alinhamento à direita === */
 #itbi-container {
     display: flex;
@@ -523,5 +534,10 @@ br {
         padding: 2px 4px !important;
         font-size: 11px !important;
         margin: 0 !important;
+    }
+
+    /* Exibe o aviso de orçamento na impressão */
+    #avisoOrcamento {
+        display: block !important;
     }
 }
