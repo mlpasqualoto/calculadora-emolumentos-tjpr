@@ -1,184 +1,397 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>Orçamento Escrituras</title>
-    <meta name="description" content="página para calcular valor de escrituras">
-    <meta autor="author" content="Matheus Leite Pasqualoto">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <title>CalcTools - Ferramentas de Cálculo Online</title>
+    <style>
+        :root {
+            /* Paleta de cores principal */
+            --primary-dark: #0f0f23;
+            --secondary-dark: #1a1a2e;
+            --accent-blue: #4f46e5;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --surface: #16213e;
+            --surface-hover: #1e2a4a;
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            
+            /* Gradientes */
+            --gradient-primary: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            --gradient-bg: linear-gradient(180deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-primary);
+            background: var(--gradient-bg);
+            min-height: 100%;
+            line-height: 1.6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header:hover {
+            background: rgba(15, 15, 35, 0.98);
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #container ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 2rem;
+        }
+
+        #container a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #container a:hover {
+            color: var(--text-primary);
+            background: var(--surface-hover);
+            transform: translateY(-2px);
+        }
+
+        #container a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #container a:hover::before {
+            width: 100%;
+        }
+
+        main {
+            background: transparent;
+            width: 100%;
+            padding-top: 100px;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+        }
+
+        .tool-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        footer {
+            width: 100%;
+            min-height: 80px;
+            background: var(--primary-dark);
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tool-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .tool-card:nth-child(2) { animation-delay: 0.1s; }
+        .tool-card:nth-child(3) { animation-delay: 0.2s; }
+        .tool-card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            #container ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            header {
+                padding: 15px 20px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div id="totalScreen">
-        <div class="cont_cabecalho">
-            <div class="title">
-                <h1>Calculadora de Emolumentos TJ/PR</h1>
-            </div>
-        </div>
-        <div class="cont_calc">
-            <div class="cont_corpo">
-                <div class="cont_tabela">
-                    <table>
-                        <tr id="topo">
-                            <td id="topItem">Item</td>
-                            <td id="topVal">Valor R$</td>
-                        </tr>
-                        <tr id="transparent">
-                            <td class="item">
-                                <div id="td-top">
-                                    <div id="bem-container">
-                                        Bem nº
-                                        <p id="contBens"></p>
-                                    </div>
-                                    <div id="checkbox-container">
-                                        <label class="add-checkbox" for="input-meacao">
-                                            <input id="input-meacao" type="checkbox"> Desc. Meação
-                                        </label>
-                                        <label class="add-checkbox" for="input-garagem">
-                                            <input id="input-garagem" type="checkbox"> Garagem (compra venda)
-                                        </label>
-                                        <label class="add-checkbox" for="input-Doacao">
-                                            <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
-                                        </label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="val"><input type="number" id="valBem" placeholder="Valor do bem"
-                                    autocomplete="off" required></td>
-                        </tr>
-                    </table>
-                    <table id="bensTable"></table>
-                    <table class="corpo">
-                        <tr>
-                            <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
-                            <td>
-                                <button id="addbens">Adicionar Bem</button>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="corpo">
-                        <tr>
-                            <td class="item">Soma dos valores dos bens</td>
-                            <td id="sumBens" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Soma dos emolumentos</td>
-                            <td id="sumEscrituras" class="val"></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <hr class="corpo"><br class="corpo">
-                    <table class="corpo">
-                        <tr>
-                            <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
-                            <td id="fundep" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
-                            <td id="issqn" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Selos (R$ 8,00 cada)</td>
-                            <td id="selos" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Distribuidor</td>
-                            <td class="val">12,40</td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
-                                    ISSQN + Selos + Distribuidor)</strong></td>
-                            <td class="val"><strong id="sumEscrituraTotal"></strong></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item">
-                                <div id="funrejus-container">
-                                    Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
-                                        FUNREJUS</p>
-                                </div>
-                            </td>
-                            <td id="funrejus" class="val"></td>
-                        </tr>
-                    </table>
-                    <table id="guiasTable"></table>
-                    <br class="corpo">
-                    <table class="corpo">
-                        <tr>
-                            <td class="item"><strong>Total da escritura + Funrejus</strong></td>
-                            <td class="val"><strong id="sumEscrituraRodape"></strong></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <hr class="corpo"><br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item">Certidões</td>
-                            <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
-                                    autocomplete="off" required value="250"></td>
-                        </tr>
-                        <tr>
-                            <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
-                            <td id="itbi" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">
-                                <div id="itcmd-container">
-                                    <div id="itcmd-text-container">
-                                        <div id="itcmd-text2">
-                                            ITCMD (4% sobre a soma dos bens)
-                                        </div>
-                                        <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
-                                        <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
-                                    </div>
-                                    <div>
-                                        <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td id="itcmd" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Registro de imóveis</td>
-                            <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
-                                    autocomplete="off" required value="1700"></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <hr><br>
-                    <table id="orcamentoTable">
-                        <tr>
-                            <td class="item"><strong>Orçamento</strong></td>
-                            <td class="val"><strong id="orcamento"></strong></td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <p id="avisoOrcamento"><b>ATENÇÃO:</b> Informamos que o presente orçamento tem <b>caráter meramente estimativo</b>, elaborado com base nas informações preliminares fornecidas. O valor poderá sofrer alterações conforme as especificidades do ato notarial efetivamente praticado, bem como em decorrência de eventuais alterações na tabela de emolumentos. <b>Destacamos que quaisquer ajustes de valores observarão, sempre, os parâmetros estabelecidos na tabela de emolumentos vigente</b>. Permanecemos à disposição para esclarecimentos adicionais.</p>
-                        </tr>
-                    </table>
-                    <br>
-                    <hr><br>
-                    <div id="btn-container">
-                        <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
-                        <button id="printResumoBtn">IMPRIMIR RESUMO</button>
-                        <button id="limparBtn">LIMPAR</button>
+    <!-- Cabeçalho -->
+    <header>
+        <nav id="container">
+            <div class="logo">CalcTools</div>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-                        <button id="calcularBtn">CALCULAR</button>
+    <!-- Conteúdo principal -->
+    <main>
+        <section class="hero-section">
+            <h1 class="hero-title">Ferramentas de Cálculo Online</h1>
+            <p class="hero-subtitle">Simplifique seus cálculos com nossas ferramentas profissionais e gratuitas. Rápido, preciso e sempre disponível.</p>
+        </section>
+
+        <section class="tools-grid">
+            <div class="tool-card">
+                <a href="escrituras.html" class="tool-link">
+                    <div class="tool-icon">
+                        <i class="fas fa-calculator"></i>
                     </div>
-                </div>
+                    <h3 class="tool-title">Calculadora de Escrituras TJ/PR</h3>
+                    <p class="tool-description">Calcule o valor de escrituras com valor econômico.</p>
+                </a>
             </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <h3 class="tool-title">Calculadora de Porcentagem</h3>
+                <p class="tool-description">Calcule porcentagens, descontos e aumentos de forma rápida e simples.</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h3 class="tool-title">Calculadora Financeira</h3>
+                <p class="tool-description">Juros compostos, financiamentos e investimentos ao seu alcance.</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-ruler"></i>
+                </div>
+                <h3 class="tool-title">Conversor de Unidades</h3>
+                <p class="tool-description">Converta medidas, pesos, temperaturas e muito mais instantaneamente.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacidade</a>
+                <a href="#terms">Termos</a>
+                <a href="#support">Suporte</a>
+                <a href="#github">GitHub</a>
+            </div>
+            <p class="footer-text">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
         </div>
-    </div>
-
-    <script src="main.js"></script>
+    </footer>
 </body>
-
 </html>
