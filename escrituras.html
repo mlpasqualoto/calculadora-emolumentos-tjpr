@@ -394,34 +394,58 @@
 
         /* === Responsividade === */
         @media (max-width: 768px) {
+            /* Remove as barras laterais em mobile */
             .ads-left, 
             .ads-right {
-                display: none;
+                display: none !important;
             }
 
             body {
-                padding: 10px;
+                padding: 0;
+                background: #f8fafc;
+                margin: 0;
             }
 
             #layout {
                 flex-direction: column;
-                align-items: center;
-                gap: 20px;
+                align-items: stretch;
+                gap: 0;
+                padding: 0;
+                margin: 0;
+            }
+
+            #totalScreen {
+                border-radius: 0;
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
             }
 
             .cont_corpo {
-                padding: 20px;
+                padding: 15px;
             }
             
             .cont_tabela {
-                padding: 16px;
+                padding: 12px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
             }
             
             .title h1 {
-                font-size: 20px;
-                padding: 20px 16px;
+                font-size: 18px;
+                padding: 16px 15px;
             }
-            
+
+            /* Otimiza inputs em mobile */
+            input, .val {
+                padding: 12px;
+                font-size: 16px; /* Evita zoom no iOS */
+                border-radius: 6px;
+            }
+
+            /* Melhora layout dos containers especiais */
             #td-top {
                 flex-direction: column;
                 align-items: flex-start;
@@ -431,12 +455,44 @@
             #checkbox-container {
                 flex-direction: column;
                 gap: 8px;
+                width: 100%;
+            }
+
+            .add-checkbox {
+                font-size: 14px;
+                padding: 4px 0;
+            }
+
+            .add-checkbox input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
             }
             
+            /* Otimiza botões em mobile */
             #btn-container {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            #btn-container button {
+                padding: 16px;
+                font-size: 14px;
+                border-radius: 8px;
+            }
+
+            button {
+                padding: 12px 16px;
+                font-size: 14px;
+                border-radius: 6px;
+            }
+
+            .itbiitcmd {
+                margin-left: 8px;
+                padding: 8px 12px;
+                font-size: 12px;
             }
             
+            /* Melhora containers de avisos */
             #funrejus-container,
             #itcmd-container,
             #itbi-container {
@@ -444,13 +500,93 @@
                 align-items: flex-start;
                 gap: 8px;
             }
-            
-            th, td {
-                padding: 8px 12px;
+
+            #itcmd-text-container {
+                width: 100%;
             }
             
+            /* Otimiza tabelas em mobile */
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+
+            #topItem, #topVal {
+                font-size: 13px;
+                padding: 10px 8px;
+            }
+
+            /* Melhora alertas */
+            #alert {
+                font-size: 14px;
+                padding: 10px;
+                margin-bottom: 8px;
+            }
+
+            #doacao-aviso-funrejus,
+            #doacao-aviso-itcmd,
+            #meacao-aviso-itcmd {
+                font-size: 12px;
+                padding: 6px 10px;
+                margin: 4px 0;
+            }
+
+            /* Remove anúncios em mobile */
+            .adsbygoogle {
+                display: none !important;
+            }
+
+            /* Melhora bem-container */
+            #bem-container {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            #bem-container p {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+        }
+
+        /* === Responsividade para telas muito pequenas === */
+        @media (max-width: 480px) {
+            .title h1 {
+                font-size: 16px;
+                padding: 12px 10px;
+            }
+
+            .cont_corpo {
+                padding: 10px;
+            }
+
+            .cont_tabela {
+                padding: 8px;
+            }
+
+            th, td {
+                padding: 8px 6px;
+            }
+
             input, .val {
-                padding: 8px 12px;
+                padding: 10px 8px;
+                font-size: 16px;
+            }
+
+            #btn-container button {
+                padding: 14px 12px;
+                font-size: 13px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            #topItem, #topVal {
+                font-size: 12px;
+                padding: 8px 6px;
             }
         }
 
