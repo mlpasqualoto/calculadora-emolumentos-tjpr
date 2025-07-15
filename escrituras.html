@@ -19,13 +19,31 @@
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             color: #1e293b;
             margin: 0;
-            padding: 15px;
+            padding: 0;
             line-height: 1.4;
             min-height: 100vh;
         }
 
+        /* === Layout principal === */
+        #layout {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 10px;
+        }
+
+        /* === Anúncios laterais === */
+        .ads-left, .ads-right {
+            flex: 0 0 160px; /* largura lateral */
+            position: sticky;
+            top: 20px;
+            height: max-content;
+        }
+
         /* === Container principal === */
         #totalScreen {
+            flex: 1 1 auto;
             max-width: 1000px;
             margin: 0 auto;
             background: #ffffff;
@@ -564,171 +582,222 @@
     </style>
 </head>
 <body>
-    <div id="totalScreen">
-        <div class="cont_cabecalho">
-            <div class="title">
-                <h1>Calculadora de Emolumentos TJ/PR</h1>
-            </div>
-        </div>
-        <div class="cont_calc">
-            <div class="cont_corpo">
-                <div class="cont_tabela">
-                    <table>
-                        <tr id="topo">
-                            <td id="topItem">Item</td>
-                            <td id="topVal">Valor R$</td>
-                        </tr>
-                        <tr id="transparent">
-                            <td class="item">
-                                <div id="td-top">
-                                    <div id="bem-container">
-                                        Bem nº
-                                        <p id="contBens"></p>
-                                    </div>
-                                    <div id="checkbox-container">
-                                        <label class="add-checkbox" for="input-meacao">
-                                            <input id="input-meacao" type="checkbox"> Desc. Meação
-                                        </label>
-                                        <label class="add-checkbox" for="input-garagem">
-                                            <input id="input-garagem" type="checkbox"> Garagem (compra venda)
-                                        </label>
-                                        <label class="add-checkbox" for="input-Doacao">
-                                            <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
-                                        </label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="val"><input type="number" id="valBem" placeholder="Valor do bem"
-                                    autocomplete="off" required></td>
-                        </tr>
-                    </table>
-                    <table id="bensTable"></table>
-                    <table class="corpo">
-                        <tr>
-                            <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
-                            <td>
-                                <button id="addbens">Adicionar Bem</button>
-                            </td>
-                        </tr>
-                    </table>
-                    <table class="corpo">
-                        <tr>
-                            <td class="item">Soma dos valores dos bens</td>
-                            <td id="sumBens" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Soma dos emolumentos</td>
-                            <td id="sumEscrituras" class="val"></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <hr class="corpo"><br class="corpo">
-                    <table class="corpo">
-                        <tr>
-                            <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
-                            <td id="fundep" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
-                            <td id="issqn" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Selos (R$ 8,00 cada)</td>
-                            <td id="selos" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Distribuidor</td>
-                            <td class="val">12,40</td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
-                                    ISSQN + Selos + Distribuidor)</strong></td>
-                            <td class="val"><strong id="sumEscrituraTotal"></strong></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item">
-                                <div id="funrejus-container">
-                                    Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
-                                        FUNREJUS</p>
-                                </div>
-                            </td>
-                            <td id="funrejus" class="val"></td>
-                        </tr>
-                    </table>
-                    <table id="guiasTable"></table>
-                    <br class="corpo">
-                    <table class="corpo">
-                        <tr>
-                            <td class="item"><strong>Total da escritura + Funrejus</strong></td>
-                            <td class="val"><strong id="sumEscrituraRodape"></strong></td>
-                        </tr>
-                    </table>
-                    <br class="corpo">
-                    <hr class="corpo"><br class="corpo">
-                    <table>
-                        <tr>
-                            <td class="item">Certidões</td>
-                            <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
-                                    autocomplete="off" required value="250"></td>
-                        </tr>
-                        <tr>
-                            <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
-                            <td id="itbi" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">
-                                <div id="itcmd-container">
-                                    <div id="itcmd-text-container">
-                                        <div id="itcmd-text2">
-                                            ITCMD (4% sobre a soma dos bens)
-                                        </div>
-                                        <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
-                                        <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
-                                    </div>
-                                    <div>
-                                        <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td id="itcmd" class="val"></td>
-                        </tr>
-                        <tr>
-                            <td class="item">Registro de imóveis</td>
-                            <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
-                                    autocomplete="off" required value="1700"></td>
-                        </tr>
-                    </table>
-                    <br>
-                    <hr><br>
-                    <table id="orcamentoTable">
-                        <tr>
-                            <td class="item"><strong>Orçamento</strong></td>
-                            <td class="val"><strong id="orcamento"></strong></td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <p id="avisoOrcamento"><b>ATENÇÃO:</b> Informamos que o presente orçamento tem <b>caráter meramente estimativo</b>, elaborado com base nas informações preliminares fornecidas. O valor poderá sofrer alterações conforme as especificidades do ato notarial efetivamente praticado, bem como em decorrência de eventuais alterações na tabela de emolumentos. <b>Destacamos que quaisquer ajustes de valores observarão, sempre, os parâmetros estabelecidos na tabela de emolumentos vigente</b>. Permanecemos à disposição para esclarecimentos adicionais.</p>
-                        </tr>
-                    </table>
-                    <br>
-                    <hr><br>
-                    <div id="btn-container">
-                        <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
-                        <button id="printResumoBtn">IMPRIMIR RESUMO</button>
-                        <button id="limparBtn">LIMPAR</button>
+    <div id="layout">
+        <aside class="ads-left">
+            <!-- Anúncio esquerdo -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5720110707960649"
+                data-ad-slot="LEFT_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </aside>
 
-                        <button id="calcularBtn">CALCULAR</button>
+        <main id="totalScreen">
+            <!-- Anúncio no topo -->
+            <ins class="adsbygoogle"
+                style="display:block; text-align:center;"
+                data-ad-client="ca-pub-5720110707960649"
+                data-ad-slot="TOP_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+
+            <div id="totalScreen">
+                <div class="cont_cabecalho">
+                    <div class="title">
+                        <h1>Calculadora de Emolumentos TJ/PR</h1>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="cont_calc">
+                    <div class="cont_corpo">
+                        <div class="cont_tabela">
+                            <table>
+                                <tr id="topo">
+                                    <td id="topItem">Item</td>
+                                    <td id="topVal">Valor R$</td>
+                                </tr>
+                                <tr id="transparent">
+                                    <td class="item">
+                                        <div id="td-top">
+                                            <div id="bem-container">
+                                                Bem nº
+                                                <p id="contBens"></p>
+                                            </div>
+                                            <div id="checkbox-container">
+                                                <label class="add-checkbox" for="input-meacao">
+                                                    <input id="input-meacao" type="checkbox"> Desc. Meação
+                                                </label>
+                                                <label class="add-checkbox" for="input-garagem">
+                                                    <input id="input-garagem" type="checkbox"> Garagem (compra venda)
+                                                </label>
+                                                <label class="add-checkbox" for="input-Doacao">
+                                                    <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="val"><input type="number" id="valBem" placeholder="Valor do bem"
+                                            autocomplete="off" required></td>
+                                </tr>
+                            </table>
+                            <table id="bensTable"></table>
+                            <table class="corpo">
+                                <tr>
+                                    <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
+                                    <td>
+                                        <button id="addbens">Adicionar Bem</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table class="corpo">
+                                <tr>
+                                    <td class="item">Soma dos valores dos bens</td>
+                                    <td id="sumBens" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Soma dos emolumentos</td>
+                                    <td id="sumEscrituras" class="val"></td>
+                                </tr>
+                            </table>
+                            <br class="corpo">
+                            <hr class="corpo"><br class="corpo">
+                            <table class="corpo">
+                                <tr>
+                                    <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
+                                    <td id="fundep" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
+                                    <td id="issqn" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Selos (R$ 8,00 cada)</td>
+                                    <td id="selos" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Distribuidor</td>
+                                    <td class="val">12,40</td>
+                                </tr>
+                            </table>
+                            <br class="corpo">
+                            <table>
+                                <tr>
+                                    <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
+                                            ISSQN + Selos + Distribuidor)</strong></td>
+                                    <td class="val"><strong id="sumEscrituraTotal"></strong></td>
+                                </tr>
+                            </table>
+                            <br class="corpo">
+                            <table>
+                                <tr>
+                                    <td class="item">
+                                        <div id="funrejus-container">
+                                            Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
+                                                FUNREJUS</p>
+                                        </div>
+                                    </td>
+                                    <td id="funrejus" class="val"></td>
+                                </tr>
+                            </table>
+                            <table id="guiasTable"></table>
+                            <br class="corpo">
+                            <table class="corpo">
+                                <tr>
+                                    <td class="item"><strong>Total da escritura + Funrejus</strong></td>
+                                    <td class="val"><strong id="sumEscrituraRodape"></strong></td>
+                                </tr>
+                            </table>
+                            <br class="corpo">
+                            <hr class="corpo">
+                            <br class="corpo">
+                            <table>
+                                <tr>
+                                    <td class="item">Certidões</td>
+                                    <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
+                                            autocomplete="off" required value="250"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
+                                    <td id="itbi" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">
+                                        <div id="itcmd-container">
+                                            <div id="itcmd-text-container">
+                                                <div id="itcmd-text2">
+                                                    ITCMD (4% sobre a soma dos bens)
+                                                </div>
+                                                <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
+                                                <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
+                                            </div>
+                                            <div>
+                                                <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td id="itcmd" class="val"></td>
+                                </tr>
+                                <tr>
+                                    <td class="item">Registro de imóveis</td>
+                                    <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
+                                            autocomplete="off" required value="1700"></td>
+                                </tr>
+                            </table>
+                            <br>
+                            <hr><br>
+                            <table id="orcamentoTable">
+                                <tr>
+                                    <td class="item"><strong>Orçamento</strong></td>
+                                    <td class="val"><strong id="orcamento"></strong></td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <p id="avisoOrcamento"><b>ATENÇÃO:</b> Informamos que o presente orçamento tem <b>caráter meramente estimativo</b>, elaborado com base nas informações preliminares fornecidas. O valor poderá sofrer alterações conforme as especificidades do ato notarial efetivamente praticado, bem como em decorrência de eventuais alterações na tabela de emolumentos. <b>Destacamos que quaisquer ajustes de valores observarão, sempre, os parâmetros estabelecidos na tabela de emolumentos vigente</b>. Permanecemos à disposição para esclarecimentos adicionais.</p>
+                                </tr>
+                            </table>
+
+                            <!-- Anúncio no rodapé -->
+                            <ins class="adsbygoogle"
+                                style="display:block; text-align:center; margin: 20px 0;"
+                                data-ad-client="ca-pub-5720110707960649"
+                                data-ad-slot="RODAPE_SLOT_ID"
+                                data-ad-format="auto"
+                                data-full-width-responsive="true"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+
+                            <br>
+                            <hr>
+                            <br>
+                            <div id="btn-container">
+                                <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
+                                <button id="printResumoBtn">IMPRIMIR RESUMO</button>
+                                <button id="limparBtn">LIMPAR</button>
+
+                                <button id="calcularBtn">CALCULAR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </main>
+
+        <aside class="ads-right">
+            <!-- Anúncio direito -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-5720110707960649"
+                data-ad-slot="RIGHT_SLOT_ID"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </aside>
     </div>
 
     <script>
