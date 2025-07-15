@@ -474,12 +474,14 @@
             #doacao-aviso-funrejus,
             #doacao-aviso-itcmd,
             #meacao-aviso-itcmd,
+            #addBtnContainer,
             #alert,
             #btn-container, 
             hr, 
             br,
             aside,
-            ins {
+            ins,
+            #transparent {
                 display: none !important;
             }
 
@@ -567,20 +569,18 @@
                 padding: 2px 4px !important;
                 font-size: 11px !important;
                 margin: 0 !important;
+                max-width: 185px !important;
             }
 
             /* Exibe o aviso de orçamento na impressão */
             #avisoOrcamento {
                 display: block !important;
+                font-size: 13px !important;
             }
 
             /* Ajusta tamanhos de fontes para impressão */
             .val, .item, #certidoes, #registro {
                 font-size: 15px !important;
-            }
-
-            #avisoOrcamento {
-                font-size: 13px !important;
             }
         }
     </style>
@@ -649,7 +649,7 @@
                                 </tr>
                             </table>
                             <table id="bensTable"></table>
-                            <table class="corpo">
+                            <table id="addBtnContainer" class="corpo">
                                 <tr>
                                     <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
                                     <td>
