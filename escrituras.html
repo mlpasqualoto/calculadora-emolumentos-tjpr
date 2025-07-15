@@ -132,12 +132,15 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
             font-size: 13px;
             background: #ffffff;
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        #addBtnContainer {
+            margin: 10px 0 25px 0;
         }
 
         th, td {
@@ -391,6 +394,11 @@
 
         /* === Responsividade === */
         @media (max-width: 768px) {
+            .ads-left, 
+            .ads-right {
+                display: none;
+            }
+
             body {
                 padding: 10px;
             }
