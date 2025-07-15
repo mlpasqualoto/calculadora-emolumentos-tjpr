@@ -737,7 +737,7 @@
 </head>
 <body>
     <div id="layout">
-        <aside class="ads-left">
+        <aside class="ads-left" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
             <!-- Anúncio esquerdo -->
             <ins class="adsbygoogle"
                 style="display:block"
@@ -750,15 +750,17 @@
 
         <main id="totalScreen">
             <!-- Anúncio no topo -->
-            <ins class="adsbygoogle"
-                style="display:block; text-align:center;"
-                data-ad-client="ca-pub-5720110707960649"
-                data-ad-slot="TOP_SLOT_ID"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <div id="ad-top-container" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-client="ca-pub-5720110707960649"
+                    data-ad-slot="TOP_SLOT_ID"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
 
             <div id="totalScreen">
                 <div class="cont_cabecalho">
@@ -916,15 +918,17 @@
                             </table>
 
                             <!-- Anúncio no rodapé -->
-                            <ins class="adsbygoogle"
-                                style="display:block; text-align:center; margin: 20px 0;"
-                                data-ad-client="ca-pub-5720110707960649"
-                                data-ad-slot="RODAPE_SLOT_ID"
-                                data-ad-format="auto"
-                                data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                            <div id="ad-top-container" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
+                                <ins class="adsbygoogle"
+                                    style="display:block; text-align:center; margin: 20px 0;"
+                                    data-ad-client="ca-pub-5720110707960649"
+                                    data-ad-slot="RODAPE_SLOT_ID"
+                                    data-ad-format="auto"
+                                    data-full-width-responsive="true"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
 
                             <br>
                             <hr>
@@ -942,7 +946,7 @@
 
         </main>
 
-        <aside class="ads-right">
+        <aside class="ads-right" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
             <!-- Anúncio direito -->
             <ins class="adsbygoogle"
                 style="display:block"
