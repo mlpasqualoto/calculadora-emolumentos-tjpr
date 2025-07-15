@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5720110707960649"
      crossorigin="anonymous"></script>
@@ -9,75 +8,561 @@
     <meta name="description" content="página para calcular valor de escrituras">
     <meta autor="author" content="Matheus Leite Pasqualoto">
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Layout para anúncios laterais */
-        #totalScreen {
-            display: flex;
-            flex-direction: column;
+        /* === Reset e configurações base === */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            color: #1e293b;
+            margin: 0;
+            padding: 15px;
+            line-height: 1.4;
             min-height: 100vh;
         }
-        
+
+        /* === Container principal === */
+        #totalScreen {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        /* === Cabeçalho === */
         .cont_cabecalho {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 0;
+        }
+
+        .title h1 {
+            margin: 0;
+            padding: 18px 24px;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: -0.025em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* === Containers === */
+        .cont_calc {
             width: 100%;
-            flex-shrink: 0;
-        }
-        
-        .main-content-wrapper {
             display: flex;
-            flex: 1;
             justify-content: center;
-            align-items: flex-start;
+            padding: 0;
         }
-        
-        .ad-left, .ad-right {
-            width: 160px;
-            min-height: 600px;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+
+        .cont_corpo {
+            background-color: #ffffff;
+            padding: 20px;
+            width: 100%;
+            max-width: none;
+        }
+
+        .cont_tabela {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 16px;
+            background: #ffffff;
+        }
+
+        /* === Campos de entrada === */
+        input, .val {
+            text-align: right;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1e293b;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background-color: #ffffff;
+        }
+
+        input::placeholder {
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        /* Remove setas do input number */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+
+        /* === Tabelas === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 13px;
+            background: #ffffff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+
+        /* Força alinhamento das colunas */
+        table td:first-child {
+            width: 70%;
+        }
+
+        table td:last-child {
+            width: 30%;
+            text-align: right;
+        }
+
+        .item {
+            text-align: left;
+            background-color: #f8fafc;
+            font-weight: 500;
+            color: #374151;
+            width: 70%;
+        }
+
+        .val {
+            background-color: #ffffff;
+            font-weight: 600;
+            color: #1e293b;
+            width: 70%;
+            text-align: right;
+        }
+
+        /* === Cabeçalho da tabela === */
+        #topItem, #topVal {
+            background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            padding: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #topItem {
+            width: 70%;
+        }
+
+        #topVal {
+            width: 30%;
+        }
+
+        /* === Containers especiais === */
+        #td-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #bem-container {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #666;
+            gap: 8px;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        #bem-container p {
+            margin: 0;
+            background: #dbeafe;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        #checkbox-container {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .add-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .add-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #3b82f6;
+        }
+
+        /* === Containers de avisos === */
+        #funrejus-container,
+        #itcmd-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+        }
+
+        #avisoOrcamento {
+            margin-bottom: 0;
+            text-align: justify;
+            display: none; /* Oculto por padrão */
+        }
+
+        #avisoOrcamento b {
+            color: #dc2626;
+            font-weight: 600;
+        }
+
+        /* === Container do ITBI com alinhamento à direita === */
+        #itbi-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+        }
+
+        #itcmd-text-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* === Botões === */
+        button {
+            cursor: pointer;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: none;
+            color: white;
+            padding: 10px 16px;
             font-size: 12px;
-            text-align: center;
-            flex-shrink: 0;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
         }
-        
-        .cont_calc {
-            /* Mantém todas as propriedades originais */
-            flex-shrink: 0;
+
+        button:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
         }
-        
-        /* Responsivo para telas menores */
-        @media (max-width: 1200px) {
-            .main-content-wrapper {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .ad-left, .ad-right {
-                width: 100%;
-                max-width: 728px;
-                height: 90px;
-                min-height: 90px;
-            }
+
+        button:active {
+            transform: translateY(0);
         }
-        
+
+        .itbiitcmd {
+            margin-left: 10px;
+            padding: 6px 12px;
+            font-size: 11px;
+            border-radius: 4px;
+        }
+
+        #btn-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        #btn-container button {
+            padding: 12px 16px;
+            font-size: 13px;
+            border-radius: 6px;
+        }
+
+        #calcularBtn {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+        }
+
+        #calcularBtn:hover {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+        }
+
+        #limparBtn {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+        }
+
+        #limparBtn:hover {
+            background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+            box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+        }
+
+        /* === Alertas e avisos === */
+        #alert {
+            font-size: 13px;
+            color: #dc2626;
+            font-style: italic;
+            margin-bottom: 0;
+            padding: 8px 12px;
+            background: #fef2f2;
+            border-radius: 4px;
+            border-left: 4px solid #dc2626;
+        }
+
+        #doacao-aviso-funrejus,
+        #doacao-aviso-itcmd,
+        #meacao-aviso-itcmd {
+            color: #dc2626;
+            font-weight: 600;
+            font-size: 11px;
+            margin: 2px 0;
+            padding: 4px 8px;
+            background: #fef2f2;
+            border-radius: 4px;
+            border: 1px solid #fecaca;
+            display: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* === Separadores === */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+            margin: 0;
+        }
+
+        /* === Textos destacados === */
+        strong {
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        /* === Espaçamentos === */
+        br {
+            line-height: 1.5;
+        }
+
+        /* === Responsividade === */
         @media (max-width: 768px) {
-            .main-content-wrapper {
+            body {
                 padding: 10px;
             }
             
-            .ad-left, .ad-right {
-                height: 50px;
-                min-height: 50px;
+            .cont_corpo {
+                padding: 20px;
+            }
+            
+            .cont_tabela {
+                padding: 16px;
+            }
+            
+            .title h1 {
+                font-size: 20px;
+                padding: 20px 16px;
+            }
+            
+            #td-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            #checkbox-container {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            #btn-container {
+                grid-template-columns: 1fr;
+            }
+            
+            #funrejus-container,
+            #itcmd-container,
+            #itbi-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            th, td {
+                padding: 8px 12px;
+            }
+            
+            input, .val {
+                padding: 8px 12px;
+            }
+        }
+
+        /* === Impressão Otimizada === */
+        @media print {
+            body {
+                background: white !important;
+                padding: 0;
+                font-size: 12px;
+                line-height: 1.3;
+            }
+            
+            #totalScreen {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: 100%;
+                margin: 0;
+            }
+            
+            .cont_cabecalho {
+                background: #1e40af !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .title h1 {
+                font-size: 18px;
+                padding: 12px 16px;
+            }
+            
+            /* Oculta elementos desnecessários na impressão */
+            button,
+            .add-checkbox,
+            #checkbox-container,
+            #doacao-aviso-funrejus,
+            #doacao-aviso-itcmd,
+            #meacao-aviso-itcmd,
+            #alert,
+            #btn-container, hr, br {
+                display: none !important;
+            }
+
+            .cont_calc,
+            .cont_corpo {
+                width: 100%;
+                margin: 0;
+                padding: 12px;
+                box-shadow: none;
+            }
+
+            .cont_tabela {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #e2e8f0;
+                margin-bottom: 8px;
+            }
+
+            /* Otimiza tabelas para impressão */
+            table {
+                box-shadow: none;
+                font-size: 11px;
+                margin-bottom: 8px;
+                page-break-inside: avoid;
+            }
+            
+            th, td {
+                padding: 4px 8px;
+                border: 1px solid #cbd5e1;
+            }
+            
+            .item {
+                background-color: #f8fafc !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                font-size: 11px;
+            }
+            
+            .val {
+                background-color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                font-size: 11px;
+                font-weight: 600;
+            }
+            
+            #topItem, #topVal {
+                background: #475569 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 6px 8px;
+            }
+            
+            /* Otimiza quebras de página */
+            .cont_tabela {
+                page-break-inside: avoid;
+            }
+            
+            /* Esconde elementos específicos para impressão de resumo */
+            body.printResumo .corpo {
+                display: none;
+            }
+
+            body.printResumo #transparent {
+                visibility: hidden;
+            }
+            
+            /* Força cores em impressão */
+            * {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            /* Remove espaços desnecessários */
+            #td-top {
+                display: none;
+            }
+            
+            /* Compacta inputs para impressão */
+            input {
+                background: white !important;
+                border: 1px solid #cbd5e1 !important;
+                padding: 2px 4px !important;
+                font-size: 11px !important;
+                margin: 0 !important;
+            }
+
+            /* Exibe o aviso de orçamento na impressão */
+            #avisoOrcamento {
+                display: block !important;
+            }
+
+            /* Ajusta tamanhos de fontes para impressão */
+            .val, .item, #certidoes, #registro {
+                font-size: 15px !important;
+            }
+
+            #avisoOrcamento {
+                font-size: 13px !important;
             }
         }
     </style>
 </head>
-
 <body>
     <div id="totalScreen">
         <div class="cont_cabecalho">
@@ -85,200 +570,599 @@
                 <h1>Calculadora de Emolumentos TJ/PR</h1>
             </div>
         </div>
-        
-        <div class="main-content-wrapper">
-            <!-- Anúncio lateral esquerdo -->
-            <div class="ad-left">
-                <!-- Substitua por seu código do Google AdSense -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-5720110707960649"
-                     data-ad-slot="SLOT_ID_ESQUERDO"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-            
-            <!-- Conteúdo principal -->
-            <div class="cont_calc">
-                <div class="cont_corpo">
-                    <div class="cont_tabela">
-                        <table>
-                            <tr id="topo">
-                                <td id="topItem">Item</td>
-                                <td id="topVal">Valor R$</td>
-                            </tr>
-                            <tr id="transparent">
-                                <td class="item">
-                                    <div id="td-top">
-                                        <div id="bem-container">
-                                            Bem nº
-                                            <p id="contBens"></p>
-                                        </div>
-                                        <div id="checkbox-container">
-                                            <label class="add-checkbox" for="input-meacao">
-                                                <input id="input-meacao" type="checkbox"> Desc. Meação
-                                            </label>
-                                            <label class="add-checkbox" for="input-garagem">
-                                                <input id="input-garagem" type="checkbox"> Garagem (compra venda)
-                                            </label>
-                                            <label class="add-checkbox" for="input-Doacao">
-                                                <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
-                                            </label>
-                                        </div>
+        <div class="cont_calc">
+            <div class="cont_corpo">
+                <div class="cont_tabela">
+                    <table>
+                        <tr id="topo">
+                            <td id="topItem">Item</td>
+                            <td id="topVal">Valor R$</td>
+                        </tr>
+                        <tr id="transparent">
+                            <td class="item">
+                                <div id="td-top">
+                                    <div id="bem-container">
+                                        Bem nº
+                                        <p id="contBens"></p>
                                     </div>
-                                </td>
-                                <td class="val"><input type="number" id="valBem" placeholder="Valor do bem"
-                                        autocomplete="off" required></td>
-                            </tr>
-                        </table>
-                        <table id="bensTable"></table>
-                        <table class="corpo">
-                            <tr>
-                                <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
-                                <td>
-                                    <button id="addbens">Adicionar Bem</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="corpo">
-                            <tr>
-                                <td class="item">Soma dos valores dos bens</td>
-                                <td id="sumBens" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">Soma dos emolumentos</td>
-                                <td id="sumEscrituras" class="val"></td>
-                            </tr>
-                        </table>
-                        <br class="corpo">
-                        <hr class="corpo"><br class="corpo">
-                        <table class="corpo">
-                            <tr>
-                                <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
-                                <td id="fundep" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
-                                <td id="issqn" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">Selos (R$ 8,00 cada)</td>
-                                <td id="selos" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">Distribuidor</td>
-                                <td class="val">12,40</td>
-                            </tr>
-                        </table>
-                        <br class="corpo">
-                        <table>
-                            <tr>
-                                <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
-                                        ISSQN + Selos + Distribuidor)</strong></td>
-                                <td class="val"><strong id="sumEscrituraTotal"></strong></td>
-                            </tr>
-                        </table>
-                        <br class="corpo">
-                        <table>
-                            <tr>
-                                <td class="item">
-                                    <div id="funrejus-container">
-                                        Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
-                                            FUNREJUS</p>
+                                    <div id="checkbox-container">
+                                        <label class="add-checkbox" for="input-meacao">
+                                            <input id="input-meacao" type="checkbox"> Desc. Meação
+                                        </label>
+                                        <label class="add-checkbox" for="input-garagem">
+                                            <input id="input-garagem" type="checkbox"> Garagem (compra venda)
+                                        </label>
+                                        <label class="add-checkbox" for="input-Doacao">
+                                            <input type="checkbox" id="input-Doacao"> Doação c/ Usufruto
+                                        </label>
                                     </div>
-                                </td>
-                                <td id="funrejus" class="val"></td>
-                            </tr>
-                        </table>
-                        <table id="guiasTable"></table>
-                        <br class="corpo">
-                        <table class="corpo">
-                            <tr>
-                                <td class="item"><strong>Total da escritura + Funrejus</strong></td>
-                                <td class="val"><strong id="sumEscrituraRodape"></strong></td>
-                            </tr>
-                        </table>
-                        <br class="corpo">
-                        <hr class="corpo"><br class="corpo">
-                        <table>
-                            <tr>
-                                <td class="item">Certidões</td>
-                                <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
-                                        autocomplete="off" required value="250"></td>
-                            </tr>
-                            <tr>
-                                <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
-                                <td id="itbi" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">
-                                    <div id="itcmd-container">
-                                        <div id="itcmd-text-container">
-                                            <div id="itcmd-text2">
-                                                ITCMD (4% sobre a soma dos bens)
-                                            </div>
-                                            <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
-                                            <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
+                                </div>
+                            </td>
+                            <td class="val"><input type="number" id="valBem" placeholder="Valor do bem"
+                                    autocomplete="off" required></td>
+                        </tr>
+                    </table>
+                    <table id="bensTable"></table>
+                    <table class="corpo">
+                        <tr>
+                            <td id="alert">*Adicione sempre o bem de maior valor primeiro*</td>
+                            <td>
+                                <button id="addbens">Adicionar Bem</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="corpo">
+                        <tr>
+                            <td class="item">Soma dos valores dos bens</td>
+                            <td id="sumBens" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Soma dos emolumentos</td>
+                            <td id="sumEscrituras" class="val"></td>
+                        </tr>
+                    </table>
+                    <br class="corpo">
+                    <hr class="corpo"><br class="corpo">
+                    <table class="corpo">
+                        <tr>
+                            <td class="item">Fundep (5% sobre a soma dos emolumentos)</td>
+                            <td id="fundep" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">ISSQN (2% sobre a soma dos emolumentos)</td>
+                            <td id="issqn" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Selos (R$ 8,00 cada)</td>
+                            <td id="selos" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Distribuidor</td>
+                            <td class="val">12,40</td>
+                        </tr>
+                    </table>
+                    <br class="corpo">
+                    <table>
+                        <tr>
+                            <td class="item"><strong>Total da escritura (Emolumentos + Fudenp +
+                                    ISSQN + Selos + Distribuidor)</strong></td>
+                            <td class="val"><strong id="sumEscrituraTotal"></strong></td>
+                        </tr>
+                    </table>
+                    <br class="corpo">
+                    <table>
+                        <tr>
+                            <td class="item">
+                                <div id="funrejus-container">
+                                    Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
+                                        FUNREJUS</p>
+                                </div>
+                            </td>
+                            <td id="funrejus" class="val"></td>
+                        </tr>
+                    </table>
+                    <table id="guiasTable"></table>
+                    <br class="corpo">
+                    <table class="corpo">
+                        <tr>
+                            <td class="item"><strong>Total da escritura + Funrejus</strong></td>
+                            <td class="val"><strong id="sumEscrituraRodape"></strong></td>
+                        </tr>
+                    </table>
+                    <br class="corpo">
+                    <hr class="corpo"><br class="corpo">
+                    <table>
+                        <tr>
+                            <td class="item">Certidões</td>
+                            <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
+                                    autocomplete="off" required value="250"></td>
+                        </tr>
+                        <tr>
+                            <td class="item" id="itbi-container">ITBI (2% sobre a soma dos bens)<button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
+                            <td id="itbi" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">
+                                <div id="itcmd-container">
+                                    <div id="itcmd-text-container">
+                                        <div id="itcmd-text2">
+                                            ITCMD (4% sobre a soma dos bens)
                                         </div>
-                                        <div>
-                                            <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
-                                        </div>
+                                        <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
+                                        <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
                                     </div>
-                                </td>
-                                <td id="itcmd" class="val"></td>
-                            </tr>
-                            <tr>
-                                <td class="item">Registro de imóveis</td>
-                                <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
-                                        autocomplete="off" required value="1700"></td>
-                            </tr>
-                        </table>
-                        <br>
-                        <hr><br>
-                        <table id="orcamentoTable">
-                            <tr>
-                                <td class="item"><strong>Orçamento</strong></td>
-                                <td class="val"><strong id="orcamento"></strong></td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <p id="avisoOrcamento"><b>ATENÇÃO:</b> Informamos que o presente orçamento tem <b>caráter meramente estimativo</b>, elaborado com base nas informações preliminares fornecidas. O valor poderá sofrer alterações conforme as especificidades do ato notarial efetivamente praticado, bem como em decorrência de eventuais alterações na tabela de emolumentos. <b>Destacamos que quaisquer ajustes de valores observarão, sempre, os parâmetros estabelecidos na tabela de emolumentos vigente</b>. Permanecemos à disposição para esclarecimentos adicionais.</p>
-                            </tr>
-                        </table>
-                        <br>
-                        <hr><br>
-                        <div id="btn-container">
-                            <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
-                            <button id="printResumoBtn">IMPRIMIR RESUMO</button>
-                            <button id="limparBtn">LIMPAR</button>
+                                    <div>
+                                        <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td id="itcmd" class="val"></td>
+                        </tr>
+                        <tr>
+                            <td class="item">Registro de imóveis</td>
+                            <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
+                                    autocomplete="off" required value="1700"></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <hr><br>
+                    <table id="orcamentoTable">
+                        <tr>
+                            <td class="item"><strong>Orçamento</strong></td>
+                            <td class="val"><strong id="orcamento"></strong></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <p id="avisoOrcamento"><b>ATENÇÃO:</b> Informamos que o presente orçamento tem <b>caráter meramente estimativo</b>, elaborado com base nas informações preliminares fornecidas. O valor poderá sofrer alterações conforme as especificidades do ato notarial efetivamente praticado, bem como em decorrência de eventuais alterações na tabela de emolumentos. <b>Destacamos que quaisquer ajustes de valores observarão, sempre, os parâmetros estabelecidos na tabela de emolumentos vigente</b>. Permanecemos à disposição para esclarecimentos adicionais.</p>
+                        </tr>
+                    </table>
+                    <br>
+                    <hr><br>
+                    <div id="btn-container">
+                        <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
+                        <button id="printResumoBtn">IMPRIMIR RESUMO</button>
+                        <button id="limparBtn">LIMPAR</button>
 
-                            <button id="calcularBtn">CALCULAR</button>
-                        </div>
+                        <button id="calcularBtn">CALCULAR</button>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Anúncio lateral direito -->
-            <div class="ad-right">
-                <!-- Substitua por seu código do Google AdSense -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-5720110707960649"
-                     data-ad-slot="SLOT_ID_DIREITO"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
     </div>
 
-    <script src="main.js"></script>
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const valBemInput = document.getElementById("valBem");
+            valBemInput.focus();
 
+            // mostra e esconde aviso de meação
+            const meacao = document.getElementById("input-meacao");
+            const meacaoAvisoItmcd = document.getElementById("meacao-aviso-itcmd");
+
+            meacao.addEventListener("change", () => {
+                if (meacao.checked) {
+                meacaoAvisoItmcd.style.display = "flex";
+                } else {
+                meacaoAvisoItmcd.style.display = "none";
+                }
+            });
+
+            //mostra e esconde aviso de doação com usufruto
+            const doacaoUsufruto = document.getElementById("input-Doacao");
+            const doacaoAvisoFunrejus = document.getElementById("doacao-aviso-funrejus");
+            const doacaoAvisoItcmd = document.getElementById("doacao-aviso-itcmd");
+
+            doacaoUsufruto.addEventListener("change", () => {
+                if (doacaoUsufruto.checked) {
+                doacaoAvisoFunrejus.style.display = "flex";
+                doacaoAvisoItcmd.style.display = "flex";
+                } else {
+                doacaoAvisoFunrejus.style.display = "none";
+                doacaoAvisoItcmd.style.display = "none";
+                }
+            });
+
+            //calcular valor da escritura
+            let cont = 1;
+            let contBem = 0;
+            function valorEscritura(valBem, tabela) {
+                cont = cont + 1;
+
+                const garagem = document.getElementById("input-garagem");
+                if (!garagem.checked) {
+                contBem = contBem + 1;
+                }
+
+                let valEsc = 0;
+
+                // Se passou do limite de 10 bens, valor da escritura é 0
+                if (cont > 11) {
+                if (cont === 12) {
+                    alert('Limite de 10 bens atingido! Próximos bens terão valor de escritura R$ 0,00!');
+                }
+                return valEsc.toFixed(2);
+                }
+
+                if (valBem >= 62602.0) {
+                if (cont === 2) {
+                    valEsc = 1377.24;
+                } else if (garagem.checked) {
+                    valEsc = 1377.24 * (50 / 100);
+                } else {
+                    valEsc = 1377.24 * (80 / 100);
+                }
+                return valEsc.toFixed(2);
+                } else {
+                for (const key in tabela) {
+                    if (valBem <= key) {
+                    if (cont === 2) {
+                        valEsc = tabela[key];
+                    } else if (garagem.checked) {
+                        valEsc = tabela[key] * (50 / 100);
+                    } else {
+                        valEsc = tabela[key] * (80 / 100);
+                    }
+                    return valEsc.toFixed(2);
+                    }
+                }
+                }
+            };
+
+            //formata valor em reais
+            function valFormatReais(val) {
+                const valReais = new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+                }).format(val);
+
+                return valReais;
+            };
+
+            //adiciona guias funrejus
+            function addGuias(valFunrejus) {
+                const guiasTable = document.getElementById("guiasTable");
+
+                const row1 = document.createElement("tr");
+                const column1 = document.createElement("td");
+                const column2 = document.createElement("td");
+                column1.classList.add("item");
+                column2.classList.add("val");
+                column1.textContent = "Guia 1 - FUNREJUS - Nua Propriedade";
+                column2.textContent = valFormatReais(valFunrejus / 2);
+                row1.appendChild(column1);
+                row1.appendChild(column2);
+
+                const row2 = document.createElement("tr");
+                const column3 = document.createElement("td");
+                const column4 = document.createElement("td");
+                column3.classList.add("item");
+                column4.classList.add("val");
+                column3.textContent = "Guia 2 - FUNREJUS - Usufruto";
+                column4.textContent = valFormatReais(valFunrejus / 2);
+                row2.appendChild(column3);
+                row2.appendChild(column4);
+
+                guiasTable.appendChild(row1);
+                guiasTable.appendChild(row2);
+            }
+
+            //adiciona descrição de cada bem
+            function addBemRow(nBem, valBem, valEscritura) {
+                const table = document.getElementById("bensTable");
+                const row = document.createElement("tr");
+                const garagem = document.getElementById("input-garagem");
+                const columnItem = document.createElement("td");
+
+                columnItem.classList.add("item");
+
+                if (garagem.checked) {
+                columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem) + " (Imóvel de Garagem)";
+                } else {
+                columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem);
+                }
+
+                row.appendChild(columnItem);
+
+                const columnVal = document.createElement("td");
+                columnVal.classList.add("val");
+                columnVal.textContent = valFormatReais(valEscritura);
+                
+                row.appendChild(columnVal);
+                table.appendChild(row);
+            };
+
+            //calcular valor fundep
+            function valorFundep(sumEsc) {
+                let fundep = sumEsc * (5 / 100);
+                return fundep.toFixed(2);
+            };
+            //calcular valor issqn
+            function valorIssqn(sumEsc) {
+                let issqn = sumEsc * (2 / 100);
+                return issqn.toFixed(2);
+            };
+
+            //calcular valor selos
+            let valSelos = 16;
+            function valorSelos() {
+                if (contBem > 1) {
+                for (let i = 1; i < contBem; i++) {
+                    valSelos = valSelos + 8;
+                }
+                }
+
+                console.log(valSelos);
+                return valSelos.toFixed(2);
+            }
+
+            //calcular valor funrejus
+            function valorFunrejus(sumB) {
+                const doacaoUsufruto = document.getElementById("input-Doacao");
+                let funrejus = sumB * (0.2 / 100);
+
+                if (doacaoUsufruto.checked) {
+                funrejus = 2 * funrejus;
+                };
+
+                return funrejus.toFixed(2);
+
+            };
+
+            //calcular valor itbi
+            function valorItbi(sumB) {
+                let itbi = sumB * (2 / 100);
+                return itbi.toFixed(2);
+            };
+
+            //calcular valor itcmd
+            function valorItcmd(sumB) {
+                const doacaoUsufruto = document.getElementById("input-Doacao");
+                const meacao = document.getElementById("input-meacao");
+                let itcmd = sumB * (4 / 100);
+
+                if (doacaoUsufruto.checked || meacao.checked) {
+                itcmd = sumB * (2 / 100);
+                };
+
+                return itcmd.toFixed(2);
+            };
+
+            //formatar valor
+            function formatarVal(val) {
+                val = val.toFixed(2);
+                val = parseFloat(val);
+                return val;
+            };
+
+            function limparValor() {
+                document.getElementById("valBem").value = '';
+            };
+
+            const tabela = {
+                15512.0: 349.02,
+                18282.0: 411.34,
+                21052.0: 473.67,
+                23822.0: 535.99,
+                26592.0: 598.32,
+                29362.0: 660.64,
+                32132.0: 722.97,
+                34902.0: 785.29,
+                37672.0: 847.62,
+                40442.0: 909.94,
+                43212.0: 972.27,
+                45982.0: 1011.6,
+                48752.0: 1072.54,
+                51522.0: 1133.48,
+                54292.0: 1194.42,
+                57062.0: 1255.36,
+                59832.0: 1316.3,
+                62602.0: 1377.24
+            };
+
+            //calculo do valor das escrituras
+            let valEscrituras = [];
+            let valBens = [];
+            function calculoValorEscrituras() {
+                document.getElementById("contBens").textContent = cont;
+                let valBem = parseFloat(document.getElementById("valBem").value);
+                while (isNaN(valBem)) {
+                alert('Valor inválido! Digite um número válido!');
+                return;
+                };
+                valBem = formatarVal(valBem);
+                valBens.push(valBem);
+
+                let valEscrituraAtual = valorEscritura(valBem, tabela);
+                valEscrituraAtual = parseFloat(valEscrituraAtual);
+                valEscrituras.push(valEscrituraAtual);
+
+                addBemRow(cont, valBem, valEscrituraAtual);
+            };
+
+            //soma do valor dos bens
+            function somaValorBens() {
+                sumBens = 0; //sumbens declarada aqui!
+                for (let i in valBens) {
+                sumBens = sumBens + valBens[i];
+                };
+                sumBens = formatarVal(sumBens);
+                document.getElementById("sumBens").textContent = valFormatReais(sumBens);
+            };
+
+            //soma do valor das escrituras
+            function somaValorEscrituras() {
+                sumEscrituras = 0; //sumEscrituras declarada aqui!
+                for (let i in valEscrituras) {
+                sumEscrituras = sumEscrituras + valEscrituras[i];
+                };
+                sumEscrituras = formatarVal(sumEscrituras);
+                document.getElementById("sumEscrituras").textContent = valFormatReais(sumEscrituras);
+            };
+
+            //calculo do fundep
+            function calculoFundep() {
+                fundep = valorFundep(sumEscrituras); //fundep declarado aqui!
+                fundep = parseFloat(fundep);
+                document.getElementById("fundep").textContent = valFormatReais(fundep);
+            };
+
+            //calculo issqn
+            function calculoIssqn() {
+                issqn = valorIssqn(sumEscrituras); //issqn declarado aqui!
+                issqn = parseFloat(issqn);
+                document.getElementById("issqn").textContent = valFormatReais(issqn);
+            };
+
+            //selos
+            function calculoSelos() {
+                selos = valorSelos(); // selos declarado aqui!
+                selos = parseFloat(selos);
+                console.log(selos);
+                document.getElementById("selos").textContent = valFormatReais(selos);
+            }
+
+            //distribuidor
+            let distribuidor = parseFloat(12.40);
+
+            //soma valor total da escritura
+            function somaValorEscriturasTotal() {
+                sumEscrituraTotal = sumEscrituras + fundep + issqn + selos + distribuidor; //sumEscrituraTotal declarada aqui!
+                document.getElementById("sumEscrituraTotal").textContent = valFormatReais(sumEscrituraTotal);
+            };
+
+            //calculo funrejus
+            function calculoFunrejus() {
+                const doacaoUsufruto = document.getElementById("input-Doacao");
+
+                funrejus = valorFunrejus(sumBens); //funrejus declarado aqui!
+                funrejus = parseFloat(funrejus);
+                if (doacaoUsufruto.checked) {
+                addGuias(funrejus);
+                };
+                document.getElementById("funrejus").textContent = valFormatReais(funrejus);
+            };
+
+            //calculo soma da escritura rodape
+            function somaEscrituraRodape() {
+                sumEscrituraRodape = sumEscrituraTotal + funrejus; //sumEscrituraRodape declarada aqui!
+                document.getElementById("sumEscrituraRodape").textContent = valFormatReais(sumEscrituraRodape);
+            };
+
+            //certidoes
+            function calculoCertidoes() {
+                certidoes = parseFloat(document.getElementById("certidoes").value); //certidoes declarada aqui!
+                while (isNaN(certidoes)) {
+                alert('Valor inválido! Digite o valor das certidões!');
+                return;
+                };
+                certidoes = formatarVal(certidoes);
+            };
+
+            //registro
+            function calculoRegistro() {
+                registro = parseFloat(document.getElementById("registro").value); //registro declarado aqui!
+                while (isNaN(registro)) {
+                alert('Valor inválido! Digite o valor do registro de imóveis');
+                return;
+                };
+                registro = formatarVal(registro);
+            };
+
+            //calculo itbi
+            itbi = 0; //itbi declarado aqui!
+            function calculoItbi() {
+                itbi = valorItbi(sumBens);
+                itbi = parseFloat(itbi);
+                document.getElementById("itbi").textContent = valFormatReais(itbi);
+            };
+
+            //calculo itcmd
+            itcmd = 0; //itcmd declarado aqui!
+            function calculoItcmd() {
+                itcmd = valorItcmd(sumBens);
+                itcmd = parseFloat(itcmd);
+                document.getElementById("itcmd").textContent = valFormatReais(itcmd);
+            };
+
+            //calculo orcamento total
+            function calculoOrcamento() {
+                orcamento = sumEscrituraRodape + certidoes + registro + itbi + itcmd; //orcamento declarado aqui!
+                orcamento = formatarVal(orcamento);
+                document.getElementById("orcamento").textContent = valFormatReais(orcamento);
+            };
+
+            /* EVENTOS DE AÇÃO DO SISTEMA */
+
+            // Define botão de adicionar bens
+            const addbensBtn = document.getElementById("addbens");
+            addbensBtn.addEventListener("click", () => {
+                calculoValorEscrituras(); 
+                somaValorBens(); 
+                somaValorEscrituras(); 
+                limparValor();
+            });
+
+            // Define botão de calcular ITBI
+            const itbiBtn = document.getElementById("itbiBtn");
+            itbiBtn.addEventListener("click", () => {
+                calculoItbi();
+            });
+
+            // Define botão de calcular ITCMD
+            const itcmdBtn = document.getElementById("itcmdBtn");
+            itcmdBtn.addEventListener("click", () => {
+                calculoItcmd();
+            });
+
+            // Define botão de calcular valores
+            const calcularBtn = document.getElementById("calcularBtn");
+            calcularBtn.addEventListener("click", () => {
+                calculoFundep(); 
+                calculoIssqn(); 
+                calculoSelos(); 
+                somaValorEscriturasTotal(); 
+                calculoFunrejus(); 
+                somaEscrituraRodape(); 
+                calculoCertidoes(); 
+                calculoRegistro(); 
+                calculoOrcamento();
+            });
+
+            // Função para adicionar classe ao body e acionar a impressão
+            function printSection(section) {
+                document.body.classList.add(section); // Adiciona a classe correspondente
+                window.print(); // Dispara a impressão
+                document.body.classList.remove(section); // Remove a classe após a impressão
+            }
+
+            // Define botões de impressão
+            const printResumoBtn = document.getElementById('printResumoBtn');
+            const printCompletoBtn = document.getElementById('printCompletoBtn');
+            printResumoBtn.addEventListener('click', () => printSection('printResumo'));
+            printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
+
+            // Evento do botão enter p/ adicionar bens
+            valBem.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                addbens.click();
+                };
+            });
+
+            //Evento do botão enter p/ calcular valores
+            const registroInput = document.getElementById("registro");
+            registroInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                calcularBtn.click();
+                };
+            });
+
+            // Define botão de recarregar a página
+            const limparBtn = document.getElementById("limparBtn");
+            limparBtn.addEventListener("click", () => {
+                location.reload();
+            });
+        });
+    </script>
+</body>
 </html>

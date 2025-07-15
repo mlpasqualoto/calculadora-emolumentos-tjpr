@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain } = require("electron");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -6,17 +6,17 @@ function createWindow() {
     height: 1200,
     webPreferences: {
       nodeIntegration: true, // Atenção: para novas versões do Electron, avalie usar contextIsolation
-      contextIsolation: false
-    }
+      contextIsolation: false,
+    },
   });
 
   // Carrega o arquivo da sua aplicação web
-  win.loadFile('index.html');
+  win.loadFile("index.html");
 }
 
 app.whenReady().then(createWindow);
 
 // Fechar a aplicação quando todas as janelas forem fechadas (exceto no macOS)
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
 });
