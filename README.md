@@ -1,87 +1,91 @@
-# Calculadora de Emolumentos
+readme_content = """# 🧾 Calculadora de Emolumentos - TJ/PR
 
-Este é um projeto desenvolvido somente para desktop para calcular os emolumentos de serviços notariais e de registro, considerando diferentes variáveis, como valor da escritura e presença de imóveis de garagem. A aplicação utiliza HTML, CSS e JavaScript para a interface e a lógica de cálculo.
+Este é um projeto web desenvolvido para calcular o valor de **emolumentos notariais e de registro**, conforme a tabela do **TJ/PR**, levando em consideração variáveis como: valor do bem, existência de garagem, meação, doação com usufruto e mais. A aplicação é totalmente **gratuita e online**, podendo ser acessada pelo link:
 
----
-
-## 📸 Capturas de Tela  
-### Desktop  
-![calc](https://github.com/user-attachments/assets/237e8958-5d78-4062-94ac-ed63c2e762a5)
-  
----
-
-## ✨ Funcionalidades  
-- **Cálculo Automático:** O usuário pode inserir valores e selecionar opções, como a presença de garagem, para calcular o valor dos emolumentos.  
-- **Interface Responsiva:** O layout é adaptável para dispositivos desktop e móveis, garantindo uma experiência consistente e acessível.  
-- **Campos Interativos:** O usuário pode facilmente inserir dados como o valor da escritura e marcar a opção de garagem.  
-- **Resultado Imediato:** O valor do emolumento é calculado automaticamente conforme as entradas.  
+🔗 [https://calculaonlinefacil.com.br/escrituras](https://calculaonlinefacil.com.br/escrituras)
 
 ---
 
-## 🛠 Tecnologias Utilizadas  
-### Frontend:  
-- **HTML5:** Estrutura básica da interface.  
-- **CSS3:** Estilização responsiva e moderna, garantindo um design limpo e organizado.  
-- **JavaScript:** Lógica de cálculo e manipulação das interações do usuário.  
+## 📸 Capturas de Tela
+
+### Versão Web
+
+<img width="1053" height="899" alt="image" src="https://github.com/user-attachments/assets/35214055-d138-4414-b9ce-8b81edcd65f3" />
 
 ---
 
-## 📂 Estrutura do Código  
-### **HTML**  
-Estrutura da interface, incluindo:  
-- Cabeçalho com o título da calculadora de emolumentos.  
-- Campos de entrada para os dados necessários (valor da escritura, opção de garagem, etc).  
-- Exibição do resultado do cálculo.
+## ✨ Funcionalidades
 
-### **CSS**  
-Estilos responsivos e modernos, como:  
-- Layout flexível para diferentes tamanhos de tela.  
-- Estilização clara e intuitiva para facilitar a navegação do usuário.
-
-### **JavaScript (Frontend)**  
-- **main.js:**  
-  - `calcularEmolumento()`: Função que realiza o cálculo com base nos valores inseridos.  
-  - Manipulação de eventos para atualizar o valor conforme as opções selecionadas.
+- **Cálculo Automático dos Emolumentos:** baseado no valor do(s) bem(ns) e nas opções selecionadas (como garagem, doação com usufruto, etc).
+- **Adição de Múltiplos Bens:** é possível adicionar até 10 bens com cálculo proporcional.
+- **Simulação de ITBI e ITCMD:** valores calculados com base percentual e nas exceções previstas.
+- **Cálculo detalhado por item:** incluindo Fundep, ISSQN, Selos, Funrejus, Certidões e Registro.
+- **Impressão do Orçamento:** escolha entre versão completa ou versão resumida.
+- **Interface Adaptável:** embora otimizada para **desktop**, também funciona em dispositivos móveis.
+- **Suporte à impressão otimizada:** ideal para anexar em pastas ou processos físicos.
 
 ---
 
-## ⚙️ Configuração do Projeto  
-1. **Clone o repositório:**  
-   ```bash  
-   git clone <url-do-repositorio>  
-   cd calculadora-emolumentos  
-2. **Abra o arquivo HTML:**  
-   Abra o arquivo `index.html` no seu navegador para utilizar a calculadora.
+## 🛠 Tecnologias Utilizadas
 
-   ou
-
-- Você também pode instalar as dependências do Electron e instalar o app na sua máquina, através dos comandos abaixos:
-```bash
-npm install electron electron-builder --save-dev
-```
+- **HTML5:** Estrutura do layout.
+- **CSS3:** Estilização moderna, responsiva e com modo de impressão.
+- **JavaScript Puro (Vanilla JS):** Toda a lógica de cálculo e interatividade do usuário.
 
 ---
 
-## 🔍 Exemplo de Uso  
-1. **Insira o valor da escritura e selecione se há alguma exceção como a de bem de garagem ou escritura de Doação com Usufruto.**
-2. **O cálculo do emolumento será exibido automaticamente na tela.**
-3. **Você pode alterar os valores a qualquer momento para ver o cálculo atualizado.**
+## 📂 Estrutura do Código
 
-   ou
+- **Interface Principal (HTML):**
+  - Campos de entrada para bens.
+  - Checkboxes de exceções.
+  - Tabelas com os valores detalhados.
+- **Estilos (CSS):**
+  - Layout com responsividade e suporte a impressão.
+  - Temas claros com cores institucionais.
+- **Lógica (JS embutido):**
+  - Funções como `valorEscritura`, `valorFunrejus`, `valorItbi`, entre outras.
+  - Manipulação de eventos como clique, Enter, impressão e limpeza de campos.
+  - Validação e formatação de valores em tempo real.
 
-- Você também pode gerar um instalador através do Electron e usar o app diretamente no seu desktop. Neste caso, use o comando abaixo:
-```bash
-npm run dist
-```
+---
+
+## 🚀 Como Usar
+
+1. Acesse o site:  
+   👉 **[https://calculaonlinefacil.com.br/escrituras](https://calculaonlinefacil.com.br/escrituras)**
+
+2. Insira o valor do(s) bem(ns) e selecione as opções aplicáveis (ex: garagem, meação, etc).
+
+3. Clique em **Adicionar Bem** para cada novo imóvel e em **Calcular** para ver o valor total.
+
+4. Você pode:
+   - **Imprimir** a versão completa ou resumida.
+   - **Limpar** os dados para reiniciar um novo orçamento.
+
+---
+
+## 📌 Observações Importantes
+
+> ⚠️ Os valores calculados têm **caráter estimativo** e podem variar conforme atualizações na tabela oficial ou especificidades do ato notarial.
+
+> ⚖️ A calculadora segue os parâmetros da tabela de emolumentos vigente no Estado do Paraná.
 
 ---
 
 ## 🤝 Contribuições
 
-Contribuições são bem-vindas! Caso encontre algum problema ou tenha sugestões, fique à vontade para abrir uma issue ou enviar um pull request.
+Sugestões e melhorias são bem-vindas!  
+Você pode abrir uma issue ou enviar um pull request neste repositório (caso esteja no GitHub) ou entrar em contato pelo site.
 
 ---
 
 ## 📜 Licença
 
-Este projeto está licenciado sob a licença MIT.
+Este projeto está licenciado sob os termos da **Licença MIT**.
+"""
+
+with open("/mnt/data/README.md", "w", encoding="utf-8") as f:
+    f.write(readme_content)
+
+"/mnt/data/README.md"
