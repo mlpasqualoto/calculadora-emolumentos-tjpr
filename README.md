@@ -1,4 +1,4 @@
-readme_content = """# 🧾 Calculadora de Emolumentos - TJ/PR
+# 🧾 Calculadora de Emolumentos - TJ/PR
 
 Este é um projeto web desenvolvido para calcular o valor de **emolumentos notariais e de registro**, conforme a tabela do **TJ/PR**, levando em consideração variáveis como: valor do bem, existência de garagem, meação, doação com usufruto e mais. A aplicação é totalmente **gratuita e online**, podendo ser acessada pelo link:
 
@@ -83,9 +83,3 @@ Você pode abrir uma issue ou enviar um pull request neste repositório (caso es
 ## 📜 Licença
 
 Este projeto está licenciado sob os termos da **Licença MIT**.
-"""
-
-with open("/mnt/data/README.md", "w", encoding="utf-8") as f:
-    f.write(readme_content)
-
-"/mnt/data/README.md"
