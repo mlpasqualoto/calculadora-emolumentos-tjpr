@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5720110707960649"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <title>Calculadora Financeira - CalcTools</title>
+    <style>
+        :root {
+            /* Paleta de cores clara inspirada no escrituras.html */
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --surface-blue: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --background-primary: #f8fafc;
+            --background-secondary: #e2e8f0;
+            --surface-white: #ffffff;
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            
+            /* Gradientes claros */
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --gradient-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-primary);
+            background: var(--gradient-bg);
+            min-height: 100%;
+            line-height: 1.6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header:hover {
+            background: rgba(248, 250, 252, 0.98);
+        }
+
+        /* Botão hamburguer escondido por padrão */
+        #menuToggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #mobileSidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 240px;
+            height: 100%;
+            background: var(--surface-white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mobileSidebar ul {
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #mobileSidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        #mobileSidebar a:hover {
+            color: var(--primary-blue);
+        }
+
+        #closeSidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            align-self: flex-end;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ativação da sidebar com JavaScript */
+        #mobileSidebar.active {
+            left: 0;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #container ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        #container a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #container a:hover {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        #container a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #container a:hover::before {
+            width: 100%;
+        }
+
+        main {
+            background: transparent;
+            width: 100%;
+            padding-top: 100px;
+            min-height: calc(100vh - 180px);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-card {
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .calc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .calc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .calc-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calc-icon {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--surface-white);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .calc-button {
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .calc-button:active {
+            transform: translateY(0);
+        }
+
+        .result-display {
+            background: var(--light-blue);
+            border: 1px solid var(--secondary-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .result-empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .tips-section {
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tips-list li strong {
+            color: var(--text-primary);
+        }
+
+        footer {
+            width: 100%;
+            min-height: 80px;
+            background: var(--surface-white);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Responsividade */
+        @media (min-width: 769px) {
+            #mobileSidebar, #overlay {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .nav-text, #container ul {
+                display: none;
+            }
+
+            #menuToggle {
+                display: block;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .calculator-container {
+                padding: 0 1rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .calc-card {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .page-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .calc-card {
+                padding: 1.25rem;
+            }
+
+            .calc-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .calc-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .calc-card:nth-child(2) { animation-delay: 0.1s; }
+        .calc-card:nth-child(3) { animation-delay: 0.2s; }
+        .calc-card:nth-child(4) { animation-delay: 0.3s; }
+        .calc-card:nth-child(5) { animation-delay: 0.4s; }
+        .calc-card:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <nav id="container">
+            <div class="logo">CalcTools</div>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-desktop">
+                <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+
+            <!-- Botão do Menu Mobile -->
+            <button id="menuToggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Sidebar Mobile -->
+        <aside id="mobileSidebar">
+            <button id="closeSidebar" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+        </aside>
+
+        <!-- Fundo escurecido ao abrir o menu -->
+        <div id="overlay"></div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <section class="page-header">
+            <h1 class="page-title">Calculadora Financeira</h1>
+            <p class="page-subtitle">Ferramentas completas para cálculos de juros, financiamentos, investimentos e planejamento financeiro</p>
+        </section>
+
+        <div class="calculator-container">
+            <div class="calculator-grid">
+                <!-- Calculadora de Juros Compostos -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-chart-line calc-icon"></i>
+                        Juros Compostos
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Capital Inicial (R$)</label>
+                        <input type="number" id="principal1" class="form-input" placeholder="Ex: 1000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Taxa de Juros (%)</label>
+                        <input type="number" id="rate1" class="form-input" placeholder="Ex: 10" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Período</label>
+                        <select id="period1" class="form-select">
+                            <option value="monthly">Mensal</option>
+                            <option value="yearly">Anual</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tempo</label>
+                        <input type="number" id="time1" class="form-input" placeholder="Ex: 12" step="1">
+                    </div>
+                    <button class="calc-button" onclick="calcCompoundInterest()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result1" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Financiamento -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-home calc-icon"></i>
+                        Simulador de Financiamento
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Valor do Imóvel (R$)</label>
+                        <input type="number" id="propertyValue" class="form-input" placeholder="Ex: 300000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Entrada (R$)</label>
+                        <input type="number" id="downPayment" class="form-input" placeholder="Ex: 60000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Taxa de Juros (% ao mês)</label>
+                        <input type="number" id="rate2" class="form-input" placeholder="Ex: 0.8" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Prazo (meses)</label>
+                        <input type="number" id="months" class="form-input" placeholder="Ex: 240" step="1">
+                    </div>
+                    <button class="calc-button" onclick="calcFinancing()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result2" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Poupança -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-piggy-bank calc-icon"></i>
+                        Meta de Poupança
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Meta (R$)</label>
+                        <input type="number" id="goal" class="form-input" placeholder="Ex: 10000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Valor Mensal (R$)</label>
+                        <input type="number" id="monthlyAmount" class="form-input" placeholder="Ex: 500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Rendimento Mensal (%)</label>
+                        <input type="number" id="monthlyRate" class="form-input" placeholder="Ex: 0.5" step="0.01">
+                    </div>
+                    <button class="calc-button" onclick="calcSavings()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result3" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Empréstimo -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-handshake calc-icon"></i>
+                        Simulador de Empréstimo
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Valor do Empréstimo (R$)</label>
+                        <input type="number" id="loanAmount" class="form-input" placeholder="Ex: 10000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Taxa de Juros (% ao mês)</label>
+                        <input type="number" id="loanRate" class="form-input" placeholder="Ex: 2.5" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Número de Parcelas</label>
+                        <input type="number" id="loanMonths" class="form-input" placeholder="Ex: 24" step="1">
+                    </div>
+                    <button class="calc-button" onclick="calcLoan()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result4" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Aposentadoria -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-user-clock calc-icon"></i>
+                        Planejamento de Aposentadoria
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Idade Atual</label>
+                        <input type="number" id="currentAge" class="form-input" placeholder="Ex: 30" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Idade de Aposentadoria</label>
+                        <input type="number" id="retireAge" class="form-input" placeholder="Ex: 65" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contribuição Mensal (R$)</label>
+                        <input type="number" id="monthlyContrib" class="form-input" placeholder="Ex: 800" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Rendimento Anual (%)</label>
+                        <input type="number" id="annualReturn" class="form-input" placeholder="Ex: 8" step="0.01">
+                    </div>
+                    <button class="calc-button" onclick="calcRetirement()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result5" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Rendimento de Investimento -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-chart-pie calc-icon"></i>
+                        Rendimento de Investimento
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Valor Inicial (R$)</label>
+                        <input type="number" id="investmentValue" class="form-input" placeholder="Ex: 5000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Aporte Mensal (R$)</label>
+                        <input type="number" id="monthlyInvestment" class="form-input" placeholder="Ex: 300" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Taxa de Rendimento (% ao mês)</label>
+                        <input type="number" id="investmentRate" class="form-input" placeholder="Ex: 0.6" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Período (meses)</label>
+                        <input type="number" id="investmentPeriod" class="form-input" placeholder="Ex: 60" step="1">
+                    </div>
+                    <button class="calc-button" onclick="calcInvestment()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result6" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Dicas -->
+            <div class="tips-section">
+                <h3 class="tips-title">
+                    <i class="fas fa-lightbulb" style="color: var(--warning);"></i>
+                    Dicas de Uso
+                </h3>
+                <ul class="tips-list">
+                    <li><strong>Juros Compostos:</strong> Calcule o crescimento do seu dinheiro com juros compostos. Ideal para investimentos de longo prazo como CDB, LCI/LCA e fundos</li>
+                    <li><strong>Simulador de Financiamento:</strong> Simule financiamentos imobiliários. Compare diferentes cenários alterando entrada, prazo e taxa de juros</li>
+                    <li><strong>Meta de Poupança:</strong> Descubra quanto tempo levará para atingir sua meta financeira com aportes mensais regulares</li>
+                    <li><strong>Simulador de Empréstimo:</strong> Calcule parcelas de empréstimos pessoais. Compare diferentes propostas analisando o valor total a pagar</li>
+                    <li><strong>Planejamento de Aposentadoria:</strong> Monte sua estratégia de aposentadoria. Veja quanto acumulará investindo mensalmente até se aposentar</li>
+                    <li><strong>Rendimento de Investimento:</strong> Acompanhe o crescimento de investimentos com aportes regulares. Ideal para tesouro direto, ações e fundos de investimento</li>
+                    <li><strong>Dica Importante:</strong> As taxas de juros podem ser inseridas em formato decimal (ex: 0,5% = 0.5) ou percentual (ex: 10% = 10)</li>
+                    <li><strong>Inflação:</strong> Lembre-se de considerar a inflação nos seus cálculos de longo prazo para ter uma perspectiva real do poder de compra</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacidade</a>
+                <a href="#terms">Termos</a>
+                <a href="#support">Suporte</a>
+                <a href="#github">GitHub</a>
+            </div>
+            <p class="footer-text">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidade do menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('mobileSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Funções da Calculadora Financeira
+
+        // Função para calcular juros compostos
+        function calcCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal1').value);
+            const rate = parseFloat(document.getElementById('rate1').value);
+            const period = document.getElementById('period1').value;
+            const time = parseFloat(document.getElementById('time1').value);
+            const resultDiv = document.getElementById('result1');
+
+            if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            let periodsPerYear = period === 'monthly' ? 12 : 1;
+            let totalPeriods = period === 'monthly' ? time : time * 12;
+            let periodRate = rate / 100 / periodsPerYear;
+
+            const finalAmount = principal * Math.pow(1 + periodRate, totalPeriods);
+            const interest = finalAmount - principal;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Montante Final: ${formatCurrency(finalAmount)}</div>
+                    <div>Juros Ganhos: ${formatCurrency(interest)}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Rendimento: ${((finalAmount / principal - 1) * 100).toFixed(2)}%
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular financiamento
+        function calcFinancing() {
+            const propertyValue = parseFloat(document.getElementById('propertyValue').value);
+            const downPayment = parseFloat(document.getElementById('downPayment').value);
+            const rate = parseFloat(document.getElementById('rate2').value);
+            const months = parseFloat(document.getElementById('months').value);
+            const resultDiv = document.getElementById('result2');
+
+            if (isNaN(propertyValue) || isNaN(downPayment) || isNaN(rate) || isNaN(months)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            const loanAmount = propertyValue - downPayment;
+            const monthlyRate = rate / 100;
+            const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            const totalPaid = monthlyPayment * months;
+            const totalInterest = totalPaid - loanAmount;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Parcela Mensal: ${formatCurrency(monthlyPayment)}</div>
+                    <div>Total de Juros: ${formatCurrency(totalInterest)}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Total a Pagar: ${formatCurrency(totalPaid + downPayment)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular meta de poupança
+        function calcSavings() {
+            const goal = parseFloat(document.getElementById('goal').value);
+            const monthlyAmount = parseFloat(document.getElementById('monthlyAmount').value);
+            const monthlyRate = parseFloat(document.getElementById('monthlyRate').value);
+            const resultDiv = document.getElementById('result3');
+
+            if (isNaN(goal) || isNaN(monthlyAmount) || isNaN(monthlyRate)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            const rate = monthlyRate / 100;
+            let months = 0;
+            let balance = 0;
+
+            if (rate === 0) {
+                months = goal / monthlyAmount;
+            } else {
+                months = Math.log(1 + (goal * rate) / monthlyAmount) / Math.log(1 + rate);
+            }
+
+            const years = Math.floor(months / 12);
+            const remainingMonths = Math.ceil(months % 12);
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Tempo para a Meta: ${years > 0 ? years + ' ano' + (years > 1 ? 's' : '') + ' e ' : ''}${remainingMonths} mese${remainingMonths > 1 ? 's' : ''}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Total de Aportes: ${formatCurrency(monthlyAmount * months)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular empréstimo
+        function calcLoan() {
+            const loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            const loanRate = parseFloat(document.getElementById('loanRate').value);
+            const loanMonths = parseFloat(document.getElementById('loanMonths').value);
+            const resultDiv = document.getElementById('result4');
+
+            if (isNaN(loanAmount) || isNaN(loanRate) || isNaN(loanMonths)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            const monthlyRate = loanRate / 100;
+            const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanMonths)) / (Math.pow(1 + monthlyRate, loanMonths) - 1);
+            const totalPaid = monthlyPayment * loanMonths;
+            const totalInterest = totalPaid - loanAmount;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Parcela Mensal: ${formatCurrency(monthlyPayment)}</div>
+                    <div>Total de Juros: ${formatCurrency(totalInterest)}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Total a Pagar: ${formatCurrency(totalPaid)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular aposentadoria
+        function calcRetirement() {
+            const currentAge = parseFloat(document.getElementById('currentAge').value);
+            const retireAge = parseFloat(document.getElementById('retireAge').value);
+            const monthlyContrib = parseFloat(document.getElementById('monthlyContrib').value);
+            const annualReturn = parseFloat(document.getElementById('annualReturn').value);
+            const resultDiv = document.getElementById('result5');
+
+            if (isNaN(currentAge) || isNaN(retireAge) || isNaN(monthlyContrib) || isNaN(annualReturn)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            const yearsToRetire = retireAge - currentAge;
+            const monthsToRetire = yearsToRetire * 12;
+            const monthlyRate = annualReturn / 100 / 12;
+
+            const futureValue = monthlyContrib * (Math.pow(1 + monthlyRate, monthsToRetire) - 1) / monthlyRate;
+            const totalContributions = monthlyContrib * monthsToRetire;
+            const earnings = futureValue - totalContributions;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Patrimônio aos ${retireAge} anos: ${formatCurrency(futureValue)}</div>
+                    <div>Total Investido: ${formatCurrency(totalContributions)}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Rendimentos: ${formatCurrency(earnings)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular rendimento de investimento
+        function calcInvestment() {
+            const investmentValue = parseFloat(document.getElementById('investmentValue').value);
+            const monthlyInvestment = parseFloat(document.getElementById('monthlyInvestment').value);
+            const investmentRate = parseFloat(document.getElementById('investmentRate').value);
+            const investmentPeriod = parseFloat(document.getElementById('investmentPeriod').value);
+            const resultDiv = document.getElementById('result6');
+
+            if (isNaN(investmentValue) || isNaN(monthlyInvestment) || isNaN(investmentRate) || isNaN(investmentPeriod)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            const monthlyRate = investmentRate / 100;
+            
+            // Valor futuro do investimento inicial
+            const futureValueInitial = investmentValue * Math.pow(1 + monthlyRate, investmentPeriod);
+            
+            // Valor futuro dos aportes mensais
+            const futureValueMonthly = monthlyInvestment * (Math.pow(1 + monthlyRate, investmentPeriod) - 1) / monthlyRate;
+            
+            const totalFutureValue = futureValueInitial + futureValueMonthly;
+            const totalInvested = investmentValue + (monthlyInvestment * investmentPeriod);
+            const totalEarnings = totalFutureValue - totalInvested;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Valor Final: ${formatCurrency(totalFutureValue)}</div>
+                    <div>Total Investido: ${formatCurrency(totalInvested)}</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        Rendimentos: ${formatCurrency(totalEarnings)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para formatar como moeda
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        // Função para formatar números
+        function formatNumber(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }).format(value);
+        }
+
+        // Adicionar listeners para calcular automaticamente quando pressionar Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-input, .form-select');
+            
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const card = input.closest('.calc-card');
+                        const button = card.querySelector('.calc-button');
+                        button.click();
+                    }
+                });
+            });
+        });
+
+        // Funções para limpar resultados quando os campos forem alterados
+        function clearResult(resultId) {
+            document.getElementById(resultId).innerHTML = '<span class="result-empty">Digite os valores para calcular</span>';
+        }
+
+        // Adicionar listeners para limpar resultados quando os campos mudarem
+        // Juros Compostos
+        document.getElementById('principal1').addEventListener('input', () => clearResult('result1'));
+        document.getElementById('rate1').addEventListener('input', () => clearResult('result1'));
+        document.getElementById('period1').addEventListener('change', () => clearResult('result1'));
+        document.getElementById('time1').addEventListener('input', () => clearResult('result1'));
+
+        // Financiamento
+        document.getElementById('propertyValue').addEventListener('input', () => clearResult('result2'));
+        document.getElementById('downPayment').addEventListener('input', () => clearResult('result2'));
+        document.getElementById('rate2').addEventListener('input', () => clearResult('result2'));
+        document.getElementById('months').addEventListener('input', () => clearResult('result2'));
+
+        // Poupança
+        document.getElementById('goal').addEventListener('input', () => clearResult('result3'));
+        document.getElementById('monthlyAmount').addEventListener('input', () => clearResult('result3'));
+        document.getElementById('monthlyRate').addEventListener('input', () => clearResult('result3'));
+
+        // Empréstimo
+        document.getElementById('loanAmount').addEventListener('input', () => clearResult('result4'));
+        document.getElementById('loanRate').addEventListener('input', () => clearResult('result4'));
+        document.getElementById('loanMonths').addEventListener('input', () => clearResult('result4'));
+
+        // Aposentadoria
+        document.getElementById('currentAge').addEventListener('input', () => clearResult('result5'));
+        document.getElementById('retireAge').addEventListener('input', () => clearResult('result5'));
+        document.getElementById('monthlyContrib').addEventListener('input', () => clearResult('result5'));
+        document.getElementById('annualReturn').addEventListener('input', () => clearResult('result5'));
+
+        // Investimento
+        document.getElementById('investmentValue').addEventListener('input', () => clearResult('result6'));
+        document.getElementById('monthlyInvestment').addEventListener('input', () => clearResult('result6'));
+        document.getElementById('investmentRate').addEventListener('input', () => clearResult('result6'));
+        document.getElementById('investmentPeriod').addEventListener('input', () => clearResult('result6'));
+    </script>
+</body>
+</html>
