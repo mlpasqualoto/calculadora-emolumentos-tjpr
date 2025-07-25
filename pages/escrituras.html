@@ -50,12 +50,183 @@
             min-height: 100vh;
         }
 
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header:hover {
+            background: rgba(248, 250, 252, 0.98);
+        }
+
+        /* Botão hamburguer escondido por padrão */
+        #menuToggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #mobileSidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 240px;
+            height: 100%;
+            background: var(--surface-white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mobileSidebar ul {
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #mobileSidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        #mobileSidebar a:hover {
+            color: var(--primary-blue);
+        }
+
+        #closeSidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            align-self: flex-end;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ativação da sidebar com JavaScript */
+        #mobileSidebar.active {
+            left: 0;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #container ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        #container a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #container a:hover {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        #container a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #container a:hover::before {
+            width: 100%;
+        }
+
         /* === Layout principal === */
         #layout {
             display: flex;
             justify-content: center;
             align-items: flex-start;
             flex-direction: column;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         /* === Anúncios laterais === */
@@ -815,6 +986,44 @@
     </style>
 </head>
 <body>
+    <!-- Cabeçalho -->
+    <header>
+        <nav id="container">
+            <div class="logo">CalcTools</div>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-desktop">
+                <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+
+            <!-- Botão do Menu Mobile -->
+            <button id="menuToggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Sidebar Mobile -->
+        <aside id="mobileSidebar">
+            <button id="closeSidebar" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+        </aside>
+
+        <!-- Fundo escurecido ao abrir o menu -->
+        <div id="overlay"></div>
+    </header>
+
     <div id="layout">
         <aside class="ads-left" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
             <!-- Anúncio esquerdo -->
@@ -1022,7 +1231,6 @@
                         </div>
                     </div>
                 </div>
-
         </main>
 
         <aside class="ads-right" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
@@ -1036,7 +1244,7 @@
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </aside>
 
-        <div class="tips-section" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; margin: 2rem 31rem 0rem 31rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <div class="tips-section" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
             <h3 class="tips-title" style="font-size: 1.5rem; font-weight: 600; color: #1e293b; margin-bottom: 1rem; margin-top: 0; display: flex; align-items: center; gap: 8px;">
                 <i class="fas fa-lightbulb" style="color: #f59e0b;"></i>
                 Dicas de Uso
@@ -1052,23 +1260,46 @@
                 <li style="padding: 0.5rem 0; color: #475569;"><strong style="color: #1e293b;">Importante:</strong> Os valores apresentados têm caráter estimativo. Consulte sempre o cartório responsável para confirmar os valores definitivos e orientações específicas do caso.</li>
             </ul>
         </div>
-
-        <!-- Rodapé -->
-        <footer style="width: 100%; min-height: 80px; background-color: white; border-top: 1px solid #e2e8f0; color: #64748b; display: flex; justify-content: center; align-items: center; margin-top: 4rem; padding: 2rem; box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); font-family: 'Inter', sans-serif;">
-            <div class="footer-content" style="text-align: center; max-width: 1200px; width: 100%;">
-                <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
-                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Privacidade</a>
-                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Termos</a>
-                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Suporte</a>
-                    <a href="#" target="_blank" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">GitHub</a>
-                </div>
-                <p style="font-size: 0.9rem; margin-bottom: 0; color: #94a3b8;">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
-            </div>
-        </footer>
     </div>
+
+    <!-- Rodapé -->
+    <footer style="width: 100%; min-height: 80px; background-color: white; border-top: 1px solid #e2e8f0; color: #64748b; display: flex; justify-content: center; align-items: center; margin-top: 4rem; padding: 2rem; box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); font-family: 'Inter', sans-serif;">
+        <div class="footer-content" style="text-align: center; max-width: 1200px; width: 100%;">
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
+                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Privacidade</a>
+                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Termos</a>
+                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Suporte</a>
+                <a href="#" target="_blank" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">GitHub</a>
+            </div>
+            <p style="font-size: 0.9rem; margin-bottom: 0; color: #94a3b8;">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Funcionalidade do menu mobile
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('mobileSidebar');
+            const closeSidebar = document.getElementById('closeSidebar');
+            const overlay = document.getElementById('overlay');
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+            });
+
+            closeSidebar.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+
+            /* === Funcionalidade da calculadora === */
             const valBemInput = document.getElementById("valBem");
             valBemInput.focus();
 
