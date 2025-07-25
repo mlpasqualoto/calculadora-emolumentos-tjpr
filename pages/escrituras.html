@@ -11,6 +11,30 @@
     <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
     <title>Orçamento Escrituras</title>
     <style>
+        :root {
+            /* Paleta de cores clara inspirada no escrituras.html */
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --surface-blue: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --background-primary: #f8fafc;
+            --background-secondary: #e2e8f0;
+            --surface-white: #ffffff;
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            
+            /* Gradientes claros */
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --gradient-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
         /* === Reset e configurações base === */
         * {
             box-sizing: border-box;
@@ -47,6 +71,7 @@
             flex: 1 1 auto;
             max-width: 1000px;
             margin: 0 auto;
+            margin-top: 2rem;
             background: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
