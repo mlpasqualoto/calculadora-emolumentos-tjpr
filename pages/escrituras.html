@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5720110707960649"
         crossorigin="anonymous"></script>
-    <meta charset="utf-8">
-    <title>Orçamento Escrituras</title>
+    <meta charset="UTF-8">
     <meta name="description" content="página para calcular valor de escrituras">
     <meta autor="author" content="Matheus Leite Pasqualoto">
-    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <title>Orçamento Escrituras</title>
     <style>
         /* === Reset e configurações base === */
         * {
@@ -16,11 +18,11 @@
 
         body {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            color: #1e293b;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.4;
+            color: var(--text-primary);
+            line-height: 1.6;
             min-height: 100vh;
         }
 
@@ -29,8 +31,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 16px;
-            padding: 10px;
+            flex-direction: column;
         }
 
         /* === Anúncios laterais === */
@@ -397,6 +398,51 @@
             line-height: 1.5;
         }
 
+        /* === Rodapé === */
+        footer {
+            width: 100%;
+            min-height: 80px;
+            background-color: white;
+            border-top: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
         /* === Responsividade === */
         @media (max-width: 768px) {
             /* Remove as barras laterais em mobile */
@@ -637,7 +683,9 @@
             br,
             aside,
             ins,
-            #transparent {
+            #transparent,
+            footer,
+            .tips-section {
                 display: none !important;
             }
 
@@ -962,6 +1010,36 @@
                 data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </aside>
+
+        <div class="tips-section" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2rem; margin: 2rem 31rem 0rem 31rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+            <h3 class="tips-title" style="font-size: 1.5rem; font-weight: 600; color: #1e293b; margin-bottom: 1rem; margin-top: 0; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-lightbulb" style="color: #f59e0b;"></i>
+                Dicas de Uso
+            </h3>
+            <ul class="tips-list" style="list-style: none; padding: 0; margin: 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Preenchimento:</strong> Para iniciar, informe o valor do(s) bem(ns) na calculadora. Caso o imóvel possua garagem com matrícula própria, marque a opção correspondente para aplicar corretamente o redutor na escritura.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Descontos:</strong> O sistema aplica automaticamente reduções de acordo com os critérios legais, como desconto de 50% para garagem e 80% para bens adicionais.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Guia FUNREJUS:</strong> Em casos de doação com usufruto, serão geradas automaticamente duas guias de FUNREJUS: uma para a nua propriedade e outra para o usufruto.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">ITCMD e ITBI:</strong> Utilize os botões “Adicionar” ao lado dos respectivos tributos para incluir ou excluir esses valores no orçamento. O sistema aplica as alíquotas conforme o tipo de escritura (compra, doação, etc.).</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Certidões e Registro:</strong> Informe manualmente os valores estimados para certidões e registro de imóveis, pois esses variam conforme a localização e tipo de documento.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Atualização dos valores:</strong> Os cálculos são baseados na tabela de emolumentos do TJ/PR vigente. Certifique-se de manter a tabela atualizada sempre que houver reajustes legais.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Impressão:</strong> Após preencher os dados, utilize os botões “Imprimir Completo” ou “Imprimir Resumo” para gerar uma via em PDF do orçamento, útil para anexar ao processo ou apresentar ao cliente.</li>
+                <li style="padding: 0.5rem 0; color: #475569;"><strong style="color: #1e293b;">Importante:</strong> Os valores apresentados têm caráter estimativo. Consulte sempre o cartório responsável para confirmar os valores definitivos e orientações específicas do caso.</li>
+            </ul>
+        </div>
+
+        <!-- Rodapé -->
+        <footer style="width: 100%; min-height: 80px; background-color: white; border-top: 1px solid #e2e8f0; color: #64748b; display: flex; justify-content: center; align-items: center; margin-top: 4rem; padding: 2rem; box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); font-family: 'Inter', sans-serif;">
+            <div class="footer-content" style="text-align: center; max-width: 1200px; width: 100%;">
+                <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
+                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Privacidade</a>
+                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Termos</a>
+                    <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Suporte</a>
+                    <a href="#" target="_blank" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">GitHub</a>
+                </div>
+                <p style="font-size: 0.9rem; margin-bottom: 0; color: #94a3b8;">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
+            </div>
+        </footer>
     </div>
 
     <script>
