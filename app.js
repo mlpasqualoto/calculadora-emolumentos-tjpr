@@ -11,7 +11,7 @@ function createWindow() {
   });
 
   // Carrega o arquivo da sua aplicação web
-  win.loadFile("index.html");
+  win.loadFile("pages/escrituras.html");
 }
 
 app.whenReady().then(createWindow);
