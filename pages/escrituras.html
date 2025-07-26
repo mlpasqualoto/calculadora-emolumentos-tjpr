@@ -640,7 +640,30 @@
         }
 
         /* === Responsividade === */
+        @media (max-width: 769px) {
+            #mobileSidebar, #overlay {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
+            /* Menu Desktop escondido em mobile */
+            .nav-desktop {
+                display: none;
+            }
+
+            .nav-text, #container ul {
+                display: none;
+            }
+
+            #menuToggle {
+                display: block;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
             /* Remove as barras laterais em mobile */
             .ads-left, 
             .ads-right {
@@ -1298,7 +1321,6 @@
                 sidebar.classList.remove('active');
                 overlay.classList.remove('active');
             });
-
 
             /* === Funcionalidade da calculadora === */
             const valBemInput = document.getElementById("valBem");
