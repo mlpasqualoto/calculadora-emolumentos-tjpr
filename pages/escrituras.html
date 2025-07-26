@@ -4,6 +4,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5720110707960649"
         crossorigin="anonymous"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="página para calcular valor de escrituras">
     <meta autor="author" content="Matheus Leite Pasqualoto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -175,7 +176,12 @@
             background-clip: text;
         }
 
-        #container ul {
+        /* Menu Desktop - sempre visível por padrão */
+        .nav-desktop {
+            display: flex;
+        }
+
+        .nav-desktop ul {
             list-style: none;
             margin: 0;
             padding: 0;
@@ -183,7 +189,7 @@
             gap: 1rem;
         }
 
-        #container a {
+        .nav-desktop a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
@@ -196,13 +202,13 @@
             gap: 6px;
         }
 
-        #container a:hover {
+        .nav-desktop a:hover {
             color: var(--primary-blue);
             background: var(--light-blue);
             transform: translateY(-2px);
         }
 
-        #container a::before {
+        .nav-desktop a::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -214,7 +220,7 @@
             transform: translateX(-50%);
         }
 
-        #container a:hover::before {
+        .nav-desktop a:hover::before {
             width: 100%;
         }
 
@@ -227,6 +233,7 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 2rem;
+            padding-top: 100px;
         }
 
         /* === Anúncios laterais === */
@@ -640,24 +647,29 @@
         }
 
         /* === Responsividade === */
-        @media (max-width: 769px) {
-            #mobileSidebar, #overlay {
-                display: none;
+        @media (min-width: 769px) {
+            /* Esconde elementos mobile em desktop */
+            #mobileSidebar, #overlay, #menuToggle {
+                display: none !important;
+            }
+            
+            /* Mostra menu desktop */
+            .nav-desktop {
+                display: flex !important;
             }
         }
 
         @media (max-width: 768px) {
             /* Menu Desktop escondido em mobile */
             .nav-desktop {
-                display: none;
+                display: none !important;
             }
 
-            .nav-text, #container ul {
-                display: none;
-            }
-
+            /* Mostra botão hamburguer em mobile */
             #menuToggle {
-                display: block;
+                display: block !important;
+                box-shadow: none;
+                padding: 1px 6px;
             }
 
             header {
@@ -682,6 +694,7 @@
                 gap: 0;
                 padding: 0;
                 margin: 0;
+                padding-top: 80px;
             }
 
             #totalScreen {
@@ -1016,13 +1029,15 @@
             <div class="logo">CalcTools</div>
 
             <!-- Menu Desktop -->
-            <ul class="nav-desktop">
-                <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
-                <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
-                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
-                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
-                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
-            </ul>
+            <div class="nav-desktop">
+                <ul>
+                    <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
+                    <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                    <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                </ul>
+            </div>
 
             <!-- Botão do Menu Mobile -->
             <button id="menuToggle" aria-label="Abrir menu">
@@ -1048,6 +1063,7 @@
         <div id="overlay"></div>
     </header>
 
+    <!-- Conteúdo principal -->
     <div id="layout">
         <aside class="ads-left" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
             <!-- Anúncio esquerdo -->
@@ -1249,12 +1265,12 @@
                                 <button id="printCompletoBtn">IMPRIMIR COMPLETO</button>
                                 <button id="printResumoBtn">IMPRIMIR RESUMO</button>
                                 <button id="limparBtn">LIMPAR</button>
-
                                 <button id="calcularBtn">CALCULAR</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </main>
 
         <aside class="ads-right" style="margin: 0; padding: 0; height: 0; overflow: hidden;">
@@ -1277,10 +1293,10 @@
                 <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Preenchimento:</strong> Para iniciar, informe o valor do(s) bem(ns) na calculadora. Caso o imóvel possua garagem com matrícula própria, marque a opção correspondente para aplicar corretamente o redutor na escritura.</li>
                 <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Descontos:</strong> O sistema aplica automaticamente reduções de acordo com os critérios legais, como desconto de 50% para garagem e 80% para bens adicionais.</li>
                 <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Guia FUNREJUS:</strong> Em casos de doação com usufruto, serão geradas automaticamente duas guias de FUNREJUS: uma para a nua propriedade e outra para o usufruto.</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">ITCMD e ITBI:</strong> Utilize os botões “Adicionar” ao lado dos respectivos tributos para incluir ou excluir esses valores no orçamento. O sistema aplica as alíquotas conforme o tipo de escritura (compra, doação, etc.).</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">ITCMD e ITBI:</strong> Utilize os botões "Adicionar" ao lado dos respectivos tributos para incluir ou excluir esses valores no orçamento. O sistema aplica as alíquotas conforme o tipo de escritura (compra, doação, etc.).</li>
                 <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Certidões e Registro:</strong> Informe manualmente os valores estimados para certidões e registro de imóveis, pois esses variam conforme a localização e tipo de documento.</li>
                 <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Atualização dos valores:</strong> Os cálculos são baseados na tabela de emolumentos do TJ/PR vigente. Certifique-se de manter a tabela atualizada sempre que houver reajustes legais.</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Impressão:</strong> Após preencher os dados, utilize os botões “Imprimir Completo” ou “Imprimir Resumo” para gerar uma via em PDF do orçamento, útil para anexar ao processo ou apresentar ao cliente.</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0; color: #475569;"><strong style="color: #1e293b;">Impressão:</strong> Após preencher os dados, utilize os botões "Imprimir Completo" ou "Imprimir Resumo" para gerar uma via em PDF do orçamento, útil para anexar ao processo ou apresentar ao cliente.</li>
                 <li style="padding: 0.5rem 0; color: #475569;"><strong style="color: #1e293b;">Importante:</strong> Os valores apresentados têm caráter estimativo. Consulte sempre o cartório responsável para confirmar os valores definitivos e orientações específicas do caso.</li>
             </ul>
         </div>
@@ -1733,9 +1749,10 @@
             printCompletoBtn.addEventListener('click', () => printSection('printCompleto'));
 
             // Evento do botão enter p/ adicionar bens
+            const valBem = document.getElementById("valBem");
             valBem.addEventListener("keypress", (e) => {
                 if (e.key === "Enter") {
-                addbens.click();
+                addbensBtn.click();
                 };
             });
 
