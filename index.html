@@ -335,6 +335,249 @@
             color: inherit;
         }
 
+        /* Seção de Artigos */
+        .articles-section {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Carrossel de Artigos */
+        .articles-carousel {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .articles-container {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .articles-grid {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            min-width: 350px;
+            flex: 0 0 350px;
+        }
+
+        /* Setas de Navegação */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--surface-white);
+            border: 2px solid var(--border-light);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-nav:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav.prev {
+            left: -25px;
+        }
+
+        .carousel-nav.next {
+            right: -25px;
+        }
+
+        .carousel-nav i {
+            font-size: 1.2rem;
+        }
+
+        /* Indicadores */
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-medium);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--primary-blue);
+            transform: scale(1.2);
+        }
+
+        .article-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .article-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .article-category {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-link {
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .article-link:hover {
+            color: var(--secondary-blue);
+            transform: translateX(4px);
+        }
+
+        .view-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 0 auto;
+            display: flex;
+            width: fit-content;
+        }
+
+        .view-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+            color: white;
+        }
+
         footer {
             width: 100%;
             min-height: 80px;
@@ -391,13 +634,13 @@
             }
         }
 
-        .tool-card {
+        .tool-card, .article-card {
             animation: fadeInUp 0.6s ease forwards;
         }
 
-        .tool-card:nth-child(2) { animation-delay: 0.1s; }
-        .tool-card:nth-child(3) { animation-delay: 0.2s; }
-        .tool-card:nth-child(4) { animation-delay: 0.3s; }
+        .tool-card:nth-child(2), .article-card:nth-child(2) { animation-delay: 0.1s; }
+        .tool-card:nth-child(3), .article-card:nth-child(3) { animation-delay: 0.2s; }
+        .tool-card:nth-child(4), .article-card:nth-child(4) { animation-delay: 0.3s; }
 
         /* Responsividade */
 
@@ -453,13 +696,43 @@
                 padding: 15px 20px;
             }
             
-            .tools-grid {
+            .tools-grid, .articles-grid {
                 grid-template-columns: 1fr;
                 padding: 1rem;
             }
 
-            .tool-card {
+            .tool-card, .article-card {
                 padding: 1.5rem;
+            }
+
+            .articles-section {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .articles-grid {
+                gap: 1.5rem;
+            }
+
+            .article-card {
+                min-width: 300px;
+                flex: 0 0 300px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-nav.prev {
+                left: -20px;
+            }
+
+            .carousel-nav.next {
+                right: -20px;
             }
 
             .footer-links {
@@ -481,16 +754,24 @@
                 padding: 2rem 1rem;
             }
 
-            .tool-card {
+            .tool-card, .article-card {
                 padding: 1.25rem;
             }
 
-            .tool-title {
+            .tool-title, .article-title {
                 font-size: 1.25rem;
             }
 
-            .tool-description {
+            .tool-description, .article-excerpt {
                 font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .article-content {
+                padding: 1.25rem;
             }
         }
     </style>
@@ -582,6 +863,175 @@
                 </a>
             </div>
         </section>
+
+        <!-- Nova Seção de Artigos -->
+        <section class="articles-section">
+            <div class="section-header">
+                <h2 class="section-title">Artigos e Guias</h2>
+                <p class="section-subtitle">Aprenda mais sobre cálculos, finanças e ferramentas úteis para o seu dia a dia profissional.</p>
+            </div>
+
+            <div class="articles-carousel">
+                <div class="articles-container">
+                    <div class="articles-grid" id="articlesGrid">
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        15 Jan 2025
+                                    </span>
+                                    <span class="article-category">Finanças</span>
+                                </div>
+                                <h3 class="article-title">Como Calcular Juros Compostos de Forma Simples</h3>
+                                <p class="article-excerpt">Entenda os conceitos fundamentais dos juros compostos e aprenda a usar nossa calculadora financeira para maximizar seus investimentos.</p>
+                                <a href="pages/artigos/juros-compostos.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-percent"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        12 Jan 2025
+                                    </span>
+                                    <span class="article-category">Tutoriais</span>
+                                </div>
+                                <h3 class="article-title">Guia Completo de Cálculos de Porcentagem</h3>
+                                <p class="article-excerpt">Descubra todos os tipos de cálculos de porcentagem e quando usar cada um. Inclui exemplos práticos e dicas importantes.</p>
+                                <a href="pages/artigos/guia-porcentagem.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        08 Jan 2025
+                                    </span>
+                                    <span class="article-category">Jurídico</span>
+                                </div>
+                                <h3 class="article-title">Entendendo o Cálculo de Escrituras no TJ/PR</h3>
+                                <p class="article-excerpt">Tudo que você precisa saber sobre o cálculo de escrituras com valor econômico no Tribunal de Justiça do Paraná.</p>
+                                <a href="pages/artigos/escrituras-tjpr.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        26 Jul 2025
+                                    </span>
+                                    <span class="article-category">Jurídico</span>
+                                </div>
+                                <h3 class="article-title">Entendendo o que é ITCMD</h3>
+                                <p class="article-excerpt">Tudo que você precisa saber sobre o Imposto sobre Transmissão Causa Mortis e Doação.</p>
+                                <a href="pages/articles/article_itcmd.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        05 Jan 2025
+                                    </span>
+                                    <span class="article-category">Tutoriais</span>
+                                </div>
+                                <h3 class="article-title">Conversões de Unidades Mais Comuns</h3>
+                                <p class="article-excerpt">Lista completa das conversões mais utilizadas no dia a dia, com exemplos práticos e dicas para não errar nunca mais.</p>
+                                <a href="pages/artigos/conversoes-unidades.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        02 Jan 2025
+                                    </span>
+                                    <span class="article-category">Finanças</span>
+                                </div>
+                                <h3 class="article-title">Planejamento Financeiro Para Iniciantes</h3>
+                                <p class="article-excerpt">Aprenda os primeiros passos para organizar suas finanças pessoais e começar a investir de forma inteligente.</p>
+                                <a href="pages/artigos/planejamento-financeiro.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="article-card">
+                            <div class="article-image">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span class="article-date">
+                                        <i class="far fa-calendar"></i>
+                                        28 Dez 2024
+                                    </span>
+                                    <span class="article-category">Dicas</span>
+                                </div>
+                                <h3 class="article-title">10 Truques de Cálculo Mental</h3>
+                                <p class="article-excerpt">Técnicas simples para fazer cálculos rápidos na sua cabeça e impressionar qualquer um com sua agilidade matemática.</p>
+                                <a href="pages/artigos/calculo-mental.html" class="article-link">
+                                    Ler artigo <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Setas de Navegação -->
+                <button class="carousel-nav prev" id="prevBtn" aria-label="Artigo anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-nav next" id="nextBtn" aria-label="Próximo artigo">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="carousel-indicators" id="indicators"></div>
+
+            <a href="pages/artigos.html" class="view-all-btn">
+                Ver todos os artigos <i class="fas fa-arrow-right"></i>
+            </a>
+        </section>
     </main>
 
     <!-- Rodapé -->
@@ -618,6 +1068,150 @@
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
         });
+
+        // Funcionalidade do carrossel de artigos
+        const articlesGrid = document.getElementById('articlesGrid');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+        
+        let currentIndex = 0;
+        let articlesPerView = 3;
+        let totalArticles = 6;
+        
+        // Ajustar quantos artigos mostrar baseado no tamanho da tela
+        function updateArticlesPerView() {
+            const screenWidth = window.innerWidth;
+            if (screenWidth <= 480) {
+                articlesPerView = 1;
+            } else if (screenWidth <= 768) {
+                articlesPerView = 2;
+            } else {
+                articlesPerView = 3;
+            }
+            
+            // Recalcular máximo índice
+            maxIndex = Math.max(0, totalArticles - articlesPerView);
+            
+            // Ajustar índice atual se necessário
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+            
+            updateCarousel();
+            createIndicators();
+        }
+        
+        const maxIndex = Math.max(0, totalArticles - articlesPerView);
+        
+        // Criar indicadores
+        function createIndicators() {
+            indicatorsContainer.innerHTML = '';
+            const totalPages = Math.ceil(totalArticles / articlesPerView);
+            
+            for (let i = 0; i < totalPages; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                indicator.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(indicator);
+            }
+            updateIndicators();
+        }
+        
+        // Atualizar indicadores
+        function updateIndicators() {
+            const indicators = indicatorsContainer.querySelectorAll('.indicator');
+            const currentPage = Math.floor(currentIndex / articlesPerView);
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentPage);
+            });
+        }
+        
+        // Atualizar posição do carrossel
+        function updateCarousel() {
+            const cardWidth = 350 + 32; // largura do card + gap
+            const offset = -currentIndex * cardWidth;
+            articlesGrid.style.transform = `translateX(${offset}px)`;
+            updateIndicators();
+            
+            // Atualizar visibilidade das setas
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+            nextBtn.style.opacity = currentIndex >= maxIndex ? '0.5' : '1';
+        }
+        
+        // Ir para slide específico
+        function goToSlide(slideIndex) {
+            currentIndex = slideIndex * articlesPerView;
+            if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+            updateCarousel();
+        }
+        
+        // Próximo slide
+        function nextSlide() {
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        }
+        
+        // Slide anterior
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        }
+        
+        // Event listeners
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+        
+        // Swipe para mobile
+        let startX = 0;
+        let isDragging = false;
+        
+        articlesGrid.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+        });
+        
+        articlesGrid.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+        
+        articlesGrid.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // Mínimo de 50px para considerar swipe
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+            
+            isDragging = false;
+        });
+        
+        // Inicializar
+        window.addEventListener('resize', updateArticlesPerView);
+        updateArticlesPerView();
     </script>
 
 </body>
