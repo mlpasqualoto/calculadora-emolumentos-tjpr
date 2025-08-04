@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5720110707960649"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <title>Calculadora Jurídica Trabalhista - CalcTools</title>
+    <style>
+        :root {
+            /* Paleta de cores clara inspirada no escrituras.html */
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #dbeafe;
+            --surface-blue: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --background-primary: #f8fafc;
+            --background-secondary: #e2e8f0;
+            --surface-white: #ffffff;
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --success: #059669;
+            --warning: #f59e0b;
+            --danger: #dc2626;
+            
+            /* Gradientes claros */
+            --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --gradient-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-primary);
+            background: var(--gradient-bg);
+            min-height: 100%;
+            line-height: 1.6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header:hover {
+            background: rgba(248, 250, 252, 0.98);
+        }
+
+        /* Botão hamburguer escondido por padrão */
+        #menuToggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        #mobileSidebar {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 240px;
+            height: 100%;
+            background: var(--surface-white);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            transition: left 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mobileSidebar ul {
+            list-style: none;
+            padding: 1rem 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #mobileSidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        #mobileSidebar a:hover {
+            color: var(--primary-blue);
+        }
+
+        #closeSidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            align-self: flex-end;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Ativação da sidebar com JavaScript */
+        #mobileSidebar.active {
+            left: 0;
+        }
+
+        #overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #container ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        #container a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #container a:hover {
+            color: var(--primary-blue);
+            background: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        #container a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        #container a:hover::before {
+            width: 100%;
+        }
+
+        main {
+            background: transparent;
+            width: 100%;
+            padding-top: 100px;
+            min-height: calc(100vh - 180px);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-card {
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .calc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--secondary-blue);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .calc-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .calc-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calc-icon {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--surface-white);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .calc-button {
+            width: 100%;
+            padding: 12px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .calc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .calc-button:active {
+            transform: translateY(0);
+        }
+
+        .result-display {
+            background: var(--light-blue);
+            border: 1px solid var(--secondary-blue);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .result-empty {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .result-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .tips-section {
+            background: var(--surface-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        footer {
+            width: 100%;
+            min-height: 80px;
+            background: var(--surface-white);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Responsividade */
+        @media (min-width: 769px) {
+            #mobileSidebar, #overlay {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .nav-text, #container ul {
+                display: none;
+            }
+
+            #menuToggle {
+                display: block;
+            }
+
+            header {
+                padding: 10px 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .calculator-container {
+                padding: 0 1rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .calc-card {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .page-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .calc-card {
+                padding: 1.25rem;
+            }
+
+            .calc-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .calc-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .calc-card:nth-child(2) { animation-delay: 0.1s; }
+        .calc-card:nth-child(3) { animation-delay: 0.2s; }
+        .calc-card:nth-child(4) { animation-delay: 0.3s; }
+        .calc-card:nth-child(5) { animation-delay: 0.4s; }
+        .calc-card:nth-child(6) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <nav id="container">
+            <div class="logo"><a href="/index.html" style="padding: 0; font-size: 1.5rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text">CalcTools</a></div>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-desktop">
+                <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+
+            <!-- Botão do Menu Mobile -->
+            <button id="menuToggle" aria-label="Abrir menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+
+        <!-- Sidebar Mobile -->
+        <aside id="mobileSidebar">
+            <button id="closeSidebar" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <ul>
+                <li><a href="/index.html"><i class="fas fa-home"></i> Início</a></li>
+                <li><a href="/index.html"><i class="fas fa-calculator"></i> Ferramentas</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                <li><a href="privacy.html"><i class="fas fa-shield"></i> Privacidade</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contato</a></li>
+            </ul>
+        </aside>
+
+        <!-- Fundo escurecido ao abrir o menu -->
+        <div id="overlay"></div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <section class="page-header">
+            <h1 class="page-title">Calculadora Jurídica Trabalhista</h1>
+            <p class="page-subtitle">Ferramentas especializadas para cálculos trabalhistas: rescisão, férias, décimo terceiro, horas extras e muito mais</p>
+        </section>
+
+        <div class="calculator-container">
+            <div class="calculator-grid">
+                <!-- Calculadora de Rescisão Contratual -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-file-contract calc-icon"></i>
+                        Rescisão Contratual
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary1" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meses Trabalhados</label>
+                        <input type="number" id="monthsWorked" class="form-input" placeholder="Ex: 18" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dias do Último Mês</label>
+                        <input type="number" id="daysWorked" class="form-input" placeholder="Ex: 15" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Rescisão</label>
+                        <select id="rescissionType" class="form-select">
+                            <option value="sem_justa_causa">Demissão sem justa causa</option>
+                            <option value="pedido_demissao">Pedido de demissão</option>
+                            <option value="justa_causa">Demissão por justa causa</option>
+                            <option value="acordo">Acordo (Art. 484-A)</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="calcRescission()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result1" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Férias -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-umbrella-beach calc-icon"></i>
+                        Cálculo de Férias
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary2" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meses de Direito</label>
+                        <input type="number" id="vacationMonths" class="form-input" placeholder="Ex: 12" step="1" max="12">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Dias de Férias</label>
+                        <select id="vacationDays" class="form-select">
+                            <option value="30">30 dias (integral)</option>
+                            <option value="20">20 dias (2/3)</option>
+                            <option value="15">15 dias (1/2)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Abono Pecuniário (1/3 das férias)</label>
+                        <select id="vacationBonus" class="form-select">
+                            <option value="sim">Sim, vender 1/3</option>
+                            <option value="nao">Não vender</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="calcVacation()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result2" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Décimo Terceiro -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-gift calc-icon"></i>
+                        Décimo Terceiro Salário
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary3" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meses Trabalhados no Ano</label>
+                        <input type="number" id="monthsWorked13" class="form-input" placeholder="Ex: 8" step="1" max="12">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Cálculo</label>
+                        <select id="thirteenthType" class="form-select">
+                            <option value="proporcional">Proporcional</option>
+                            <option value="integral">Integral (12 meses)</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="calcThirteenth()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result3" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Horas Extras -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-clock calc-icon"></i>
+                        Horas Extras
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary4" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Horas Extras no Mês</label>
+                        <input type="number" id="extraHours" class="form-input" placeholder="Ex: 20" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Percentual de Adicional</label>
+                        <select id="extraPercentage" class="form-select">
+                            <option value="50">50% (dias úteis)</option>
+                            <option value="100">100% (domingos e feriados)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jornada Semanal (horas)</label>
+                        <input type="number" id="weeklyHours" class="form-input" placeholder="Ex: 44" step="1" value="44">
+                    </div>
+                    <button class="calc-button" onclick="calcExtraHours()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result4" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Adicional Noturno -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-moon calc-icon"></i>
+                        Adicional Noturno
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary5" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Horas Noturnas no Mês</label>
+                        <input type="number" id="nightHours" class="form-input" placeholder="Ex: 60" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jornada Semanal (horas)</label>
+                        <input type="number" id="weeklyHours2" class="form-input" placeholder="Ex: 44" step="1" value="44">
+                    </div>
+                    <button class="calc-button" onclick="calcNightShift()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result5" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+
+                <!-- Calculadora de FGTS -->
+                <div class="calc-card">
+                    <h3 class="calc-title">
+                        <i class="fas fa-university calc-icon"></i>
+                        FGTS e Multa
+                    </h3>
+                    <div class="form-group">
+                        <label class="form-label">Salário Bruto (R$)</label>
+                        <input type="number" id="salary6" class="form-input" placeholder="Ex: 2500" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Meses Trabalhados</label>
+                        <input type="number" id="fgtsMonths" class="form-input" placeholder="Ex: 24" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Rescisão</label>
+                        <select id="fgtsRescissionType" class="form-select">
+                            <option value="sem_justa_causa">Demissão sem justa causa (40%)</option>
+                            <option value="acordo">Acordo - Art. 484-A (20%)</option>
+                            <option value="outros">Outros casos (0%)</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="calcFGTS()">Calcular</button>
+                    <div class="result-display">
+                        <div id="result6" class="result-text result-empty">Digite os valores para calcular</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção de Dicas -->
+            <div class="tips-section">
+                <h3 class="tips-title">
+                    <i class="fas fa-balance-scale" style="color: var(--warning);"></i>
+                    Guia Jurídico Trabalhista
+                </h3>
+                <div style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+                    <p>Nossa calculadora trabalhista oferece ferramentas precisas para cálculos de direitos trabalhistas, seguindo rigorosamente a legislação brasileira. Todas as fórmulas são atualizadas conforme as normas da CLT e jurisprudência consolidada.</p>
+
+                    <p><strong>Rescisão Contratual:</strong> O cálculo considera todos os direitos do trabalhador conforme o tipo de rescisão. Na demissão sem justa causa, inclui aviso prévio, férias proporcionais + 1/3, 13º proporcional, saldo de salário e multa de 40% sobre o FGTS. No pedido de demissão, não há direito ao aviso prévio nem à multa do FGTS. O acordo (Art. 484-A) garante 50% do aviso prévio e multa de 20% sobre o FGTS, além de poder movimentar 80% do FGTS.</p>
+
+                    <p><strong>Cálculo de Férias:</strong> O trabalhador tem direito a 30 dias de férias após 12 meses de trabalho, mais 1/3 constitucional. Faltas não justificadas reduzem este direito: até 5 faltas mantêm os 30 dias, de 6 a 14 faltas resultam em 24 dias, de 15 a 23 faltas em 18 dias, e de 24 a 32 faltas em 12 dias. O abono pecuniário permite "vender" 1/3 das férias, recebendo em dinheiro e mantendo o restante para descanso.</p>
+
+                    <p><strong>Décimo Terceiro Salário:</strong> Também conhecido como gratificação natalina, é calculado proporcionalmente aos meses trabalhados. Considera-se mês completo quando trabalhados 15 dias ou mais. Por exemplo, 8 meses trabalhados com salário de R$ 3.000 resultam em (3.000 ÷ 12) × 8 = R$ 2.000 de 13º salário. O pagamento pode ser feito em duas parcelas: a primeira até 30 de novembro e a segunda até 20 de dezembro.</p>
+
+                    <p><strong>Horas Extras:</strong> A Constituição limita a jornada a 8 horas diárias e 44 semanais. Horas excedentes são pagas com adicional mínimo de 50% nos dias úteis e 100% em domingos e feriados. Para calcular o valor da hora, divide-se o salário por 220 (horas mensais). Um salário de R$ 2.200 resulta em hora normal de R$ 10,00, hora extra de 50% a R$ 15,00 e de 100% a R$ 20,00.</p>
+
+                    <p><strong>Adicional Noturno:</strong> O trabalho noturno urbano (22h às 5h) tem adicional mínimo de 20% sobre a hora diurna. A hora noturna é reduzida: equivale a 52 minutos e 30 segundos. Assim, cada hora trabalhada no período noturno corresponde a 1,14 hora para efeito de pagamento. Com salário de R$ 2.640, a hora diurna é R$ 12,00 e a noturna R$ 14,40, considerando a redução ficional e o adicional.</p>
+
+                    <p><strong>FGTS e Multa Rescisória:</strong> O FGTS corresponde a 8% do salário bruto depositado mensalmente. Na rescisão sem justa causa, há multa de 40% sobre o saldo total. No acordo do Art. 484-A, a multa é de 20%. Um trabalhador com 2 anos de trabalho e salário de R$ 2.500 teria aproximadamente R$ 4.800 de FGTS, resultando em multa de R$ 1.920 (sem justa causa) ou R$ 960 (acordo).</p>
+
+                    <p><strong>Orientações Importantes:</strong> Sempre confira os cálculos com profissionais especializados para casos complexos. Esta ferramenta serve como estimativa inicial. Considere que acordos coletivos podem estabelecer condições mais favoráveis, prevalecendo sobre a legislação mínima. Em caso de dúvidas sobre seus direitos, procure o sindicato da categoria ou advogado trabalhista.</p>
+
+                    <p><strong>Prazos Legais:</strong> O empregador tem até 10 dias para quitar as verbas rescisórias (1 dia útil se houver aviso prévio trabalhado). O não pagamento no prazo gera multa equivalente ao salário do empregado. As férias devem ser pagas até 2 dias antes do início do período de descanso.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">Privacidade</a>
+                <a href="privacy.html">Termos</a>
+                <a href="contact.html">Suporte</a>
+                <a href="https://github.com/mlpasqualoto" target="_blank">GitHub</a>
+            </div>
+            <p class="footer-text">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidade do menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('mobileSidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const overlay = document.getElementById('overlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Funções da Calculadora Trabalhista
+
+        // Função para calcular rescisão contratual
+        function calcRescission() {
+            const salary = parseFloat(document.getElementById('salary1').value);
+            const monthsWorked = parseInt(document.getElementById('monthsWorked').value);
+            const daysWorked = parseInt(document.getElementById('daysWorked').value);
+            const rescissionType = document.getElementById('rescissionType').value;
+            const resultDiv = document.getElementById('result1');
+
+            if (isNaN(salary) || isNaN(monthsWorked) || isNaN(daysWorked)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            let totalAmount = 0;
+            let details = [];
+
+            // Saldo de salário (dias trabalhados no último mês)
+            const dailySalary = salary / 30;
+            const salaryBalance = dailySalary * daysWorked;
+            totalAmount += salaryBalance;
+            details.push(`Saldo de salário: ${formatCurrency(salaryBalance)}`);
+
+            // Férias proporcionais + 1/3
+            const vacationMonths = monthsWorked % 12;
+            const vacationAmount = (salary / 12) * vacationMonths;
+            const vacationBonus = vacationAmount / 3;
+            
+            if (rescissionType !== 'justa_causa') {
+                totalAmount += vacationAmount + vacationBonus;
+                details.push(`Férias proporcionais + 1/3: ${formatCurrency(vacationAmount + vacationBonus)}`);
+            }
+
+            // 13º salário proporcional
+            const thirteenthAmount = (salary / 12) * monthsWorked;
+            if (rescissionType !== 'justa_causa') {
+                totalAmount += thirteenthAmount;
+                details.push(`13º proporcional: ${formatCurrency(thirteenthAmount)}`);
+            }
+
+            // Aviso prévio
+            if (rescissionType === 'sem_justa_causa') {
+                totalAmount += salary;
+                details.push(`Aviso prévio: ${formatCurrency(salary)}`);
+            } else if (rescissionType === 'acordo') {
+                const halfNotice = salary / 2;
+                totalAmount += halfNotice;
+                details.push(`Aviso prévio (50%): ${formatCurrency(halfNotice)}`);
+            }
+
+            // FGTS + Multa
+            const fgtsBalance = salary * 0.08 * monthsWorked;
+            let fgtsFine = 0;
+            
+            if (rescissionType === 'sem_justa_causa') {
+                fgtsFine = fgtsBalance * 0.4;
+                details.push(`Multa FGTS (40%): ${formatCurrency(fgtsFine)}`);
+            } else if (rescissionType === 'acordo') {
+                fgtsFine = fgtsBalance * 0.2;
+                details.push(`Multa FGTS (20%): ${formatCurrency(fgtsFine)}`);
+            }
+
+            totalAmount += fgtsFine;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Total da Rescisão: ${formatCurrency(totalAmount)}</div>
+                    <div class="result-details">
+                        ${details.join('<br>')}
+                        <br><strong>FGTS a sacar: ${formatCurrency(fgtsBalance)}</strong>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular férias
+        function calcVacation() {
+            const salary = parseFloat(document.getElementById('salary2').value);
+            const vacationMonths = parseInt(document.getElementById('vacationMonths').value);
+            const vacationDays = parseInt(document.getElementById('vacationDays').value);
+            const vacationBonus = document.getElementById('vacationBonus').value;
+            const resultDiv = document.getElementById('result2');
+
+            if (isNaN(salary) || isNaN(vacationMonths) || isNaN(vacationDays)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            // Valor base das férias (proporcional aos meses e dias)
+            const baseVacation = (salary / 12) * vacationMonths * (vacationDays / 30);
+            
+            // 1/3 constitucional
+            const constitutionalBonus = baseVacation / 3;
+            
+            // Abono pecuniário (venda de 1/3 das férias)
+            let pecuniaryBonus = 0;
+            let pecuniaryBonusThird = 0;
+            
+            if (vacationBonus === 'sim') {
+                pecuniaryBonus = baseVacation / 3;
+                pecuniaryBonusThird = pecuniaryBonus / 3;
+            }
+
+            const totalAmount = baseVacation + constitutionalBonus + pecuniaryBonus + pecuniaryBonusThird;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Total de Férias: ${formatCurrency(totalAmount)}</div>
+                    <div class="result-details">
+                        Férias remuneradas (${vacationDays} dias): ${formatCurrency(baseVacation)}<br>
+                        Terço constitucional: ${formatCurrency(constitutionalBonus)}
+                        ${pecuniaryBonus > 0 ? `<br>Abono pecuniário: ${formatCurrency(pecuniaryBonus)}<br>1/3 do abono: ${formatCurrency(pecuniaryBonusThird)}` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular décimo terceiro
+        function calcThirteenth() {
+            const salary = parseFloat(document.getElementById('salary3').value);
+            const monthsWorked = parseInt(document.getElementById('monthsWorked13').value);
+            const thirteenthType = document.getElementById('thirteenthType').value;
+            const resultDiv = document.getElementById('result3');
+
+            if (isNaN(salary) || isNaN(monthsWorked)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            let thirteenthAmount;
+            
+            if (thirteenthType === 'integral') {
+                thirteenthAmount = salary;
+            } else {
+                thirteenthAmount = (salary / 12) * monthsWorked;
+            }
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>13º Salário: ${formatCurrency(thirteenthAmount)}</div>
+                    <div class="result-details">
+                        ${thirteenthType === 'proporcional' ? `Proporcional a ${monthsWorked} ${monthsWorked === 1 ? 'mês' : 'meses'}` : 'Valor integral (12 meses)'}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular horas extras
+        function calcExtraHours() {
+            const salary = parseFloat(document.getElementById('salary4').value);
+            const extraHours = parseFloat(document.getElementById('extraHours').value);
+            const extraPercentage = parseInt(document.getElementById('extraPercentage').value);
+            const weeklyHours = parseInt(document.getElementById('weeklyHours').value);
+            const resultDiv = document.getElementById('result4');
+
+            if (isNaN(salary) || isNaN(extraHours) || isNaN(weeklyHours)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            // Cálculo do valor da hora normal
+            const monthlyHours = (weeklyHours * 52) / 12; // Horas mensais
+            const hourlyRate = salary / monthlyHours;
+            
+            // Valor da hora extra
+            const extraHourlyRate = hourlyRate * (1 + extraPercentage / 100);
+            
+            // Total de horas extras
+            const totalExtraAmount = extraHours * extraHourlyRate;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Total Horas Extras: ${formatCurrency(totalExtraAmount)}</div>
+                    <div class="result-details">
+                        Valor da hora normal: ${formatCurrency(hourlyRate)}<br>
+                        Valor da hora extra (+${extraPercentage}%): ${formatCurrency(extraHourlyRate)}<br>
+                        ${extraHours} horas × ${formatCurrency(extraHourlyRate)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular adicional noturno
+        function calcNightShift() {
+            const salary = parseFloat(document.getElementById('salary5').value);
+            const nightHours = parseFloat(document.getElementById('nightHours').value);
+            const weeklyHours = parseInt(document.getElementById('weeklyHours2').value);
+            const resultDiv = document.getElementById('result5');
+
+            if (isNaN(salary) || isNaN(nightHours) || isNaN(weeklyHours)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            // Cálculo do valor da hora diurna
+            const monthlyHours = (weeklyHours * 52) / 12;
+            const hourlyRate = salary / monthlyHours;
+            
+            // Hora noturna = hora diurna + 20% (mínimo legal)
+            const nightHourlyRate = hourlyRate * 1.20;
+            
+            // Redução ficta da hora noturna (52min30s = 0.875)
+            const adjustedNightHours = nightHours * 1.1429; // 60/52.5
+            
+            // Total do adicional noturno
+            const totalNightAmount = adjustedNightHours * nightHourlyRate;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Total Adicional Noturno: ${formatCurrency(totalNightAmount)}</div>
+                    <div class="result-details">
+                        Hora diurna: ${formatCurrency(hourlyRate)}<br>
+                        Hora noturna (+20%): ${formatCurrency(nightHourlyRate)}<br>
+                        Horas ajustadas: ${adjustedNightHours.toFixed(2)}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para calcular FGTS
+        function calcFGTS() {
+            const salary = parseFloat(document.getElementById('salary6').value);
+            const fgtsMonths = parseInt(document.getElementById('fgtsMonths').value);
+            const fgtsRescissionType = document.getElementById('fgtsRescissionType').value;
+            const resultDiv = document.getElementById('result6');
+
+            if (isNaN(salary) || isNaN(fgtsMonths)) {
+                resultDiv.innerHTML = '<span class="result-empty">Por favor, preencha todos os campos</span>';
+                return;
+            }
+
+            // Saldo do FGTS (8% do salário por mês)
+            const fgtsBalance = salary * 0.08 * fgtsMonths;
+            
+            // Multa rescisória
+            let fgtsFine = 0;
+            let fineDescription = '';
+            
+            switch (fgtsRescissionType) {
+                case 'sem_justa_causa':
+                    fgtsFine = fgtsBalance * 0.4;
+                    fineDescription = 'Multa de 40%';
+                    break;
+                case 'acordo':
+                    fgtsFine = fgtsBalance * 0.2;
+                    fineDescription = 'Multa de 20% (acordo)';
+                    break;
+                default:
+                    fgtsFine = 0;
+                    fineDescription = 'Sem direito à multa';
+            }
+
+            const totalAmount = fgtsFine;
+
+            resultDiv.innerHTML = `
+                <div class="result-text">
+                    <div>Saldo FGTS: ${formatCurrency(fgtsBalance)}</div>
+                    ${fgtsFine > 0 ? `<div>${fineDescription}: ${formatCurrency(fgtsFine)}</div>` : `<div>${fineDescription}</div>`}
+                    <div class="result-details">
+                        8% × ${formatCurrency(salary)} × ${fgtsMonths} ${fgtsMonths === 1 ? 'mês' : 'meses'}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Função para formatar como moeda
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        // Adicionar listeners para calcular automaticamente quando pressionar Enter
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.form-input, .form-select');
+            
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const card = input.closest('.calc-card');
+                        const button = card.querySelector('.calc-button');
+                        button.click();
+                    }
+                });
+            });
+        });
+
+        // Funções para limpar resultados quando os campos forem alterados
+        function clearResult(resultId) {
+            document.getElementById(resultId).innerHTML = '<span class="result-empty">Digite os valores para calcular</span>';
+        }
+
+        // Adicionar listeners para limpar resultados quando os campos mudarem
+        // Rescisão
+        document.getElementById('salary1').addEventListener('input', () => clearResult('result1'));
+        document.getElementById('monthsWorked').addEventListener('input', () => clearResult('result1'));
+        document.getElementById('daysWorked').addEventListener('input', () => clearResult('result1'));
+        document.getElementById('rescissionType').addEventListener('change', () => clearResult('result1'));
+
+        // Férias
+        document.getElementById('salary2').addEventListener('input', () => clearResult('result2'));
+        document.getElementById('vacationMonths').addEventListener('input', () => clearResult('result2'));
+        document.getElementById('vacationDays').addEventListener('change', () => clearResult('result2'));
+        document.getElementById('vacationBonus').addEventListener('change', () => clearResult('result2'));
+
+        // Décimo Terceiro
+        document.getElementById('salary3').addEventListener('input', () => clearResult('result3'));
+        document.getElementById('monthsWorked13').addEventListener('input', () => clearResult('result3'));
+        document.getElementById('thirteenthType').addEventListener('change', () => clearResult('result3'));
+
+        // Horas Extras
+        document.getElementById('salary4').addEventListener('input', () => clearResult('result4'));
+        document.getElementById('extraHours').addEventListener('input', () => clearResult('result4'));
+        document.getElementById('extraPercentage').addEventListener('change', () => clearResult('result4'));
+        document.getElementById('weeklyHours').addEventListener('input', () => clearResult('result4'));
+
+        // Adicional Noturno
+        document.getElementById('salary5').addEventListener('input', () => clearResult('result5'));
+        document.getElementById('nightHours').addEventListener('input', () => clearResult('result5'));
+        document.getElementById('weeklyHours2').addEventListener('input', () => clearResult('result5'));
+
+        // FGTS
+        document.getElementById('salary6').addEventListener('input', () => clearResult('result6'));
+        document.getElementById('fgtsMonths').addEventListener('input', () => clearResult('result6'));
+        document.getElementById('fgtsRescissionType').addEventListener('change', () => clearResult('result6'));
+    </script>
+</body>
+</html>
