@@ -5,12 +5,11 @@
         crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="página para calcular valor de escrituras">
     <meta autor="author" content="Matheus Leite Pasqualoto">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
-    <title>Orçamento Escrituras</title>
+    <title>Orçamento Escrituras - CalcTools</title>
     <style>
         :root {
             /* Paleta de cores clara inspirada no escrituras.html */
@@ -181,7 +180,7 @@
             display: flex;
         }
 
-        .nav-desktop ul {
+        #container ul {
             list-style: none;
             margin: 0;
             padding: 0;
@@ -189,7 +188,7 @@
             gap: 1rem;
         }
 
-        .nav-desktop a {
+        #container a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
@@ -202,13 +201,13 @@
             gap: 6px;
         }
 
-        .nav-desktop a:hover {
+        #container a:hover {
             color: var(--primary-blue);
             background: var(--light-blue);
             transform: translateY(-2px);
         }
 
-        .nav-desktop a::before {
+        #container a::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -220,7 +219,7 @@
             transform: translateX(-50%);
         }
 
-        .nav-desktop a:hover::before {
+        #container a:hover::before {
             width: 100%;
         }
 
@@ -1311,10 +1310,10 @@
     <footer style="width: 100%; min-height: 80px; background-color: white; border-top: 1px solid #e2e8f0; color: #64748b; display: flex; justify-content: center; align-items: center; margin-top: 4rem; padding: 2rem; box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); font-family: 'Inter', sans-serif;">
         <div class="footer-content" style="text-align: center; max-width: 1200px; width: 100%;">
             <div class="footer-links" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem;">
-                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Privacidade</a>
-                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Termos</a>
-                <a href="#" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Suporte</a>
-                <a href="#" target="_blank" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">GitHub</a>
+                <a href="privacy.html" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Privacidade</a>
+                <a href="privacy.html" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Termos</a>
+                <a href="contact.html" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">Suporte</a>
+                <a href="https://github.com/mlpasqualoto" target="_blank" style="color: #475569; text-decoration: none; transition: color 0.3s ease; font-weight: 500;">GitHub</a>
             </div>
             <p style="font-size: 0.9rem; margin-bottom: 0; color: #94a3b8;">&copy; 2025 CalcTools. Todos os direitos reservados.</p>
         </div>
