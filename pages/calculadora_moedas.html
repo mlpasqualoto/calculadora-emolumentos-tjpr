@@ -625,6 +625,17 @@
                             <option value="USD">Dólar (USD)</option>
                             <option value="EUR">Euro (EUR)</option>
                             <option value="BRL">Real (BRL)</option>
+                            <option value="GBP">Libra Esterlina (GBP)</option>
+                            <option value="JPY">Iene Japonês (JPY)</option>
+                            <option value="AUD">Dólar Australiano (AUD)</option>
+                            <option value="CAD">Dólar Canadense (CAD)</option>
+                            <option value="CHF">Franco Suíço (CHF)</option>
+                            <option value="CNY">Yuan Chinês (CNY)</option>
+                            <option value="HKD">Dólar de Hong Kong (HKD)</option>
+                            <option value="INR">Rúpia Indiana (INR)</option>
+                            <option value="MXN">Peso Mexicano (MXN)</option>
+                            <option value="KRW">Won Sul-Coreano (KRW)</option>
+                            <option value="SGD">Dólar de Cingapura (SGD)</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -633,6 +644,17 @@
                             <option value="USD">Dólar (USD)</option>
                             <option value="EUR">Euro (EUR)</option>
                             <option value="BRL">Real (BRL)</option>
+                            <option value="GBP">Libra Esterlina (GBP)</option>
+                            <option value="JPY">Iene Japonês (JPY)</option>
+                            <option value="AUD">Dólar Australiano (AUD)</option>
+                            <option value="CAD">Dólar Canadense (CAD)</option>
+                            <option value="CHF">Franco Suíço (CHF)</option>
+                            <option value="CNY">Yuan Chinês (CNY)</option>
+                            <option value="HKD">Dólar de Hong Kong (HKD)</option>
+                            <option value="INR">Rúpia Indiana (INR)</option>
+                            <option value="MXN">Peso Mexicano (MXN)</option>
+                            <option value="KRW">Won Sul-Coreano (KRW)</option>
+                            <option value="SGD">Dólar de Cingapura (SGD)</option>
                         </select>
                     </div>
                     <button class="calc-button" onclick="calcConvertOfValue()">Calcular</button>
@@ -708,7 +730,9 @@
         async function calcConvertOfValue() {
             const value = parseFloat(document.getElementById('value').value);
             const fromCurrency = document.getElementById('fromCurrency').value;
+            const fromCurrencyText = document.querySelector('#fromCurrency option:checked').textContent;
             const toCurrency = document.getElementById('toCurrency').value;
+            const toCurrencyText = document.querySelector('#toCurrency option:checked').textContent;
 
             if (isNaN(value) || value <= 0) {
                 document.getElementById('result1').innerHTML = '<span class="result-empty">Por favor, insira um valor válido</span>';
@@ -716,22 +740,22 @@
             }
 
             try {
-                const response = await fetch(`https://v6.exchangerate-api.com/v6/${process.env.exchangeRateApiKey}/latest/${fromCurrency}`);
+                const response = await fetch(`https://api.frankfurter.app/latest?amount=${value}&from=${fromCurrency}&to=${toCurrency}`);
                 const data = await response.json();
-                const rate = data.conversion_rates[toCurrency];
-                const convertedValue = value * rate;
+                const rate = data.rates;
+                const convertedValue = rate[toCurrency];
 
-                document.getElementById('result1').innerHTML = `<span class="result-text">${formatCurrency(convertedValue)} ${toCurrency}</span>`;
+                document.getElementById('result1').innerHTML = `<span class="result-text"><b>${formatCurrency(value, fromCurrency)}</b> ${fromCurrencyText} em ${toCurrencyText} vale <b>${formatCurrency(convertedValue, toCurrency)}</b></span>`;
             } catch (error) {
                 document.getElementById('result1').innerHTML = '<span class="result-empty">Erro ao obter a taxa de câmbio</span>';
             }
         }
 
         // Função para formatar como moeda
-        function formatCurrency(value) {
+        function formatCurrency(value, currency) {
             return new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
-                currency: 'BRL'
+                currency: currency
             }).format(value);
         }
 
