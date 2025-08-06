@@ -358,6 +358,11 @@
             vertical-align: middle;
         }
 
+        #td-bem {
+            display: flex;
+            justify-content: start;
+        }
+
         /* Força alinhamento das colunas */
         table td:first-child {
             width: 70%;
@@ -1495,11 +1500,12 @@
                 const columnItem = document.createElement("td");
 
                 columnItem.classList.add("item");
+                columnItem.id = "td-bem";
 
                 if (garagem.checked) {
-                columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem) + " (Imóvel de Garagem)";
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} (Imóvel de Garagem) <input>`;
                 } else {
-                columnItem.textContent = "Bem " + (nBem - 1) + " - R$ " + valFormatReais(valBem);
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} <input>`;
                 }
 
                 row.appendChild(columnItem);
