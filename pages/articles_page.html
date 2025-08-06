@@ -569,9 +569,21 @@
         .article-card:nth-child(6) { animation-delay: 0.6s; }
 
         /* Responsividade */
+
+        /* Desktop: mostrar menu horizontal */
+        @media (min-width: 769px) {
+            #mobileSidebar, #overlay {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-desktop {
                 display: none;
+            }
+
+            .nav-text, #container ul {
+                display: none; /* Oculta os textos dos links no mobile */
             }
 
             #menuToggle {
