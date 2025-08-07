@@ -321,7 +321,7 @@
         }
 
         #descBem {
-            width: 50%;
+            width: 70%;
             height: 20px;
             padding: 0 8px;
             text-align: left;
@@ -1546,9 +1546,9 @@
                 columnItem.id = "td-bem";
 
                 if (garagem.checked) {
-                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} (Imóvel de Garagem) <input id="descBem" placeholder="Descrição do bem" autocomplete="off">`;
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} (Imóvel de Garagem) <input id="descBem" maxlength="23" placeholder="Descrição do bem" autocomplete="off">`;
                 } else {
-                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} <input id="descBem" placeholder="Descrição do bem" autocomplete="off">`;
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} <input id="descBem" maxlength="23" placeholder="Descrição do bem" autocomplete="off">`;
                 }
 
                 row.appendChild(columnItem);
