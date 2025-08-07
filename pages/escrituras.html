@@ -320,6 +320,27 @@
             background-color: #ffffff;
         }
 
+        #descBem {
+            width: 50%;
+            height: 20px;
+            padding: 0 8px;
+            text-align: left;
+            box-shadow: 0 0 0 2px #dddee044;
+            border: none;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        #descBem::placeholder {
+            color: #94a3b8;
+            font-weight: 100;
+        }
+
+        #descBem:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background-color: #ffffff;
+        }
+
         input::placeholder {
             color: #64748b;
             font-weight: 400;
@@ -356,11 +377,6 @@
             padding: 8px 12px;
             border: 1px solid #e2e8f0;
             vertical-align: middle;
-        }
-
-        #td-bem {
-            display: flex;
-            justify-content: start;
         }
 
         /* Força alinhamento das colunas */
@@ -454,6 +470,15 @@
             width: 16px;
             height: 16px;
             accent-color: #3b82f6;
+        }
+
+        #td-bem {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            min-width: 100%;
+            gap: 10px;
+            height: 100%;
         }
 
         /* === Containers de avisos === */
@@ -732,6 +757,10 @@
                 border-radius: 6px;
             }
 
+            #descBem {
+                display: none;
+            }
+
             /* Melhora layout dos containers especiais */
             #td-top {
                 flex-direction: column;
@@ -929,6 +958,20 @@
                 display: none !important;
             }
 
+            #descBem {
+                display: block !important;
+                border: none !important;
+                background: transparent !important;
+                outline: none !important;
+                box-shadow: none !important;
+                font-size: 14px !important;
+                font-weight: bold;
+            }
+
+            #descBem::placeholder {
+                color: #6b7280 !important;
+            }
+
             .cont_calc,
             .cont_corpo {
                 width: 100%;
@@ -943,7 +986,7 @@
                 border: 1px solid #e2e8f0;
                 margin-bottom: 8px;
             }
-
+            
             /* Otimiza tabelas para impressão */
             table {
                 box-shadow: none;
@@ -1503,9 +1546,9 @@
                 columnItem.id = "td-bem";
 
                 if (garagem.checked) {
-                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} (Imóvel de Garagem) <input>`;
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} (Imóvel de Garagem) <input id="descBem" placeholder="Descrição do bem" autocomplete="off">`;
                 } else {
-                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} <input>`;
+                columnItem.innerHTML = `Bem ${nBem - 1} - R$ ${valFormatReais(valBem)} <input id="descBem" placeholder="Descrição do bem" autocomplete="off">`;
                 }
 
                 row.appendChild(columnItem);
