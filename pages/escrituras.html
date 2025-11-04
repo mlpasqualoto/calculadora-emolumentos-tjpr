@@ -606,7 +606,8 @@
 
         #doacao-aviso-funrejus,
         #doacao-aviso-itcmd,
-        #meacao-aviso-itcmd {
+        #meacao-aviso-itcmd,
+        #teto-funrejus {
             color: #dc2626;
             font-weight: 600;
             font-size: 11px;
@@ -1273,8 +1274,10 @@
                                 <tr>
                                     <td class="item">
                                         <div id="funrejus-container">
-                                            <a href="/pages/articles/article_funrejus.html" style="color: #2753b1;">Funrejus (0,2% sobre a soma dos bens) <p id="doacao-aviso-funrejus">2 GUIAS DE
-                                                FUNREJUS</p></a>
+                                            <a href="/pages/articles/article_funrejus.html" style="color: #2753b1;">Funrejus (0,2% sobre a soma dos bens) 
+                                                <p id="doacao-aviso-funrejus">2 GUIAS DE FUNREJUS</p>
+                                                <p id="teto-funrejus">TETO ATINGIDO</p>
+                                            </a>
                                         </div>
                                     </td>
                                     <td id="funrejus" class="val"></td>
@@ -1601,14 +1604,20 @@
             //calcular valor funrejus
             function valorFunrejus(sumB) {
                 const doacaoUsufruto = document.getElementById("input-Doacao");
+                const tetoFunrejusAlert = document.getElementById("teto-funrejus");
+                const tetoFunrejus = 7779.34;
                 let funrejus = sumB * (0.2 / 100);
 
+                if (funrejus > tetoFunrejus) {
+                    funrejus = tetoFunrejus;
+                    tetoFunrejusAlert.style.display = "flex";
+                }
+
                 if (doacaoUsufruto.checked) {
-                funrejus = 2 * funrejus;
-                };
+                    funrejus = 2 * funrejus;
+                }
 
                 return funrejus.toFixed(2);
-
             };
 
             //calcular valor itbi
