@@ -607,6 +607,7 @@
         #doacao-aviso-funrejus,
         #doacao-aviso-itcmd,
         #meacao-aviso-itcmd,
+        #desc-funrejus,
         #teto-funrejus {
             color: #dc2626;
             font-weight: 600;
@@ -954,8 +955,6 @@
             .add-checkbox,
             #checkbox-container,
             #doacao-aviso-funrejus,
-            #doacao-aviso-itcmd,
-            #meacao-aviso-itcmd,
             #addBtnContainer,
             #alert,
             #btn-container, 
@@ -1277,6 +1276,7 @@
                                             <a href="/pages/articles/article_funrejus.html" style="color: #2753b1;">Funrejus (0,2% sobre a soma dos bens) 
                                                 <p id="doacao-aviso-funrejus">2 GUIAS DE FUNREJUS</p>
                                                 <p id="teto-funrejus">TETO ATINGIDO</p>
+                                                <p id="desc-funrejus">FUNREJUS DESCONTANDO MEAÇÃO</p>
                                             </a>
                                         </div>
                                     </td>
@@ -1312,7 +1312,7 @@
                                                     <a href="/pages/articles/article_itcmd.html" style="color: #2753b1;">ITCMD (4% sobre a soma dos bens)</a>
                                                 </div>
                                                 <p id="doacao-aviso-itcmd">ITCMD DE 2%</p>
-                                                <p id="meacao-aviso-itcmd">ITCMD SEM MEAÇÃO</p>
+                                                <p id="meacao-aviso-itcmd">ITCMD DESCONTANDO MEAÇÃO</p>
                                             </div>
                                             <div>
                                                 <button id="itcmdBtn" class="itbiitcmd">Adicionar</button>
@@ -1443,11 +1443,14 @@
             // mostra e esconde aviso de meação
             const meacao = document.getElementById("input-meacao");
             const meacaoAvisoItmcd = document.getElementById("meacao-aviso-itcmd");
+            const descFunrejus = document.getElementById("desc-funrejus");
 
             meacao.addEventListener("change", () => {
                 if (meacao.checked) {
+                descFunrejus.style.display = "flex";
                 meacaoAvisoItmcd.style.display = "flex";
                 } else {
+                descFunrejus.style.display = "none";
                 meacaoAvisoItmcd.style.display = "none";
                 }
             });
@@ -1605,6 +1608,7 @@
             function valorFunrejus(sumB) {
                 const doacaoUsufruto = document.getElementById("input-Doacao");
                 const tetoFunrejusAlert = document.getElementById("teto-funrejus");
+                const descMeacao = document.getElementById("input-meacao");
                 const tetoFunrejus = 7779.34;
                 let funrejus = sumB * (0.2 / 100);
 
@@ -1615,6 +1619,10 @@
 
                 if (doacaoUsufruto.checked) {
                     funrejus = 2 * funrejus;
+                }
+
+                if (descMeacao.checked) {
+                    funrejus = funrejus / 2;
                 }
 
                 return funrejus.toFixed(2);
