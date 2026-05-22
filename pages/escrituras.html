@@ -511,13 +511,17 @@
             font-weight: 600;
         }
 
-        /* === Container do ITBI com alinhamento à direita === */
-        #itbi-container {
+        /* === Containers do Certidoes, ITBI, ITCMD e Registro com alinhamento à direita === */
+        #itbi-container, #certidoes-container, #registro-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 16px;
             width: 100%;
+        }
+
+        #certidoes, #registro {
+            display: none; /* Oculto por padrão */
         }
 
         #itcmd-text-container {
@@ -1296,12 +1300,17 @@
                             <br class="corpo">
                             <table>
                                 <tr>
-                                    <td class="item">Certidões</td>
-                                    <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões"
-                                            autocomplete="off" required value="250"></td>
+                                    <td class="item" id="certidoes-container">
+                                        <p>Certidões</p>
+                                        <button id="certidoesBtn" class="itbiitcmd">Adicionar</button>
+                                    </td>
+                                    <td class="val"><input type="number" id="certidoes" placeholder="Valor das certidões (R$ 250,00)" autocomplete="off"></td>
                                 </tr>
                                 <tr>
-                                    <td class="item" id="itbi-container"><a href="/pages/articles/article_itbi.html" style="color: #2753b1;">ITBI (2% sobre a soma dos bens)</a><button id="itbiBtn" class="itbiitcmd">Adicionar</button></td>
+                                    <td class="item" id="itbi-container">
+                                        <a href="/pages/articles/article_itbi.html" style="color: #2753b1;">ITBI (2% sobre a soma dos bens)</a>
+                                        <button id="itbiBtn" class="itbiitcmd">Adicionar</button>
+                                    </td>
                                     <td id="itbi" class="val"></td>
                                 </tr>
                                 <tr>
@@ -1322,9 +1331,11 @@
                                     <td id="itcmd" class="val"></td>
                                 </tr>
                                 <tr>
-                                    <td class="item">Registro de imóveis</td>
-                                    <td class="val"><input type="number" id="registro" placeholder="Valor do registro"
-                                            autocomplete="off" required value="1700"></td>
+                                    <td class="item" id="registro-container">
+                                        <p>Registro de imóveis</p>
+                                        <button id="registroBtn" class="itbiitcmd">Adicionar</button>
+                                    </td>
+                                    <td class="val"><input type="number" id="registro" placeholder="Valor do registro (R$ 1.700,00)" autocomplete="off"></td>
                                 </tr>
                             </table>
                             <br>
@@ -1771,9 +1782,8 @@
             //certidoes
             function calculoCertidoes() {
                 certidoes = parseFloat(document.getElementById("certidoes").value); //certidoes declarada aqui!
-                while (isNaN(certidoes)) {
-                alert('Valor inválido! Digite o valor das certidões!');
-                return;
+                if (isNaN(certidoes)) {
+                    certidoes = 0;
                 };
                 certidoes = formatarVal(certidoes);
             };
@@ -1781,9 +1791,8 @@
             //registro
             function calculoRegistro() {
                 registro = parseFloat(document.getElementById("registro").value); //registro declarado aqui!
-                while (isNaN(registro)) {
-                alert('Valor inválido! Digite o valor do registro de imóveis');
-                return;
+                if (isNaN(registro)) {
+                    registro = 0;
                 };
                 registro = formatarVal(registro);
             };
@@ -1820,6 +1829,22 @@
                 somaValorBens(); 
                 somaValorEscrituras(); 
                 limparValor();
+            });
+
+            // Define botão de mostrar campo de certidões
+            const certidoesBtn = document.getElementById("certidoesBtn");
+            certidoesBtn.addEventListener("click", () => {
+                const certidoesInput = document.getElementById("certidoes");
+                certidoesInput.style.display = "block";
+                certidoesInput.focus();
+            });
+
+            // Define botão de mostrar campo de registro
+            const registroBtn = document.getElementById("registroBtn");
+            registroBtn.addEventListener("click", () => {
+                const registroInput = document.getElementById("registro");
+                registroInput.style.display = "block";
+                registroInput.focus();
             });
 
             // Define botão de calcular ITBI
